@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://7m2k45sde6tl"]
+
+[ext_resource type="Texture2D" uid="uid://bllweyqq8gcdp" path="res://icon.svg" id="1_qq0ii"]
+[ext_resource type="Script" uid="uid://ctkm5pecwe1px" path="res://Scripts/fase_teste.gd" id="1_seb3k"]
+[ext_resource type="PackedScene" uid="uid://bpdegc5slohhk" path="res://Scenes/Player.tscn" id="2_seb3k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7f37h"]
+size = Vector2(475, 8)
+
+[node name="fase_teste" type="Node2D" unique_id=1790296245]
+script = ExtResource("1_seb3k")
+
+[node name="Chao" type="StaticBody2D" parent="." unique_id=1890962446]
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao" unique_id=1245721649]
+position = Vector2(72.499985, 4.999998)
+scale = Vector2(3.6953123, 0.062499966)
+texture = ExtResource("1_qq0ii")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao" unique_id=445313393]
+position = Vector2(72, 4)
+shape = SubResource("RectangleShape2D_7f37h")
+
+[node name="Player" parent="." unique_id=359888918 instance=ExtResource("2_seb3k")]
+position = Vector2(-120, -17)
