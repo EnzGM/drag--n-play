@@ -4,11 +4,13 @@ extends CharacterBody2D
 const VELOCIDADE = 200.0
 const FORCA_PULO = -400.0
 const GRAVIDADE = 900.0
-const DISTANCIA_PASSO = 64.0   # <-- NOVO: distância que anda por comando (ajusta depois)
+const DISTANCIA_PASSO = 64.0
 
 # --- Lista de comandos pra fase de execução ---
 var comandos = ["andar", "pular", "andar"]
 var executando = false
+var interrompido = false
+
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -30,11 +32,16 @@ func _physics_process(delta):
 
 func executar_comandos():
 	executando = true
+	interrompido = false
 
 	for comando in comandos:
+		if interrompido:
+			break
 		match comando:
 			"andar":
-				await andar(DISTANCIA_PASSO)   # <-- mudou aqui: usa distância, não tempo
+				await andar(DISTANCIA_PASSO)
+			"andar_tras":
+				await andar(-DISTANCIA_PASSO)
 			"pular":
 				await pular()
 			"esperar":
@@ -42,6 +49,10 @@ func executar_comandos():
 
 	velocity.x = 0
 	executando = false
+
+
+func interromper():
+	interrompido = true
 
 
 func andar(distancia: float) -> void:
@@ -57,10 +68,8 @@ func pular() -> void:
 		velocity.y = FORCA_PULO
 		await get_tree().physics_frame
 
-		# espera ele REALMENTE sair do chão antes de continuar
 		while is_on_floor():
 			await get_tree().physics_frame
 
-	# agora sim espera ele pousar de novo
 	while not is_on_floor():
 		await get_tree().physics_frame

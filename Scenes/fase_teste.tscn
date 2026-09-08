@@ -7,6 +7,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7f37h"]
 size = Vector2(475, 8)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8hgew"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwym3"]
+size = Vector2(921, 2)
+
 [node name="fase_teste" type="Node2D" unique_id=1790296245]
 script = ExtResource("1_seb3k")
 
@@ -46,10 +51,71 @@ focus_mode = 0
 text = "Limpar
 "
 
+[node name="BAtras" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=993982551]
+layout_mode = 2
+text = "Atrás"
+
 [node name="ListaComandos" type="Label" parent="CanvasLayer" unique_id=2079746017]
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="TextoVitoria" type="Label" parent="CanvasLayer" unique_id=1747130364]
+visible = false
+modulate = Color(0, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -21.0
+offset_right = 48.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Vitória"
+
+[node name="BReiniciar" type="Button" parent="CanvasLayer" unique_id=885718746]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -57.5
+offset_top = -31.0
+offset_right = 57.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Reiniciar Fase
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Objetivo" type="Area2D" parent="." unique_id=1666651102]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objetivo" unique_id=126583945]
+position = Vector2(264, -17)
+shape = SubResource("RectangleShape2D_8hgew")
+
+[node name="ColorRect" type="ColorRect" parent="Objetivo/CollisionShape2D" unique_id=1698438592]
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 10.0
+
+[node name="ZonaDeMortee" type="Area2D" parent="." unique_id=716782223]
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="ZonaDeMortee" unique_id=1165413617]
+position = Vector2(78.5, 80)
+shape = SubResource("RectangleShape2D_vwym3")
+
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/BAndar" to="." method="_on_b_andar_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/BPular" to="." method="_on_b_pular_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/BLimpar" to="." method="_on_b_limpar_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/BAtras" to="." method="_on_b_atras_pressed"]
+[connection signal="pressed" from="CanvasLayer/BReiniciar" to="." method="_on_b_reiniciar_pressed"]
+[connection signal="body_entered" from="Objetivo" to="." method="_on_objetivo_body_entered"]
+[connection signal="body_entered" from="ZonaDeMortee" to="." method="_on_zona_de_morte_body_entered"]
