@@ -23,3 +23,33 @@ shape = SubResource("RectangleShape2D_7f37h")
 
 [node name="Player" parent="." unique_id=359888918 instance=ExtResource("2_seb3k")]
 position = Vector2(-120, -17)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1543111422]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=585862628]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BAndar" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1760240029]
+layout_mode = 2
+focus_mode = 0
+text = "Andar"
+
+[node name="BPular" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1223240646]
+layout_mode = 2
+focus_mode = 0
+text = "Pular"
+
+[node name="BLimpar" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=956812940]
+layout_mode = 2
+focus_mode = 0
+text = "Limpar
+"
+
+[node name="ListaComandos" type="Label" parent="CanvasLayer" unique_id=2079746017]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/BAndar" to="." method="_on_b_andar_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/BPular" to="." method="_on_b_pular_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/BLimpar" to="." method="_on_b_limpar_pressed"]
