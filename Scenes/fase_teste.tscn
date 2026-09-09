@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bllweyqq8gcdp" path="res://icon.svg" id="1_qq0ii"]
 [ext_resource type="Script" uid="uid://ctkm5pecwe1px" path="res://Scripts/fase_teste.gd" id="1_seb3k"]
 [ext_resource type="PackedScene" uid="uid://bpdegc5slohhk" path="res://Scenes/Player.tscn" id="2_seb3k"]
+[ext_resource type="PackedScene" uid="uid://bnlbmab8kwaed" path="res://Scenes/caixa.tscn" id="4_vbr3q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7f37h"]
 size = Vector2(475, 8)
@@ -111,6 +112,12 @@ offset_bottom = 10.0
 [node name="CollisionShape2d" type="CollisionShape2D" parent="ZonaDeMortee" unique_id=1165413617]
 position = Vector2(78.5, 80)
 shape = SubResource("RectangleShape2D_vwym3")
+
+[node name="Caixa" parent="." unique_id=379628843 instance=ExtResource("4_vbr3q")]
+offset_left = -96.00001
+offset_top = -57.0
+offset_right = 3.9999924
+offset_bottom = -7.0
 
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/BAndar" to="." method="_on_b_andar_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/BPular" to="." method="_on_b_pular_pressed"]
