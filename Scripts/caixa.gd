@@ -2,6 +2,11 @@ extends Control
 
 var arrastando = false
 var offset_mouse = Vector2.ZERO
+@export var tipo_comando = "andar"
+
+
+func _ready():
+	$ColorRect/Label.text = tipo_comando
 
 
 func _gui_input(event):

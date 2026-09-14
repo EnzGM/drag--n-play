@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bnlbmab8kwaed" path="res://Scenes/caixa.tscn" id="4_vbr3q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7f37h"]
-size = Vector2(475, 8)
+size = Vector2(792.5, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8hgew"]
 
@@ -19,16 +19,16 @@ script = ExtResource("1_seb3k")
 [node name="Chao" type="StaticBody2D" parent="." unique_id=1890962446]
 
 [node name="Sprite2D" type="Sprite2D" parent="Chao" unique_id=1245721649]
-position = Vector2(72.499985, 4.999998)
-scale = Vector2(3.6953123, 0.062499966)
+position = Vector2(-86.50005, 8.5)
+scale = Vector2(6.179687, 0.1171875)
 texture = ExtResource("1_qq0ii")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chao" unique_id=445313393]
-position = Vector2(72, 4)
+position = Vector2(-86.75, 7)
 shape = SubResource("RectangleShape2D_7f37h")
 
 [node name="Player" parent="." unique_id=359888918 instance=ExtResource("2_seb3k")]
-position = Vector2(-120, -17)
+position = Vector2(-430, -17)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1543111422]
 
@@ -95,6 +95,27 @@ text = "Reiniciar Fase
 "
 metadata/_edit_use_anchors_ = true
 
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1492597069]
+offset_right = 40.0
+offset_bottom = 160.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel" unique_id=1178443373]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 160.0
+
+[node name="Caixa" parent="CanvasLayer/Panel/VBoxContainer" unique_id=379628843 instance=ExtResource("4_vbr3q")]
+layout_mode = 2
+
+[node name="Caixa2" parent="CanvasLayer/Panel/VBoxContainer" unique_id=1958715490 instance=ExtResource("4_vbr3q")]
+layout_mode = 2
+tipo_comando = "pular"
+
+[node name="Caixa3" parent="CanvasLayer/Panel/VBoxContainer" unique_id=1598818988 instance=ExtResource("4_vbr3q")]
+layout_mode = 2
+tipo_comando = "trás"
+
 [node name="Objetivo" type="Area2D" parent="." unique_id=1666651102]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objetivo" unique_id=126583945]
@@ -113,7 +134,7 @@ offset_bottom = 10.0
 position = Vector2(78.5, 80)
 shape = SubResource("RectangleShape2D_vwym3")
 
-[node name="Caixa" parent="." unique_id=379628843 instance=ExtResource("4_vbr3q")]
+[node name="Caixa" parent="." unique_id=1380797841 instance=ExtResource("4_vbr3q")]
 offset_left = -96.00001
 offset_top = -57.0
 offset_right = 3.9999924

@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bnlbmab8kwaed"]
 
+[ext_resource type="Script" uid="uid://bcv7jmu0w355a" path="res://Scripts/caixa.gd" id="1_cf6bx"]
+
 [node name="Caixa" type="Control" unique_id=379628843]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 3
@@ -9,6 +11,7 @@ offset_top = -36.000004
 offset_right = 45.0
 offset_bottom = 13.999996
 scale = Vector2(0.5660377, 0.5416667)
+script = ExtResource("1_cf6bx")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=452454322]
 layout_mode = 1
