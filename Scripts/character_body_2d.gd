@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # --- Configurações de movimento ---
-const VELOCIDADE = 200.0
+const VELOCIDADE = 300.0
 const FORCA_PULO = -400.0
 const GRAVIDADE = 900.0
 const DISTANCIA_PASSO = 64.0
@@ -58,18 +58,27 @@ func interromper():
 func andar(distancia: float) -> void:
 	var alvo_x = global_position.x + distancia
 	while abs(global_position.x - alvo_x) > 2.0:
+		if interrompido:
+			return
 		velocity.x = VELOCIDADE if distancia > 0 else -VELOCIDADE
 		await get_tree().physics_frame
 	velocity.x = 0
 
 
 func pular() -> void:
+	if interrompido:
+		return
+
 	if is_on_floor():
 		velocity.y = FORCA_PULO
 		await get_tree().physics_frame
 
 		while is_on_floor():
+			if interrompido:
+				return
 			await get_tree().physics_frame
 
 	while not is_on_floor():
+		if interrompido:
+			return
 		await get_tree().physics_frame

@@ -48,6 +48,13 @@ func soltar_caixa(caixa):
 	reorganizar_trilho()
 
 
+func remover_caixa(caixa):
+	if comandos_no_trilho.has(caixa):
+		comandos_no_trilho.erase(caixa)
+	caixa.queue_free()
+	reorganizar_trilho()
+
+
 func reorganizar_trilho():
 	# Ordena pela posição X atual, pra respeitar a ordem que o jogador montou.
 	comandos_no_trilho.sort_custom(func(a, b): return a.global_position.x < b.global_position.x)
@@ -61,19 +68,6 @@ func reorganizar_trilho():
 		lista_montada.append(MAPA_COMANDOS.get(caixa.tipo_comando, caixa.tipo_comando))
 
 	atualizar_texto()
-
-
-# Os botões antigos ficam como stub (não fazem mais nada) pra não quebrar
-# as conexões de sinal que já existem na cena. Dá pra apagar os botões
-# e essas funções mais pra frente, quando não precisar mais deles.
-func _on_b_andar_pressed():
-	pass
-
-func _on_b_atras_pressed():
-	pass
-
-func _on_b_pular_pressed():
-	pass
 
 
 func _on_b_limpar_pressed():

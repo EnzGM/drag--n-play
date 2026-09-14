@@ -11,7 +11,7 @@ size = Vector2(792.5, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8hgew"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwym3"]
-size = Vector2(1466, 0)
+size = Vector2(921, 2)
 
 [node name="fase_teste" type="Node2D" unique_id=1790296245]
 script = ExtResource("1_seb3k")
@@ -32,34 +32,13 @@ position = Vector2(-430, -17)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1543111422]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=585862628]
-visible = false
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="BAndar" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1760240029]
-visible = false
-layout_mode = 2
+[node name="BLimpar" type="Button" parent="CanvasLayer" unique_id=956812940]
+offset_left = 200.0
+offset_top = 85.0
+offset_right = 320.0
+offset_bottom = 118.0
 focus_mode = 0
-text = "Andar"
-
-[node name="BPular" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1223240646]
-visible = false
-layout_mode = 2
-focus_mode = 0
-text = "Pular"
-
-[node name="BLimpar" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=956812940]
-visible = false
-layout_mode = 2
-focus_mode = 0
-text = "Limpar
-"
-
-[node name="BAtras" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=993982551]
-visible = false
-layout_mode = 2
-text = "Atrás"
+text = "Limpar Fila"
 
 [node name="Trilho" type="Control" parent="CanvasLayer" unique_id=724813205]
 layout_mode = 3
@@ -80,9 +59,9 @@ mouse_filter = 2
 color = Color(0.2, 0.2, 0.2, 0.35)
 
 [node name="ListaComandos" type="Label" parent="CanvasLayer" unique_id=2079746017]
-offset_top = 90.0
+offset_top = 125.0
 offset_right = 400.0
-offset_bottom = 130.0
+offset_bottom = 165.0
 
 [node name="TextoVitoria" type="Label" parent="CanvasLayer" unique_id=1747130364]
 visible = false
@@ -158,13 +137,10 @@ offset_bottom = 10.0
 [node name="ZonaDeMortee" type="Area2D" parent="." unique_id=716782223]
 
 [node name="CollisionShape2d" type="CollisionShape2D" parent="ZonaDeMortee" unique_id=1165413617]
-position = Vector2(-62, 79)
+position = Vector2(78.5, 80)
 shape = SubResource("RectangleShape2D_vwym3")
 
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/BAndar" to="." method="_on_b_andar_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/BPular" to="." method="_on_b_pular_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/BLimpar" to="." method="_on_b_limpar_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/BAtras" to="." method="_on_b_atras_pressed"]
+[connection signal="pressed" from="CanvasLayer/BLimpar" to="." method="_on_b_limpar_pressed"]
 [connection signal="pressed" from="CanvasLayer/BReiniciar" to="." method="_on_b_reiniciar_pressed"]
 [connection signal="body_entered" from="Objetivo" to="." method="_on_objetivo_body_entered"]
 [connection signal="body_entered" from="ZonaDeMortee" to="." method="_on_zona_de_morte_body_entered"]

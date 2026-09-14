@@ -15,17 +15,24 @@ func _gui_input(event):
 	# porque quando a caixa é uma cópia recém-criada a partir de um modelo,
 	# quem recebeu o clique original foi o modelo (não a cópia), então o
 	# evento de "soltar" nunca chegaria até a cópia por aqui.
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		if e_modelo:
-			var copia = duplicate()
-			get_tree().current_scene.get_node("CanvasLayer").add_child(copia)
-			copia.e_modelo = false
-			copia.global_position = global_position
-			copia.arrastando = true
-			copia.offset_mouse = get_global_mouse_position() - copia.global_position
-		else:
-			arrastando = true
-			offset_mouse = get_global_mouse_position() - global_position
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if e_modelo:
+				var copia = duplicate()
+				get_tree().current_scene.get_node("CanvasLayer").add_child(copia)
+				copia.e_modelo = false
+				copia.global_position = global_position
+				copia.arrastando = true
+				copia.offset_mouse = get_global_mouse_position() - copia.global_position
+			else:
+				arrastando = true
+				offset_mouse = get_global_mouse_position() - global_position
+		elif event.button_index == MOUSE_BUTTON_RIGHT and not e_modelo:
+			# Clique direito remove essa caixa da fila na hora, sem
+			# precisar arrastar ela pra fora do trilho.
+			arrastando = false
+			if get_tree().current_scene.has_method("remover_caixa"):
+				get_tree().current_scene.remover_caixa(self)
 
 
 func _process(_delta):
