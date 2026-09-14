@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bd7jprgmsmnlu"]
+
+[ext_resource type="PackedScene" uid="uid://6s4oylhu6xxf" path="res://Scenes/fase_teste.tscn" id="1_88pbf"]
+[ext_resource type="Texture2D" uid="uid://bllweyqq8gcdp" path="res://icon.svg" id="2_d1rx8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p804t"]
+size = Vector2(792.5, 15.062969)
+
+[node name="fase_teste" unique_id=1790296245 instance=ExtResource("1_88pbf")]
+
+[node name="Chao" parent="." index="0" unique_id=1890962446]
+position = Vector2(-410.00006, 1.0000001)
+scale = Vector2(0.3788795, 26.796354)
+
+[node name="CollisionShape2D" parent="Chao" index="1" unique_id=445313393]
+position = Vector2(-87.09877, 8.060799)
+scale = Vector2(1.0237529, 1.0073868)
+
+[node name="Player" parent="." index="1" unique_id=359888918]
+position = Vector2(-428, 13)
+
+[node name="CollisionShape2D" parent="Objetivo" parent_id_path=PackedInt32Array(1666651102) index="0" unique_id=126583945]
+position = Vector2(339, -13)
+
+[node name="Chao2" type="StaticBody2D" parent="." index="5" unique_id=108842343]
+position = Vector2(-46, -30)
+scale = Vector2(0.30004817, 21.828184)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao2" index="0" unique_id=671194142]
+position = Vector2(-86.50005, 8.5)
+scale = Vector2(6.179687, 0.1171875)
+texture = ExtResource("2_d1rx8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao2" index="1" unique_id=175744598]
+position = Vector2(-86.65274, 8.566906)
+shape = SubResource("RectangleShape2D_p804t")
+
+[node name="Chao3" type="StaticBody2D" parent="." index="6" unique_id=813436040]
+position = Vector2(306, -7)
+scale = Vector2(0.30004817, 21.828184)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao3" index="0" unique_id=1452764397]
+position = Vector2(-86.50005, 8.5)
+scale = Vector2(6.179687, 0.1171875)
+texture = ExtResource("2_d1rx8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao3" index="1" unique_id=96511220]
+position = Vector2(-79.98717, 8.521093)
+shape = SubResource("RectangleShape2D_p804t")
