@@ -1,34 +1,36 @@
 [gd_scene format=3 uid="uid://7m2k45sde6tl"]
 
-[ext_resource type="Texture2D" uid="uid://bllweyqq8gcdp" path="res://icon.svg" id="1_qq0ii"]
-[ext_resource type="Script" uid="uid://ctkm5pecwe1px" path="res://Scripts/fase_teste.gd" id="1_seb3k"]
-[ext_resource type="PackedScene" uid="uid://bpdegc5slohhk" path="res://Scenes/Player.tscn" id="2_seb3k"]
-[ext_resource type="PackedScene" uid="uid://bnlbmab8kwaed" path="res://Scenes/caixa.tscn" id="4_vbr3q"]
+[ext_resource type="Script" uid="uid://ctkm5pecwe1px" path="res://Scripts/fase_teste.gd" id="1_hc4ep"]
+[ext_resource type="Texture2D" uid="uid://bllweyqq8gcdp" path="res://icon.svg" id="2_d0ml7"]
+[ext_resource type="PackedScene" uid="uid://bpdegc5slohhk" path="res://Scenes/Player.tscn" id="3_uqg1k"]
+[ext_resource type="PackedScene" uid="uid://bnlbmab8kwaed" path="res://Scenes/caixa.tscn" id="4_fuc0e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7f37h"]
-size = Vector2(792.5, 14)
+size = Vector2(792.5, 15.062969)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8hgew"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwym3"]
 size = Vector2(1466, 0)
 
-[node name="fase_teste" type="Node2D" unique_id=1790296245]
-script = ExtResource("1_seb3k")
+[node name="fase1" type="Node2D" unique_id=1790296245]
+script = ExtResource("1_hc4ep")
 
 [node name="Chao" type="StaticBody2D" parent="." unique_id=1890962446]
+position = Vector2(-420, -41.000004)
+scale = Vector2(0.30004817, 21.828184)
 
 [node name="Sprite2D" type="Sprite2D" parent="Chao" unique_id=1245721649]
 position = Vector2(-86.50005, 8.5)
 scale = Vector2(6.179687, 0.1171875)
-texture = ExtResource("1_qq0ii")
+texture = ExtResource("2_d0ml7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chao" unique_id=445313393]
-position = Vector2(-86.75, 7)
+position = Vector2(-86.65271, 8.548643)
 shape = SubResource("RectangleShape2D_7f37h")
 
-[node name="Player" parent="." unique_id=359888918 instance=ExtResource("2_seb3k")]
-position = Vector2(-430, -17)
+[node name="Player" parent="." unique_id=359888918 instance=ExtResource("3_uqg1k")]
+position = Vector2(-435, -35)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1543111422]
 
@@ -129,21 +131,22 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 160.0
 
-[node name="Caixa" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=379628843 instance=ExtResource("4_vbr3q")]
+[node name="Caixa" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=379628843 instance=ExtResource("4_fuc0e")]
 layout_mode = 2
 e_modelo = true
 
-[node name="Caixa2" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=1958715490 instance=ExtResource("4_vbr3q")]
+[node name="Caixa2" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=1958715490 instance=ExtResource("4_fuc0e")]
 layout_mode = 2
 tipo_comando = "pular"
 e_modelo = true
 
-[node name="Caixa3" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=1598818988 instance=ExtResource("4_vbr3q")]
+[node name="Caixa3" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=1598818988 instance=ExtResource("4_fuc0e")]
 layout_mode = 2
 tipo_comando = "trás"
 e_modelo = true
 
 [node name="Objetivo" type="Area2D" parent="." unique_id=1666651102]
+position = Vector2(36, -18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objetivo" unique_id=126583945]
 position = Vector2(264, -17)
@@ -160,6 +163,32 @@ offset_bottom = 10.0
 [node name="CollisionShape2d" type="CollisionShape2D" parent="ZonaDeMortee" unique_id=1165413617]
 position = Vector2(-62, 79)
 shape = SubResource("RectangleShape2D_vwym3")
+
+[node name="Chao2" type="StaticBody2D" parent="." unique_id=210466272]
+position = Vector2(-30.000002, -66)
+scale = Vector2(0.30004817, 21.828184)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao2" unique_id=1450861203]
+position = Vector2(-86.50005, 8.5)
+scale = Vector2(6.179687, 0.1171875)
+texture = ExtResource("2_d0ml7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao2" unique_id=1128216417]
+position = Vector2(-86.65274, 8.566906)
+shape = SubResource("RectangleShape2D_7f37h")
+
+[node name="Chao3" type="StaticBody2D" parent="." unique_id=1449445506]
+position = Vector2(325, -4)
+scale = Vector2(0.30004817, 21.828184)
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao3" unique_id=1459191287]
+position = Vector2(-86.50005, 8.5)
+scale = Vector2(6.179687, 0.1171875)
+texture = ExtResource("2_d0ml7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao3" unique_id=78479309]
+position = Vector2(-79.98717, 8.521093)
+shape = SubResource("RectangleShape2D_7f37h")
 
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/BAndar" to="." method="_on_b_andar_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/BPular" to="." method="_on_b_pular_pressed"]
