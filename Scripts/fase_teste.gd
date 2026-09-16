@@ -1,5 +1,7 @@
 extends Node2D
 
+enum Estado { JOGANDO, MORTO, VITORIA }
+
 const MAX_COMANDOS = 5
 const ESPACO_ENTRE_CAIXAS = 110.0
 
@@ -13,6 +15,7 @@ const MAPA_COMANDOS = {
 var lista_montada = []
 var comandos_no_trilho = []  # guarda as caixas (nós), na ordem em que aparecem
 var posicao_inicial_player
+var estado = Estado.JOGANDO
 
 @onready var trilho: Control = $CanvasLayer/Trilho
 
@@ -23,13 +26,24 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("Executar"):
+	if estado != Estado.JOGANDO:
+		return
+	# event.is_echo() ignora os eventos de "auto-repeat" que o sistema manda
+	# quando você segura a tecla pressionada. Sem isso, segurar "Executar"
+	# chamava executar_comandos() várias vezes seguidas, reiniciando a
+	# sequência do zero repetidamente — parecia que o personagem só andava
+	# sem parar, porque o "pular" nunca tinha chance de terminar antes de
+	# tudo reiniciar de novo.
+	if event.is_action_pressed("Executar") and not event.is_echo():
 		$Player.comandos = lista_montada
 		$Player.executar_comandos()
 
 
 # Chamado pelo caixa.gd toda vez que o jogador solta uma caixa.
 func soltar_caixa(caixa):
+	if estado != Estado.JOGANDO:
+		return
+
 	var centro = caixa.global_position + (caixa.size * caixa.scale) / 2.0
 	var dentro_do_trilho = trilho.get_global_rect().has_point(centro)
 
@@ -49,6 +63,8 @@ func soltar_caixa(caixa):
 
 
 func remover_caixa(caixa):
+	if estado != Estado.JOGANDO:
+		return
 	if comandos_no_trilho.has(caixa):
 		comandos_no_trilho.erase(caixa)
 	caixa.queue_free()
@@ -71,6 +87,8 @@ func reorganizar_trilho():
 
 
 func _on_b_limpar_pressed():
+	if estado != Estado.JOGANDO:
+		return
 	$Player.interromper()
 	for caixa in comandos_no_trilho:
 		caixa.queue_free()
@@ -87,19 +105,30 @@ func atualizar_texto():
 
 
 func _on_objetivo_body_entered(body):
-	$"CanvasLayer/TextoVitoria".visible = true
-	$"CanvasLayer/BReiniciar".visible = true
+	if estado != Estado.JOGANDO:
+		return
+	estado = Estado.VITORIA
+	$Player.interromper()
+	get_tree().paused = true
+	$CanvasLayer/TextoVitoria.visible = true
+	$CanvasLayer/BReiniciar.visible = true
 
 
 func _on_zona_de_morte_body_entered(body):
+	if estado != Estado.JOGANDO:
+		return
+	estado = Estado.MORTO
 	$Player.interromper()
-	$Player.global_position = posicao_inicial_player
-	$Player.velocity = Vector2.ZERO
-	$CanvasLayer/TextoVitoria.visible = false
+	get_tree().paused = true
+	$CanvasLayer/TextoDerrota.visible = true
+	$CanvasLayer/BReiniciar.visible = true
 
 
 func _on_b_reiniciar_pressed():
+	get_tree().paused = false
+	estado = Estado.JOGANDO
 	$Player.global_position = posicao_inicial_player
 	$Player.velocity = Vector2.ZERO
-	$"CanvasLayer/TextoVitoria".visible = false
-	$"CanvasLayer/BReiniciar".visible = false
+	$CanvasLayer/TextoVitoria.visible = false
+	$CanvasLayer/TextoDerrota.visible = false
+	$CanvasLayer/BReiniciar.visible = false
