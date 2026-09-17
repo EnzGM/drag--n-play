@@ -1,11 +1,10 @@
 extends Control
 
-# Ajuste esse caminho pra apontar pra primeira fase do seu jogo.
-const PRIMEIRA_FASE = "res://Scenes/fase_teste.tscn"
+const TELA_SELECAO_FASES = "res://Scenes/selecao_fases.tscn"
 
 
-func _on_b_jogar_pressed():
-	get_tree().change_scene_to_file(PRIMEIRA_FASE)
+func _on_b_selecionar_fase_pressed():
+	get_tree().change_scene_to_file(TELA_SELECAO_FASES)
 
 
 func _on_b_sair_pressed():

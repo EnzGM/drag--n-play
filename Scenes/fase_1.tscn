@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bpkvn8fsgykce"]
+
+[ext_resource type="PackedScene" uid="uid://7m2k45sde6tl" path="res://Scenes/fase_teste.tscn" id="1_acukj"]
+[ext_resource type="Texture2D" uid="uid://bllweyqq8gcdp" path="res://icon.svg" id="2_cq7l2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_seeb5"]
+size = Vector2(164, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efuq8"]
+size = Vector2(165, 252)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vbr3q"]
+size = Vector2(180, 247)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gw3gf"]
+size = Vector2(1956, 3.5)
+
+[node name="fase_teste" unique_id=1790296245 instance=ExtResource("1_acukj")]
+
+[node name="Sprite2D" parent="Chao" parent_id_path=PackedInt32Array(1890962446) index="0" unique_id=1245721649]
+position = Vector2(-448, 129)
+scale = Vector2(1.390625, 1.9453125)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Chao" parent_id_path=PackedInt32Array(1890962446) index="1" unique_id=667410869]
+position = Vector2(-147, 102.24999)
+scale = Vector2(1.2812499, 2.363281)
+texture = ExtResource("2_cq7l2")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Chao" parent_id_path=PackedInt32Array(1890962446) index="2" unique_id=1524790080]
+position = Vector2(172, 129.25)
+scale = Vector2(1.296875, 1.9414061)
+texture = ExtResource("2_cq7l2")
+
+[node name="CollisionShape2D" parent="Chao" parent_id_path=PackedInt32Array(1890962446) index="3" unique_id=445313393]
+position = Vector2(-149, 108)
+shape = SubResource("RectangleShape2D_seeb5")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Chao" parent_id_path=PackedInt32Array(1890962446) index="4" unique_id=568648295]
+position = Vector2(169, 129)
+shape = SubResource("RectangleShape2D_efuq8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Chao" parent_id_path=PackedInt32Array(1890962446) index="5" unique_id=1821372010]
+position = Vector2(-448, 128.5)
+shape = SubResource("RectangleShape2D_vbr3q")
+
+[node name="Player" parent="." index="1" unique_id=359888918]
+position = Vector2(-491, -19)
+
+[node name="Objetivo" parent="." index="3" unique_id=1666651102]
+position = Vector2(-97, -2)
+
+[node name="CollisionShape2d" parent="ZonaDeMortee" parent_id_path=PackedInt32Array(716782223) index="0" unique_id=1165413617]
+position = Vector2(-181, 253.25)
+shape = SubResource("RectangleShape2D_gw3gf")

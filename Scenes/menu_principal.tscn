@@ -56,12 +56,12 @@ alignment = 1
 [node name="BJogar" type="Button" parent="VBoxContainer" unique_id=995474823]
 layout_mode = 2
 focus_mode = 0
-text = "Jogar"
+text = "Selecionar Fase"
 
 [node name="BSair" type="Button" parent="VBoxContainer" unique_id=2120658501]
 layout_mode = 2
 focus_mode = 0
 text = "Sair"
 
-[connection signal="pressed" from="VBoxContainer/BJogar" to="." method="_on_b_jogar_pressed"]
+[connection signal="pressed" from="VBoxContainer/BJogar" to="." method="_on_b_selecionar_fase_pressed"]
 [connection signal="pressed" from="VBoxContainer/BSair" to="." method="_on_b_sair_pressed"]

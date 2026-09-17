@@ -5,8 +5,8 @@ const VELOCIDADE_CHAO = 400.0
 const VELOCIDADE_AR = 320.0
 const FORCA_PULO = -400.0
 const GRAVIDADE = 900.0
-const DISTANCIA_PASSO = 64.0
-const DISTANCIA_PULO = 96.0  # quanto ele anda pra frente durante UM pulo completo
+const DISTANCIA_PASSO = 144.0
+const DISTANCIA_PULO = 160.0  # quanto ele anda pra frente durante UM pulo completo
 
 # --- Lista de comandos pra fase de execução ---
 var comandos = ["andar", "pular", "andar"]
@@ -15,6 +15,15 @@ var interrompido = false
 
 
 func _physics_process(delta):
+	# O nó da fase (raiz) roda com process_mode = Always, pra o botão de
+	# Reiniciar funcionar mesmo pausado — mas isso também faz o Player
+	# (que herda esse modo) continuar recebendo física normalmente
+	# mesmo com get_tree().paused = true. Esse "return" aqui é quem
+	# efetivamente congela o personagem enquanto o jogo tá pausado
+	# (morte, vitória ou menu de pausa).
+	if get_tree().paused:
+		return
+
 	if not is_on_floor():
 		velocity.y += GRAVIDADE * delta
 
@@ -66,12 +75,21 @@ func interromper():
 
 func andar(distancia: float) -> void:
 	var alvo_x = global_position.x + distancia
-	while abs(global_position.x - alvo_x) > 2.0:
+	var direcao = sign(distancia)
+	# Antes a condição de parada era só "abs(distância) > 2.0", com a
+	# velocidade sempre na mesma direção. Se um frame passasse do alvo por
+	# mais de 2px (fácil de acontecer com velocidade alta), o loop
+	# continuava "true" do outro lado e o personagem nunca mais parava —
+	# andava pra longe do alvo pra sempre. Agora a condição é "ainda não
+	# cheguei nem passei do alvo", que para corretamente mesmo com
+	# overshoot.
+	while (global_position.x - alvo_x) * direcao < 0:
 		if interrompido:
 			return
 		var velocidade_atual = VELOCIDADE_CHAO if is_on_floor() else VELOCIDADE_AR
-		velocity.x = velocidade_atual if distancia > 0 else -velocidade_atual
+		velocity.x = velocidade_atual * direcao
 		await get_tree().physics_frame
+	global_position.x = alvo_x  # encaixa exatamente no alvo, sem sobra de overshoot
 	velocity.x = 0
 
 
