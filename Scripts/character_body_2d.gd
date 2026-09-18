@@ -13,6 +13,26 @@ var comandos = ["andar", "pular", "andar"]
 var executando = false
 var interrompido = false
 
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+
+func _ready():
+	# As plataformas da fase_1 (os montinhos com o guarda-chuva) usam
+	# colisão arredondada (CapsuleShape2D), não um chão reto. Com o
+	# ângulo máximo padrão de chão (45°), assim que você sai do topo bem
+	# no centro da curva, is_on_floor() já passa a dar "false" — e como
+	# pular() checa "if not is_on_floor(): return", o pulo simplesmente
+	# não acontecia (sem erro nenhum) depois de andar até uma posição
+	# fora desse centro exato. Aumentando esse ângulo, a maior parte da
+	# curva ainda conta como chão.
+	floor_max_angle = deg_to_rad(80.0)
+	# Além disso, o pé do personagem TAMBÉM é uma cápsula arredondada —
+	# redondo encostando em redondo é um contato instável (às vezes é só
+	# um pontinho, não uma área), e o motor de física pode não registrar
+	# isso como "no chão" de forma confiável. Esse "snap" aumenta a
+	# tolerância pra manter o contato mesmo com essa instabilidade.
+	floor_snap_length = 16.0
+
 
 func _physics_process(delta):
 	# O nó da fase (raiz) roda com process_mode = Always, pra o botão de
@@ -40,6 +60,18 @@ func _physics_process(delta):
 			velocity.y = FORCA_PULO
 
 	move_and_slide()
+	atualizar_animacao()
+
+
+func atualizar_animacao():
+	# Enquanto tiver velocidade horizontal (andando ou pulando pra algum
+	# lado), toca a animação de andar e vira o sprite pro lado certo.
+	# Parado (ou caindo reto), fica no idle.
+	if abs(velocity.x) > 1.0:
+		sprite.flip_h = velocity.x < 0
+		sprite.play("andar")
+	else:
+		sprite.play("idle")
 
 
 func executar_comandos():
@@ -97,6 +129,7 @@ func pular() -> void:
 	if interrompido:
 		return
 	if not is_on_floor():
+		print("PULAR CANCELADO: is_on_floor()=false, posição=%s, velocity=%s" % [global_position, velocity])
 		return
 
 	# Tempo total que o personagem fica no ar num pulo completo (sobe e desce

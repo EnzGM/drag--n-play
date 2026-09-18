@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cfbttc8hw182h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flag0"]
+region = Rect2(0, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flag1"]
+region = Rect2(60, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flag2"]
+region = Rect2(120, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flag3"]
+region = Rect2(180, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flag4"]
+region = Rect2(240, 0, 60, 60)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flag0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flag1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flag2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flag3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flag4")
+}],
+"loop": 1,
+"name": &"aceno",
+"speed": 6.0
+}]
