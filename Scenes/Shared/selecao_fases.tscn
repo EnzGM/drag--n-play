@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://Scripts/selecao_fases.gd" id="1_sel"]
+[ext_resource type="Script" uid="uid://cpmrmqbbkbbsd" path="res://Scripts/Shared/selecao_fases.gd" id="1_sel"]
 
 [node name="SelecaoFases" type="Control" unique_id=305486927]
 layout_mode = 3
@@ -53,15 +53,20 @@ grow_vertical = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="BFaseTeste" type="Button" parent="VBoxContainer" unique_id=995474825]
+[node name="BTutorial" type="Button" parent="VBoxContainer" unique_id=995474824]
 layout_mode = 2
 focus_mode = 0
-text = "Fase Teste"
+text = "Tutorial"
 
 [node name="BFase1" type="Button" parent="VBoxContainer" unique_id=995474826]
 layout_mode = 2
 focus_mode = 0
 text = "Fase 1"
+
+[node name="BFase2" type="Button" parent="VBoxContainer" unique_id=995474828]
+layout_mode = 2
+focus_mode = 0
+text = "Fase 2"
 
 [node name="BVoltar" type="Button" parent="." unique_id=2120658502]
 anchors_preset = 2
@@ -75,6 +80,7 @@ grow_vertical = 0
 focus_mode = 0
 text = "Voltar"
 
-[connection signal="pressed" from="VBoxContainer/BFaseTeste" to="." method="_on_b_fase_teste_pressed"]
+[connection signal="pressed" from="VBoxContainer/BTutorial" to="." method="_on_b_tutorial_pressed"]
 [connection signal="pressed" from="VBoxContainer/BFase1" to="." method="_on_b_fase_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/BFase2" to="." method="_on_b_fase_2_pressed"]
 [connection signal="pressed" from="BVoltar" to="." method="_on_b_voltar_pressed"]

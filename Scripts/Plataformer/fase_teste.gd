@@ -2,8 +2,10 @@ extends Node2D
 
 enum Estado { JOGANDO, MORTO, VITORIA }
 
-const MAX_COMANDOS = 5
-const ESPACO_ENTRE_CAIXAS = 110.0
+# Folga (em pixels) entre uma caixa e outra no trilho. O espaço total é o
+# tamanho real da caixa + essa folga, então dá pra apertar ou afrouxar aqui.
+const FOLGA_ENTRE_CAIXAS = 8.0   # lado a lado (horizontal)
+const FOLGA_ENTRE_LINHAS = 6.0   # entre linhas (vertical)
 
 # Converte o "tipo_comando" da caixa pro comando que o Player entende.
 const MAPA_COMANDOS = {
@@ -24,6 +26,29 @@ var menu_aberto = false
 # o nó raiz e preenche esse campo no Inspector — não precisa mexer em código.
 @export_file("*.tscn") var proxima_fase: String = ""
 
+# Texto do tutorial mostrado ao entrar na fase (pausado, com botão "Entendi").
+# Deixe em branco (como aqui, na fase_teste) se a fase não tiver tutorial.
+@export_multiline var texto_tutorial: String = ""
+
+# Imagem opcional mostrada junto do texto do tutorial (ex: ilustrando que a
+# ordem de execução segue a ordem das caixas no trilho). Deixe em branco se
+# não quiser imagem nenhuma.
+@export var imagem_tutorial: Texture2D = null
+
+# Quantas caixas cabem no trilho. 5 é o padrão; a fase_tutorial usa um
+# número bem maior pra funcionar como "ilimitado" na prática.
+@export var max_comandos: int = 5
+
+# Se false, a ZonaDeMorte não mata — usado na fase_tutorial, onde não tem
+# como perder.
+@export var pode_morrer: bool = true
+
+# Se true, dá pra apertar Play quantas vezes quiser sem precisar reiniciar:
+# ao acabar a sequência, o personagem volta sozinho pro início e libera o
+# Play de novo na hora. Usado na fase_tutorial, pra você poder testar à
+# vontade.
+@export var permitir_repetir: bool = false
+
 @onready var trilho: Control = $CanvasLayer/Trilho
 
 
@@ -36,6 +61,21 @@ func _ready():
 	$CanvasLayer.visible = true
 	mostrar_caixas()
 	atualizar_texto()
+
+	if not texto_tutorial.is_empty():
+		$CanvasLayer/PainelTutorial/Conteudo/Rolagem/Label.text = texto_tutorial
+		$CanvasLayer/PainelTutorial/Conteudo/Imagem.texture = imagem_tutorial
+		$CanvasLayer/PainelTutorial/Conteudo/Imagem.visible = imagem_tutorial != null
+		$CanvasLayer/PainelTutorial.visible = true
+		get_tree().paused = true
+	else:
+		$CanvasLayer/PainelTutorial.visible = false
+
+
+func _on_b_entendi_pressed():
+	$CanvasLayer/PainelTutorial.visible = false
+	if estado == Estado.JOGANDO:
+		get_tree().paused = false
 
 
 func _input(event):
@@ -68,6 +108,7 @@ func alternar_menu_pausa():
 	menu_aberto = not menu_aberto
 	get_tree().paused = menu_aberto
 	$CanvasLayer/MenuPausa.visible = menu_aberto
+	$CanvasLayer/PainelControles.visible = false
 
 
 func _on_b_menu_pressed():
@@ -82,24 +123,48 @@ func _on_b_menu_reiniciar_pressed():
 	reiniciar_fase()
 
 
+func _on_b_menu_controles_pressed():
+	$CanvasLayer/MenuPausa.visible = false
+	$CanvasLayer/PainelControles.visible = true
+
+
+func _on_b_controles_voltar_pressed():
+	$CanvasLayer/PainelControles.visible = false
+	$CanvasLayer/MenuPausa.visible = true
+
+
 func _on_b_menu_selecionar_fase_pressed():
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://Scenes/selecao_fases.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Shared/selecao_fases.tscn")
 
 
 func _on_b_menu_principal_pressed():
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://Scenes/menu_principal.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Shared/menu_principal.tscn")
 
 
 func iniciar_execucao():
-	if estado != Estado.JOGANDO or $Player.executando or ja_executou or lista_montada.is_empty():
+	if estado != Estado.JOGANDO or $Player.executando or lista_montada.is_empty():
 		return
+	if ja_executou and not permitir_repetir:
+		return
+
 	ja_executou = true
-	$CanvasLayer/BPlay.disabled = true
+	if not permitir_repetir:
+		$CanvasLayer/BPlay.disabled = true
 	esconder_caixas()
 	$Player.comandos = lista_montada
 	await $Player.executar_comandos()
+
+	if permitir_repetir:
+		# Modo tutorial: sem risco de morrer e sem limite de tentativas —
+		# volta o personagem pro início sozinho e libera pra tentar de
+		# novo na hora, sem precisar apertar Reiniciar.
+		$Player.global_position = posicao_inicial_player
+		$Player.velocity = Vector2.ZERO
+		ja_executou = false
+		mostrar_caixas()
+		return
 
 	# A fila acabou. Se ninguém venceu nem morreu nesse meio tempo, não tem
 	# mais nada programado pra fazer — mostra o botão de reiniciar.
@@ -133,7 +198,7 @@ func soltar_caixa(caixa):
 
 	if dentro_do_trilho:
 		if not comandos_no_trilho.has(caixa):
-			if comandos_no_trilho.size() >= MAX_COMANDOS:
+			if comandos_no_trilho.size() >= max_comandos:
 				# Limite de comandos atingido: a caixa não entra.
 				caixa.queue_free()
 				return
@@ -157,13 +222,39 @@ func remover_caixa(caixa):
 	reorganizar_trilho()
 
 
+func _espaco_entre_caixas() -> Vector2:
+	# Espaço de uma célula do trilho = tamanho real da caixa (já com a escala)
+	# + a folga. Assim as caixas ficam sempre juntinhas, sem depender de um
+	# número fixo que não bate com o tamanho delas.
+	if comandos_no_trilho.is_empty():
+		return Vector2(70.0, 35.0)
+	var tamanho = comandos_no_trilho[0].size * comandos_no_trilho[0].scale
+	return Vector2(tamanho.x + FOLGA_ENTRE_CAIXAS, tamanho.y + FOLGA_ENTRE_LINHAS)
+
+
 func reorganizar_trilho():
-	# Ordena pela posição X atual, pra respeitar a ordem que o jogador montou.
-	comandos_no_trilho.sort_custom(func(a, b): return a.global_position.x < b.global_position.x)
+	var espaco = _espaco_entre_caixas()
+	# Ordena por linha (posição Y, arredondada pra "linha" mais próxima) e
+	# depois por posição X dentro da linha — assim a ordem de leitura
+	# (de cima pra baixo, esquerda pra direita) é a ordem de execução,
+	# mesmo depois de quebrar linha.
+	comandos_no_trilho.sort_custom(func(a, b):
+		var linha_a = roundi((a.global_position.y - trilho.global_position.y) / espaco.y)
+		var linha_b = roundi((b.global_position.y - trilho.global_position.y) / espaco.y)
+		if linha_a != linha_b:
+			return linha_a < linha_b
+		return a.global_position.x < b.global_position.x
+	)
+
+	# Quantas caixas cabem lado a lado antes de quebrar linha, baseado na
+	# largura real do trilho.
+	var colunas = max(1, int(trilho.size.x / espaco.x))
 
 	for i in comandos_no_trilho.size():
 		var caixa = comandos_no_trilho[i]
-		caixa.global_position = trilho.global_position + Vector2(i * ESPACO_ENTRE_CAIXAS, 0)
+		var coluna = i % colunas
+		var linha = i / colunas
+		caixa.global_position = trilho.global_position + Vector2(coluna * espaco.x, linha * espaco.y)
 
 	lista_montada.clear()
 	for caixa in comandos_no_trilho:
@@ -187,7 +278,7 @@ func atualizar_texto():
 	var texto = " > ".join(lista_montada)
 	if texto == "":
 		texto = "(arraste as caixas até o trilho)"
-	$CanvasLayer/ListaComandos.text = "%s\nComandos: %d/%d" % [texto, comandos_no_trilho.size(), MAX_COMANDOS]
+	$CanvasLayer/ListaComandos.text = "%s\nComandos: %d/%d" % [texto, comandos_no_trilho.size(), max_comandos]
 
 
 func _on_objetivo_body_entered(body):
@@ -213,7 +304,7 @@ func _on_b_proxima_fase_pressed():
 func _on_zona_de_morte_body_entered(body):
 	if body != $Player:
 		return
-	if estado != Estado.JOGANDO:
+	if estado != Estado.JOGANDO or not pode_morrer:
 		return
 	estado = Estado.MORTO
 	$Player.interromper()
@@ -242,6 +333,7 @@ func reiniciar_fase():
 	estado = Estado.JOGANDO
 	menu_aberto = false
 	$CanvasLayer/MenuPausa.visible = false
+	$CanvasLayer/PainelControles.visible = false
 	$Player.global_position = posicao_inicial_player
 	$Player.velocity = Vector2.ZERO
 	$CanvasLayer/TextoVitoria.visible = false

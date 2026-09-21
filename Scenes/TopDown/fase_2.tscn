@@ -1,0 +1,410 @@
+[gd_scene format=3 uid="uid://d3g02tcqrxok1"]
+
+[ext_resource type="Script" uid="uid://4evk0m4rsall" path="res://Scripts/TopDown/fase_grid.gd" id="1_grid"]
+[ext_resource type="PackedScene" path="res://Scenes/TopDown/PersonagemGrid.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://Scenes/TopDown/parede.tscn" id="3_parede"]
+[ext_resource type="PackedScene" path="res://Scenes/TopDown/inimigo.tscn" id="4_inimigo"]
+[ext_resource type="PackedScene" uid="uid://bnlbmab8kwaed" path="res://Scenes/Plataformer/caixa.tscn" id="5_caixa"]
+[ext_resource type="SpriteFrames" uid="uid://cfbttc8hw182h" path="res://Assets/flag_frames.tres" id="6_flag"]
+
+[node name="fase_2" type="Node2D" unique_id=2010000000]
+process_mode = 3
+script = ExtResource("1_grid")
+
+[node name="Fundo" type="ColorRect" parent="." unique_id=2010000001]
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 450.0
+offset_bottom = 250.0
+color = Color(0.88, 0.88, 0.82, 1)
+
+[node name="Paredes" type="Node2D" parent="." unique_id=2010000002]
+
+[node name="Parede" parent="Paredes" unique_id=2010000003 instance=ExtResource("3_parede")]
+position = Vector2(100, 100)
+
+[node name="Parede2" parent="Paredes" unique_id=2010000004 instance=ExtResource("3_parede")]
+position = Vector2(300, 100)
+
+[node name="Inimigos" type="Node2D" parent="." unique_id=2010000005]
+
+[node name="Inimigo" parent="Inimigos" unique_id=2010000006 instance=ExtResource("4_inimigo")]
+position = Vector2(200, 0)
+
+[node name="Inimigo2" parent="Inimigos" unique_id=2010000007 instance=ExtResource("4_inimigo")]
+position = Vector2(200, 200)
+
+[node name="Objetivo" type="Node2D" parent="." unique_id=2010000008]
+position = Vector2(400, 200)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Objetivo" unique_id=2010000009]
+sprite_frames = ExtResource("6_flag")
+animation = &"aceno"
+autoplay = "aceno"
+
+[node name="Player" parent="." unique_id=2010000010 instance=ExtResource("2_player")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2010000011]
+position = Vector2(200, 100)
+zoom = Vector2(0.9, 0.9)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2010000012]
+
+[node name="BLimpar" type="Button" parent="CanvasLayer" unique_id=2010000013]
+offset_left = 200.0
+offset_top = 85.0
+offset_right = 320.0
+offset_bottom = 118.0
+focus_mode = 0
+text = "Limpar Fila"
+
+[node name="BPlay" type="Button" parent="CanvasLayer" unique_id=2010000014]
+offset_left = 330.0
+offset_top = 85.0
+offset_right = 450.0
+offset_bottom = 118.0
+focus_mode = 0
+text = "Play (Enter)"
+
+[node name="Trilho" type="Control" parent="CanvasLayer" unique_id=2010000015]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 200.0
+offset_top = 10.0
+offset_right = 760.0
+offset_bottom = 80.0
+
+[node name="Fundo" type="ColorRect" parent="CanvasLayer/Trilho" unique_id=2010000016]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.2, 0.2, 0.2, 0.35)
+
+[node name="ListaComandos" type="Label" parent="CanvasLayer" unique_id=2010000017]
+offset_top = 180.0
+offset_right = 500.0
+offset_bottom = 280.0
+autowrap_mode = 3
+
+[node name="TextoVitoria" type="Label" parent="CanvasLayer" unique_id=2010000018]
+visible = false
+modulate = Color(0, 0.6, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -21.0
+offset_right = 48.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Vitória"
+
+[node name="TextoDerrota" type="Label" parent="CanvasLayer" unique_id=2010000019]
+visible = false
+modulate = Color(0.7, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -21.0
+offset_right = 70.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Você morreu!"
+
+[node name="BReiniciar" type="Button" parent="CanvasLayer" unique_id=2010000020]
+process_mode = 3
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -57.5
+offset_top = -31.0
+offset_right = 57.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Reiniciar Fase
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="BProximaFase" type="Button" parent="CanvasLayer" unique_id=2010000021]
+process_mode = 3
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 70.0
+offset_top = -31.0
+offset_right = 220.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Próxima Fase"
+metadata/_edit_use_anchors_ = true
+
+[node name="PainelTutorial" type="Panel" parent="CanvasLayer" unique_id=2010000022]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -260.0
+offset_right = 300.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Conteudo" type="VBoxContainer" parent="CanvasLayer/PainelTutorial" unique_id=2010000023]
+process_mode = 3
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Imagem" type="TextureRect" parent="CanvasLayer/PainelTutorial/Conteudo" unique_id=2010000024]
+process_mode = 3
+visible = false
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rolagem" type="ScrollContainer" parent="CanvasLayer/PainelTutorial/Conteudo" unique_id=2010000025]
+process_mode = 3
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/PainelTutorial/Conteudo/Rolagem" unique_id=2010000026]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tutorial"
+autowrap_mode = 3
+
+[node name="CentroBotao" type="CenterContainer" parent="CanvasLayer/PainelTutorial/Conteudo" unique_id=2010000027]
+process_mode = 3
+layout_mode = 2
+
+[node name="BEntendi" type="Button" parent="CanvasLayer/PainelTutorial/Conteudo/CentroBotao" unique_id=2010000028]
+process_mode = 3
+layout_mode = 2
+text = "Entendi!"
+
+[node name="BMenu" type="Button" parent="CanvasLayer" unique_id=2010000029]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -110.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 45.0
+grow_horizontal = 0
+focus_mode = 0
+text = "☰ Menu (Esc)"
+
+[node name="MenuPausa" type="Panel" parent="CanvasLayer" unique_id=2010000030]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -140.0
+offset_right = 110.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuPausa" unique_id=2010000031]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -120.0
+offset_right = 80.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Titulo" type="Label" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=2010000032]
+layout_mode = 2
+text = "Pausado"
+horizontal_alignment = 1
+
+[node name="BContinuar" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=2010000033]
+layout_mode = 2
+focus_mode = 0
+text = "Continuar"
+
+[node name="BReiniciarMenu" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=2010000034]
+layout_mode = 2
+focus_mode = 0
+text = "Reiniciar Fase"
+
+[node name="BControlesMenu" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=2010000035]
+layout_mode = 2
+focus_mode = 0
+text = "Controles"
+
+[node name="BSelecionarFase" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=2010000036]
+layout_mode = 2
+focus_mode = 0
+text = "Selecionar Fase"
+
+[node name="BMenuPrincipal" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=2010000037]
+layout_mode = 2
+focus_mode = 0
+text = "Menu Principal"
+
+[node name="PainelControles" type="Panel" parent="CanvasLayer" unique_id=2010000038]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -230.0
+offset_right = 280.0
+offset_bottom = 230.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titulo" type="Label" parent="CanvasLayer/PainelControles" unique_id=2010000039]
+process_mode = 3
+layout_mode = 0
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Controles"
+horizontal_alignment = 1
+
+[node name="Lista" type="Label" parent="CanvasLayer/PainelControles" unique_id=2010000040]
+process_mode = 3
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 50.0
+offset_right = -16.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = 8
+text = "Mouse: arraste as caixas da paleta até o trilho pra montar a sequência
+
+Clique direito numa caixa do trilho: remove ela na hora
+
+Enter (ou a tecla \"Executar\"): dá Play
+
+R: reinicia a fase a qualquer momento
+
+Esc: abre/fecha esse menu de pausa
+
+\"Limpar Fila\": remove todas as caixas do trilho de uma vez
+
+Atacar: acerta o inimigo na casa pra onde você tá olhando, sem se mover"
+autowrap_mode = 3
+
+[node name="BVoltarControles" type="Button" parent="CanvasLayer/PainelControles" unique_id=2010000041]
+process_mode = 3
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -40.0
+offset_right = 50.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Voltar"
+
+[node name="Caixas" type="Panel" parent="CanvasLayer" unique_id=2010000042]
+offset_right = 40.0
+offset_bottom = 220.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Caixas" unique_id=2010000043]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 220.0
+
+[node name="CaixaCima" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000044 instance=ExtResource("5_caixa")]
+layout_mode = 2
+tipo_comando = "cima"
+e_modelo = true
+
+[node name="CaixaBaixo" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000045 instance=ExtResource("5_caixa")]
+layout_mode = 2
+tipo_comando = "baixo"
+e_modelo = true
+
+[node name="CaixaEsquerda" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000046 instance=ExtResource("5_caixa")]
+layout_mode = 2
+tipo_comando = "esquerda"
+e_modelo = true
+
+[node name="CaixaDireita" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000047 instance=ExtResource("5_caixa")]
+layout_mode = 2
+tipo_comando = "direita"
+e_modelo = true
+
+[node name="CaixaAtacar" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000048 instance=ExtResource("5_caixa")]
+layout_mode = 2
+tipo_comando = "atacar"
+e_modelo = true
+
+[connection signal="pressed" from="CanvasLayer/BLimpar" to="." method="_on_b_limpar_pressed"]
+[connection signal="pressed" from="CanvasLayer/BPlay" to="." method="_on_b_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/BReiniciar" to="." method="_on_b_reiniciar_pressed"]
+[connection signal="pressed" from="CanvasLayer/BProximaFase" to="." method="_on_b_proxima_fase_pressed"]
+[connection signal="pressed" from="CanvasLayer/PainelTutorial/Conteudo/CentroBotao/BEntendi" to="." method="_on_b_entendi_pressed"]
+[connection signal="pressed" from="CanvasLayer/BMenu" to="." method="_on_b_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BContinuar" to="." method="_on_b_continuar_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BReiniciarMenu" to="." method="_on_b_menu_reiniciar_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BControlesMenu" to="." method="_on_b_menu_controles_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BSelecionarFase" to="." method="_on_b_menu_selecionar_fase_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BMenuPrincipal" to="." method="_on_b_menu_principal_pressed"]
+[connection signal="pressed" from="CanvasLayer/PainelControles/BVoltarControles" to="." method="_on_b_controles_voltar_pressed"]

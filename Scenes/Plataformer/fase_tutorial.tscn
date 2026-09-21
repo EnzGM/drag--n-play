@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dqswq2iesqqi7"]
+
+[ext_resource type="PackedScene" uid="uid://7m2k45sde6tl" path="res://Scenes/Plataformer/fase_teste.tscn" id="1_tut"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cq7l2"]
+size = Vector2(1465, 3)
+
+[node name="fase_teste" unique_id=1097491722 instance=ExtResource("1_tut")]
+proxima_fase = "res://Scenes/fase_1.tscn"
+texto_tutorial = "Bem-vindo! Aqui você pode testar à vontade, sem risco nenhum — não tem como perder, e dá pra apertar Play quantas vezes quiser.
+
+Arraste as caixas até o trilho lá em cima pra montar sua sequência de comandos. A ORDEM que você monta as caixas da esquerda pra direita é a ORDEM em que o personagem vai executar cada uma — a primeira caixa do trilho roda primeiro, depois a segunda, e assim por diante.
+
+Aperte Play (ou Enter) pra ver o personagem seguir a sequência que você montou. Quando terminar, ele volta sozinho pro início — pode mudar a sequência e tentar de novo na hora."
+max_comandos = 20
+pode_morrer = false
+permitir_repetir = true
+
+[node name="AnimatedSprite2D" parent="Objetivo/CollisionShape2D" parent_id_path=PackedInt32Array(126583945) index="0" unique_id=1698438592]
+position = Vector2(21, -14)
+
+[node name="CollisionShape2d" parent="ZonaDeMortee" parent_id_path=PackedInt32Array(716782223) index="0" unique_id=1165413617]
+position = Vector2(40, 240)
+shape = SubResource("RectangleShape2D_cq7l2")

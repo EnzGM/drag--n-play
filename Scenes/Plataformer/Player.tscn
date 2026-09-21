@@ -1,19 +1,19 @@
 [gd_scene format=3 uid="uid://bpdegc5slohhk"]
 
-[ext_resource type="Script" uid="uid://cjn3mh570p78c" path="res://Scripts/character_body_2d.gd" id="1_rpqav"]
-[ext_resource type="SpriteFrames" path="res://Assets/hero_frames.tres" id="2_frames"]
+[ext_resource type="Script" uid="uid://cjn3mh570p78c" path="res://Scripts/Plataformer/character_body_2d.gd" id="1_5d6jd"]
+[ext_resource type="SpriteFrames" uid="uid://dxaf24ivwmhvm" path="res://Assets/hero_frames.tres" id="2_ey6ne"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7f37h"]
 radius = 19.0
 height = 88.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=359888918]
-script = ExtResource("1_rpqav")
+script = ExtResource("1_5d6jd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1578200069]
 position = Vector2(-18, -32)
 scale = Vector2(1.0937499, 1.4157739)
-sprite_frames = ExtResource("2_frames")
+sprite_frames = ExtResource("2_ey6ne")
 animation = &"andar"
 frame_progress = 0.54089653
 

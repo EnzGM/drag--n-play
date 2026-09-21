@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://c8qtiwpy41qxk"]
+
+[ext_resource type="Script" uid="uid://df2rbh4opjpdh" path="res://Scripts/Shared/controles.gd" id="1_h3jom"]
+
+[node name="Controles" type="Control" unique_id=305486930]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h3jom")
+
+[node name="Fundo" type="ColorRect" parent="." unique_id=1990908984]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="Titulo" type="Label" parent="." unique_id=1044850203]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.12
+anchor_right = 0.5
+anchor_bottom = 0.12
+offset_left = -150.0
+offset_top = -30.0
+offset_right = 150.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 34
+text = "Controles"
+horizontal_alignment = 1
+
+[node name="Lista" type="Label" parent="." unique_id=1044850204]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -160.0
+offset_right = 260.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = 10
+text = "Mouse: arraste as caixas da paleta até o trilho pra montar a sequência de comandos
+
+Clique direito numa caixa do trilho: remove ela na hora
+
+Enter (ou a tecla configurada em \"Executar\"): dá Play e roda a sequência
+
+Botão Play na tela: faz a mesma coisa
+
+R: reinicia a fase a qualquer momento
+
+Esc: abre/fecha o menu de pausa
+
+Botão \"Limpar Fila\": remove todas as caixas do trilho de uma vez"
+autowrap_mode = 3
+
+[node name="BVoltar" type="Button" parent="." unique_id=2120658503]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -50.0
+offset_right = 130.0
+offset_bottom = -20.0
+grow_vertical = 0
+focus_mode = 0
+text = "Voltar"
+
+[connection signal="pressed" from="BVoltar" to="." method="_on_b_voltar_pressed"]

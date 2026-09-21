@@ -12,6 +12,7 @@ const DISTANCIA_PULO = 160.0  # quanto ele anda pra frente durante UM pulo compl
 var comandos = ["andar", "pular", "andar"]
 var executando = false
 var interrompido = false
+var andando_de_costas = false  # true enquanto roda o comando "andar_tras"
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -48,16 +49,7 @@ func _physics_process(delta):
 		velocity.y += GRAVIDADE * delta
 
 	if not executando:
-		var velocidade_atual = VELOCIDADE_CHAO if is_on_floor() else VELOCIDADE_AR
-		if Input.is_action_pressed("ui_right"):
-			velocity.x = velocidade_atual
-		elif Input.is_action_pressed("ui_left"):
-			velocity.x = -velocidade_atual
-		else:
-			velocity.x = 0
-
-		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-			velocity.y = FORCA_PULO
+		velocity.x = 0
 
 	move_and_slide()
 	atualizar_animacao()
@@ -68,7 +60,13 @@ func atualizar_animacao():
 	# lado), toca a animação de andar e vira o sprite pro lado certo.
 	# Parado (ou caindo reto), fica no idle.
 	if abs(velocity.x) > 1.0:
-		sprite.flip_h = velocity.x < 0
+		var virado_esquerda = velocity.x < 0
+		if andando_de_costas:
+			# "Andar pra trás" é ela recuando sem se virar — então o
+			# sprite fica olhando pro lado OPOSTO de pra onde ela tá
+			# indo, em vez de virar pra acompanhar o movimento.
+			virado_esquerda = not virado_esquerda
+		sprite.flip_h = virado_esquerda
 		sprite.play("andar")
 	else:
 		sprite.play("idle")
@@ -91,7 +89,9 @@ func executar_comandos():
 			"andar":
 				await andar(DISTANCIA_PASSO)
 			"andar_tras":
+				andando_de_costas = true
 				await andar(-DISTANCIA_PASSO)
+				andando_de_costas = false
 			"pular":
 				await pular()
 			"esperar":

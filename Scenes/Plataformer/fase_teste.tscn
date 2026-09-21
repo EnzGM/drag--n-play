@@ -1,63 +1,20 @@
 [gd_scene format=3 uid="uid://7m2k45sde6tl"]
 
 [ext_resource type="Texture2D" uid="uid://bllweyqq8gcdp" path="res://icon.svg" id="1_qq0ii"]
-[ext_resource type="Script" uid="uid://ctkm5pecwe1px" path="res://Scripts/fase_teste.gd" id="1_seb3k"]
-[ext_resource type="PackedScene" uid="uid://bpdegc5slohhk" path="res://Scenes/Player.tscn" id="2_seb3k"]
-[ext_resource type="PackedScene" uid="uid://bnlbmab8kwaed" path="res://Scenes/caixa.tscn" id="4_vbr3q"]
-[ext_resource type="Texture2D" uid="uid://bosbou0tpg8ap" path="res://Assets/flag animation.png" id="5_seeb5"]
+[ext_resource type="Script" uid="uid://ctkm5pecwe1px" path="res://Scripts/Plataformer/fase_teste.gd" id="1_seb3k"]
+[ext_resource type="PackedScene" uid="uid://bpdegc5slohhk" path="res://Scenes/Plataformer/Player.tscn" id="2_seb3k"]
+[ext_resource type="PackedScene" uid="uid://bnlbmab8kwaed" path="res://Scenes/Plataformer/caixa.tscn" id="4_vbr3q"]
+[ext_resource type="SpriteFrames" uid="uid://cfbttc8hw182h" path="res://Assets/flag_frames.tres" id="5_flag"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7f37h"]
 size = Vector2(792.5, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8hgew"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x3mrb"]
-atlas = ExtResource("5_seeb5")
-region = Rect2(0, 0, 60, 60)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ojxc1"]
-atlas = ExtResource("5_seeb5")
-region = Rect2(60, 0, 60, 60)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c7gn1"]
-atlas = ExtResource("5_seeb5")
-region = Rect2(120, 0, 60, 60)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mqwnr"]
-atlas = ExtResource("5_seeb5")
-region = Rect2(180, 0, 60, 60)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nrboh"]
-atlas = ExtResource("5_seeb5")
-region = Rect2(240, 0, 60, 60)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7f37h"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x3mrb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ojxc1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c7gn1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mqwnr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nrboh")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwym3"]
 size = Vector2(921, 2)
 
-[node name="fase_teste" type="Node2D" unique_id=1790296245]
+[node name="fase_teste2" type="Node2D" unique_id=1790296245]
 process_mode = 3
 script = ExtResource("1_seb3k")
 
@@ -189,7 +146,66 @@ grow_vertical = 0
 text = "Próxima Fase"
 metadata/_edit_use_anchors_ = true
 
-[node name="BMenu" type="Button" parent="CanvasLayer" unique_id=692585651]
+[node name="PainelTutorial" type="Panel" parent="CanvasLayer" unique_id=1698438600]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -260.0
+offset_right = 300.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Conteudo" type="VBoxContainer" parent="CanvasLayer/PainelTutorial" unique_id=1698438604]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Imagem" type="TextureRect" parent="CanvasLayer/PainelTutorial/Conteudo" unique_id=1698438603]
+process_mode = 3
+visible = false
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rolagem" type="ScrollContainer" parent="CanvasLayer/PainelTutorial/Conteudo" unique_id=1698438605]
+process_mode = 3
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/PainelTutorial/Conteudo/Rolagem" unique_id=1698438601]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tutorial"
+autowrap_mode = 3
+
+[node name="CentroBotao" type="CenterContainer" parent="CanvasLayer/PainelTutorial/Conteudo" unique_id=1698438606]
+process_mode = 3
+layout_mode = 2
+
+[node name="BEntendi" type="Button" parent="CanvasLayer/PainelTutorial/Conteudo/CentroBotao" unique_id=1698438602]
+process_mode = 3
+layout_mode = 2
+text = "Entendi!"
+
+[node name="BMenu" type="Button" parent="CanvasLayer" unique_id=1419415608]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -201,7 +217,7 @@ grow_horizontal = 0
 focus_mode = 0
 text = "☰ Menu (Esc)"
 
-[node name="MenuPausa" type="Panel" parent="CanvasLayer" unique_id=221692622]
+[node name="MenuPausa" type="Panel" parent="CanvasLayer" unique_id=266545154]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -209,13 +225,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -110.0
-offset_top = -120.0
+offset_top = -140.0
 offset_right = 110.0
-offset_bottom = 120.0
+offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuPausa" unique_id=1507406687]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuPausa" unique_id=1993220160]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -223,38 +239,114 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -80.0
-offset_top = -100.0
+offset_top = -120.0
 offset_right = 80.0
-offset_bottom = 100.0
+offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="Titulo" type="Label" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=1502937584]
+[node name="Titulo" type="Label" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=1586425119]
 layout_mode = 2
 text = "Pausado"
 horizontal_alignment = 1
 
-[node name="BContinuar" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=1909859504]
+[node name="BContinuar" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=980778122]
 layout_mode = 2
 focus_mode = 0
 text = "Continuar"
 
-[node name="BReiniciarMenu" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=801034929]
+[node name="BReiniciarMenu" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=117028856]
 layout_mode = 2
 focus_mode = 0
 text = "Reiniciar Fase"
 
-[node name="BSelecionarFase" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=24382707]
+[node name="BControlesMenu" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=148068889]
+layout_mode = 2
+focus_mode = 0
+text = "Controles"
+
+[node name="BSelecionarFase" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=1942102625]
 layout_mode = 2
 focus_mode = 0
 text = "Selecionar Fase"
 
-[node name="BMenuPrincipal" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=232079537]
+[node name="BMenuPrincipal" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=601238808]
 layout_mode = 2
 focus_mode = 0
 text = "Menu Principal"
+
+[node name="PainelControles" type="Panel" parent="CanvasLayer" unique_id=1698438610]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -230.0
+offset_right = 280.0
+offset_bottom = 230.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titulo" type="Label" parent="CanvasLayer/PainelControles" unique_id=1698438611]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Controles"
+horizontal_alignment = 1
+
+[node name="Lista" type="Label" parent="CanvasLayer/PainelControles" unique_id=1698438612]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 50.0
+offset_right = -16.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = 8
+text = "Mouse: arraste as caixas da paleta até o trilho pra montar a sequência
+
+Clique direito numa caixa do trilho: remove ela na hora
+
+Enter (ou a tecla \"Executar\"): dá Play
+
+R: reinicia a fase a qualquer momento
+
+Esc: abre/fecha esse menu de pausa
+
+\"Limpar Fila\": remove todas as caixas do trilho de uma vez"
+autowrap_mode = 3
+
+[node name="BVoltarControles" type="Button" parent="CanvasLayer/PainelControles" unique_id=1698438613]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -40.0
+offset_right = 50.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Voltar"
 
 [node name="Caixas" type="Panel" parent="CanvasLayer" unique_id=1492597069]
 offset_right = 40.0
@@ -287,9 +379,10 @@ position = Vector2(264, -17)
 shape = SubResource("RectangleShape2D_8hgew")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Objetivo/CollisionShape2D" unique_id=1698438592]
-position = Vector2(16, -14)
-sprite_frames = SubResource("SpriteFrames_7f37h")
-frame_progress = 0.92871386
+position = Vector2(12, -14)
+sprite_frames = ExtResource("5_flag")
+animation = &"aceno"
+autoplay = "aceno"
 
 [node name="ZonaDeMortee" type="Area2D" parent="." unique_id=716782223]
 
@@ -304,10 +397,13 @@ position = Vector2(0, -49)
 [connection signal="pressed" from="CanvasLayer/BPlay" to="." method="_on_b_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/BReiniciar" to="." method="_on_b_reiniciar_pressed"]
 [connection signal="pressed" from="CanvasLayer/BProximaFase" to="." method="_on_b_proxima_fase_pressed"]
+[connection signal="pressed" from="CanvasLayer/PainelTutorial/Conteudo/CentroBotao/BEntendi" to="." method="_on_b_entendi_pressed"]
 [connection signal="pressed" from="CanvasLayer/BMenu" to="." method="_on_b_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BContinuar" to="." method="_on_b_continuar_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BReiniciarMenu" to="." method="_on_b_menu_reiniciar_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BControlesMenu" to="." method="_on_b_menu_controles_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BSelecionarFase" to="." method="_on_b_menu_selecionar_fase_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BMenuPrincipal" to="." method="_on_b_menu_principal_pressed"]
+[connection signal="pressed" from="CanvasLayer/PainelControles/BVoltarControles" to="." method="_on_b_controles_voltar_pressed"]
 [connection signal="body_entered" from="Objetivo" to="." method="_on_objetivo_body_entered"]
 [connection signal="body_entered" from="ZonaDeMortee" to="." method="_on_zona_de_morte_body_entered"]
