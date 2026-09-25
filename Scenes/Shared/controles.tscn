@@ -37,7 +37,7 @@ theme_override_font_sizes/font_size = 34
 text = "Controles"
 horizontal_alignment = 1
 
-[node name="Lista" type="Label" parent="." unique_id=1044850204]
+[node name="Rolagem" type="ScrollContainer" parent="." unique_id=1044850205]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -50,6 +50,11 @@ offset_right = 260.0
 offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="Lista" type="Label" parent="Rolagem" unique_id=1044850204]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/line_spacing = 10
 text = "Mouse: arraste as caixas da paleta até o trilho pra montar a sequência de comandos
 

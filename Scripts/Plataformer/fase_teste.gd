@@ -49,11 +49,16 @@ var menu_aberto = false
 # vontade.
 @export var permitir_repetir: bool = false
 
+# Som ambiente em loop pra essa fase (opcional). Deixe em branco (como
+# aqui, na fase_teste) se a fase não tiver som ambiente próprio.
+@export var som_ambiente: AudioStream = null
+
 @onready var trilho: Control = $CanvasLayer/Trilho
 
 
 func _ready():
 	posicao_inicial_player = $Player.global_position
+	$Player.comando_avancou.connect(_on_comando_avancou)
 	# Garante que tudo comece visível ao rodar, mesmo que você tenha
 	# escondido o CanvasLayer inteiro ou só a paleta/trilho no editor
 	# (ícone de olho) pra facilitar de mexer no layout da fase sem UI
@@ -62,11 +67,17 @@ func _ready():
 	mostrar_caixas()
 	atualizar_texto()
 
+	if som_ambiente:
+		$SomAmbiente.stream = som_ambiente
+		$SomAmbiente.finished.connect($SomAmbiente.play)  # loop manual
+		$SomAmbiente.play()
+
 	if not texto_tutorial.is_empty():
 		$CanvasLayer/PainelTutorial/Conteudo/Rolagem/Label.text = texto_tutorial
 		$CanvasLayer/PainelTutorial/Conteudo/Imagem.texture = imagem_tutorial
 		$CanvasLayer/PainelTutorial/Conteudo/Imagem.visible = imagem_tutorial != null
 		$CanvasLayer/PainelTutorial.visible = true
+		$SomAparecerPainel.play()
 		get_tree().paused = true
 	else:
 		$CanvasLayer/PainelTutorial.visible = false
@@ -107,6 +118,8 @@ func alternar_menu_pausa():
 		return
 	menu_aberto = not menu_aberto
 	get_tree().paused = menu_aberto
+	if menu_aberto:
+		$SomAparecerPainel.play()
 	$CanvasLayer/MenuPausa.visible = menu_aberto
 	$CanvasLayer/PainelControles.visible = false
 
@@ -126,6 +139,7 @@ func _on_b_menu_reiniciar_pressed():
 func _on_b_menu_controles_pressed():
 	$CanvasLayer/MenuPausa.visible = false
 	$CanvasLayer/PainelControles.visible = true
+	$SomAparecerPainel.play()
 
 
 func _on_b_controles_voltar_pressed():
@@ -177,15 +191,14 @@ func _on_b_play_pressed():
 
 
 func esconder_caixas():
+	# Só esconde a paleta (de onde você arrasta novas caixas) — as que já
+	# estão no trilho ficam visíveis durante a execução, pra dar pra ver
+	# a setinha indicando qual comando tá rodando.
 	$CanvasLayer/Caixas.visible = false
-	for caixa in comandos_no_trilho:
-		caixa.visible = false
 
 
 func mostrar_caixas():
 	$CanvasLayer/Caixas.visible = true
-	for caixa in comandos_no_trilho:
-		caixa.visible = true
 
 
 # Chamado pelo caixa.gd toda vez que o jogador solta uma caixa.
@@ -200,14 +213,17 @@ func soltar_caixa(caixa):
 		if not comandos_no_trilho.has(caixa):
 			if comandos_no_trilho.size() >= max_comandos:
 				# Limite de comandos atingido: a caixa não entra.
+				$SomCancelar.play()
 				caixa.queue_free()
 				return
+			$SomCaixaEncaixada.play()
 			comandos_no_trilho.append(caixa)
 	else:
 		# Solta fora do trilho: some sempre, esteja ela já na fila ou seja
 		# uma cópia nova que nunca chegou a entrar.
 		if comandos_no_trilho.has(caixa):
 			comandos_no_trilho.erase(caixa)
+		$SomCaixaRemovida.play()
 		caixa.queue_free()
 
 	reorganizar_trilho()
@@ -218,6 +234,7 @@ func remover_caixa(caixa):
 		return
 	if comandos_no_trilho.has(caixa):
 		comandos_no_trilho.erase(caixa)
+	$SomCaixaRemovida.play()
 	caixa.queue_free()
 	reorganizar_trilho()
 
@@ -263,10 +280,22 @@ func reorganizar_trilho():
 	atualizar_texto()
 
 
+func _on_comando_avancou(indice: int):
+	if indice < 0 or indice >= comandos_no_trilho.size():
+		$CanvasLayer/Trilho/Seta.visible = false
+		return
+	var caixa = comandos_no_trilho[indice]
+	var centro_caixa = (caixa.global_position - trilho.global_position) + (caixa.size * caixa.scale) / 2.0
+	$CanvasLayer/Trilho/Seta.position = centro_caixa + Vector2(0, -20)
+	$CanvasLayer/Trilho/Seta.visible = true
+
+
 func _on_b_limpar_pressed():
 	if estado != Estado.JOGANDO:
 		return
 	$Player.interromper()
+	if not comandos_no_trilho.is_empty():
+		$SomCaixaRemovida.play()
 	for caixa in comandos_no_trilho:
 		caixa.queue_free()
 	comandos_no_trilho.clear()
@@ -275,10 +304,7 @@ func _on_b_limpar_pressed():
 
 
 func atualizar_texto():
-	var texto = " > ".join(lista_montada)
-	if texto == "":
-		texto = "(arraste as caixas até o trilho)"
-	$CanvasLayer/ListaComandos.text = "%s\nComandos: %d/%d" % [texto, comandos_no_trilho.size(), max_comandos]
+	$CanvasLayer/Trilho/ListaComandos.text = "Comandos: %d/%d" % [comandos_no_trilho.size(), max_comandos]
 
 
 func _on_objetivo_body_entered(body):
@@ -289,6 +315,7 @@ func _on_objetivo_body_entered(body):
 	estado = Estado.VITORIA
 	$Player.interromper()
 	get_tree().paused = true
+	$SomAparecerPainel.play()
 	$CanvasLayer/TextoVitoria.visible = true
 	$CanvasLayer/BReiniciar.visible = true
 	$CanvasLayer/BProximaFase.visible = not proxima_fase.is_empty()
@@ -309,6 +336,7 @@ func _on_zona_de_morte_body_entered(body):
 	estado = Estado.MORTO
 	$Player.interromper()
 	get_tree().paused = true
+	$SomCancelar.play()
 	$CanvasLayer/TextoDerrota.visible = true
 	$CanvasLayer/BReiniciar.visible = true
 

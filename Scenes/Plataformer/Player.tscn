@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cjn3mh570p78c" path="res://Scripts/Plataformer/character_body_2d.gd" id="1_5d6jd"]
 [ext_resource type="SpriteFrames" uid="uid://dxaf24ivwmhvm" path="res://Assets/hero_frames.tres" id="2_ey6ne"]
+[ext_resource type="AudioStream" uid="uid://c773if1ju2n8m" path="res://Assets/Sons/footstep1.wav" id="3_step1"]
+[ext_resource type="AudioStream" uid="uid://dd1444nycbc4w" path="res://Assets/Sons/footstep2.wav" id="4_step2"]
+[ext_resource type="AudioStream" uid="uid://bu3no1psxoas" path="res://Assets/Sons/jump.wav" id="5_jump"]
+[ext_resource type="AudioStream" uid="uid://bj4j2cfjl0c5m" path="res://Assets/Sons/jump_impact.wav" id="6_land"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7f37h"]
 radius = 19.0
@@ -11,7 +15,7 @@ height = 88.0
 script = ExtResource("1_5d6jd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1578200069]
-position = Vector2(-18, -32)
+position = Vector2(-24.000002, -32)
 scale = Vector2(1.0937499, 1.4157739)
 sprite_frames = ExtResource("2_ey6ne")
 animation = &"andar"
@@ -20,3 +24,15 @@ frame_progress = 0.54089653
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=407260774]
 position = Vector2(-24, -32)
 shape = SubResource("CapsuleShape2D_7f37h")
+
+[node name="SomPasso1" type="AudioStreamPlayer" parent="." unique_id=1148280220]
+stream = ExtResource("3_step1")
+
+[node name="SomPasso2" type="AudioStreamPlayer" parent="." unique_id=241649773]
+stream = ExtResource("4_step2")
+
+[node name="SomPular" type="AudioStreamPlayer" parent="." unique_id=1156737945]
+stream = ExtResource("5_jump")
+
+[node name="SomAterrissar" type="AudioStreamPlayer" parent="." unique_id=1270522691]
+stream = ExtResource("6_land")
