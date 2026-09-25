@@ -18,6 +18,7 @@ func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if e_modelo:
+				$SomAparecer.play()
 				var copia = duplicate()
 				get_tree().current_scene.get_node("CanvasLayer").add_child(copia)
 				copia.e_modelo = false
@@ -25,6 +26,7 @@ func _gui_input(event):
 				copia.arrastando = true
 				copia.offset_mouse = get_global_mouse_position() - copia.global_position
 			else:
+				$SomClique.play()
 				arrastando = true
 				offset_mouse = get_global_mouse_position() - global_position
 		elif event.button_index == MOUSE_BUTTON_RIGHT and not e_modelo:

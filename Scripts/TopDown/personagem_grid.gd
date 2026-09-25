@@ -18,7 +18,12 @@ var fase = null
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var seta: Node2D = $Seta
+@onready var som_passo: Array[AudioStreamPlayer] = [$SomPasso1, $SomPasso2]
 
+var _indice_passo = 0
+
+
+signal comando_avancou(indice)
 
 func interromper():
 	interrompido = true
@@ -33,10 +38,11 @@ func executar_comandos():
 	executando = true
 	interrompido = false
 
-	for comando in comandos:
+	for i in comandos.size():
 		if interrompido:
 			break
-		match comando:
+		comando_avancou.emit(i)
+		match comandos[i]:
 			"cima":
 				await mover(Direcao.CIMA)
 			"baixo":
@@ -49,6 +55,7 @@ func executar_comandos():
 				await atacar()
 
 	executando = false
+	comando_avancou.emit(-1)
 
 
 func vetor_direcao(dir: int) -> Vector2i:
@@ -91,6 +98,7 @@ func mover(dir: int) -> void:
 
 	if fase.celula_e_parede(alvo):
 		# Bateu na parede: fica de frente pra ela, não anda.
+		$SomBloqueado.play()
 		return
 
 	if fase.celula_tem_inimigo_vivo(alvo):
@@ -100,6 +108,9 @@ func mover(dir: int) -> void:
 
 	celula = alvo
 	var posicao_alvo = fase.posicao_da_celula(celula)
+
+	som_passo[_indice_passo].play()
+	_indice_passo = (_indice_passo + 1) % som_passo.size()
 
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", posicao_alvo, TEMPO_MOVIMENTO)
@@ -115,6 +126,7 @@ func mover(dir: int) -> void:
 func atacar() -> void:
 	if interrompido:
 		return
+	$SomAtacar.play()
 	var alvo = celula + vetor_direcao(direcao_atual)
 	fase.tentar_derrotar_inimigo(alvo)
 	await get_tree().create_timer(TEMPO_ATAQUE).timeout

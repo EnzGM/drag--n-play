@@ -1,6 +1,10 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" uid="uid://dqedblfpnmifi" path="res://Scripts/TopDown/personagem_grid.gd" id="1_grid"]
+[ext_resource type="AudioStream" path="res://Assets/Sons/footstep1.wav" id="2_step1"]
+[ext_resource type="AudioStream" path="res://Assets/Sons/footstep2.wav" id="3_step2"]
+[ext_resource type="AudioStream" path="res://Assets/Sons/cancel.wav" id="4_bloqueado"]
+[ext_resource type="AudioStream" path="res://Assets/Sons/jump_impact.wav" id="5_ataque"]
 
 [node name="PersonagemGrid" type="Node2D" unique_id=2001000001]
 script = ExtResource("1_grid")
@@ -19,3 +23,15 @@ color = Color(1, 1, 1, 1)
 polygon = PackedVector2Array(18, 0, -6, -12, -6, 12)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2001000005]
+
+[node name="SomPasso1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_step1")
+
+[node name="SomPasso2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_step2")
+
+[node name="SomBloqueado" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_bloqueado")
+
+[node name="SomAtacar" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ataque")

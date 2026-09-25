@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://c5o1vupq7t3ke"]
+
+[ext_resource type="Script" uid="uid://xaji0y6dpbhsa" path="res://Scripts/Shared/opcoes.gd" id="1_opcoes"]
+
+[node name="Opcoes" type="Control" unique_id=305486940]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_opcoes")
+
+[node name="Fundo" type="ColorRect" parent="." unique_id=1990908990]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="Titulo" type="Label" parent="." unique_id=1044850210]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.12
+anchor_right = 0.5
+anchor_bottom = 0.12
+offset_left = -150.0
+offset_top = -30.0
+offset_right = 150.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 34
+text = "Opções"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=825229930]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -45.0
+offset_right = 150.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="LabelVolume" type="Label" parent="VBoxContainer" unique_id=1044850211]
+layout_mode = 2
+text = "Volume Geral"
+horizontal_alignment = 1
+
+[node name="Slider" type="HSlider" parent="VBoxContainer" unique_id=1252748881]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_mode = 0
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 100.0
+
+[node name="ValorVolume" type="Label" parent="VBoxContainer" unique_id=1252748882]
+layout_mode = 2
+text = "Volume: 100%"
+horizontal_alignment = 1
+
+[node name="BVoltar" type="Button" parent="." unique_id=2120658510]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -50.0
+offset_right = 130.0
+offset_bottom = -20.0
+grow_vertical = 0
+focus_mode = 0
+text = "Voltar"
+
+[connection signal="value_changed" from="VBoxContainer/Slider" to="." method="_on_slider_value_changed"]
+[connection signal="pressed" from="BVoltar" to="." method="_on_b_voltar_pressed"]

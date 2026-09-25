@@ -54,8 +54,10 @@ var celula_objetivo: Vector2i
 
 func _ready():
 	$CanvasLayer.visible = true
+	$Player.comando_avancou.connect(_on_comando_avancou)
 	mostrar_caixas()
 	atualizar_texto()
+	queue_redraw()
 
 	for parede in $Paredes.get_children():
 		paredes[celula_da_posicao(parede.position)] = true
@@ -76,12 +78,36 @@ func _ready():
 		$CanvasLayer/PainelTutorial/Conteudo/Imagem.texture = imagem_tutorial
 		$CanvasLayer/PainelTutorial/Conteudo/Imagem.visible = imagem_tutorial != null
 		$CanvasLayer/PainelTutorial.visible = true
+		$SomAparecerPainel.play()
 		get_tree().paused = true
 	else:
 		$CanvasLayer/PainelTutorial.visible = false
 
 
 # --- Ponte com o personagem_grid.gd ---
+
+func _draw() -> void:
+	# Desenha as linhas da grade sobre a área do Fundo, uma célula por
+	# quadrado — puramente visual, não afeta a lógica de colisão.
+	if not has_node("Fundo"):
+		return
+	var fundo: ColorRect = $Fundo
+	var esquerda = fundo.position.x
+	var topo = fundo.position.y
+	var direita = fundo.position.x + fundo.size.x
+	var baixo = fundo.position.y + fundo.size.y
+	var cor_grade = Color(0, 0, 0, 0.3)
+
+	var x = esquerda
+	while x <= direita + 0.5:
+		draw_line(Vector2(x, topo), Vector2(x, baixo), cor_grade, 2.0)
+		x += TAMANHO_CELULA
+
+	var y = topo
+	while y <= baixo + 0.5:
+		draw_line(Vector2(esquerda, y), Vector2(direita, y), cor_grade, 2.0)
+		y += TAMANHO_CELULA
+
 
 func celula_da_posicao(pos: Vector2) -> Vector2i:
 	return Vector2i(roundi(pos.x / TAMANHO_CELULA), roundi(pos.y / TAMANHO_CELULA))
@@ -108,6 +134,7 @@ func tentar_derrotar_inimigo(celula: Vector2i) -> void:
 		var inimigo = inimigos[celula]
 		inimigo.queue_free()
 		inimigos.erase(celula)
+		$SomCaixaRemovida.play()  # reaproveitado como "poof" do inimigo sumindo
 
 
 func jogador_morreu() -> void:
@@ -116,6 +143,7 @@ func jogador_morreu() -> void:
 	estado = Estado.MORTO
 	$Player.interromper()
 	get_tree().paused = true
+	$SomCancelar.play()
 	$CanvasLayer/TextoDerrota.visible = true
 	$CanvasLayer/BReiniciar.visible = true
 
@@ -126,6 +154,7 @@ func jogador_venceu() -> void:
 	estado = Estado.VITORIA
 	$Player.interromper()
 	get_tree().paused = true
+	$SomAparecerPainel.play()
 	$CanvasLayer/TextoVitoria.visible = true
 	$CanvasLayer/BReiniciar.visible = true
 	$CanvasLayer/BProximaFase.visible = not proxima_fase.is_empty()
@@ -170,6 +199,8 @@ func alternar_menu_pausa():
 		return
 	menu_aberto = not menu_aberto
 	get_tree().paused = menu_aberto
+	if menu_aberto:
+		$SomAparecerPainel.play()
 	$CanvasLayer/MenuPausa.visible = menu_aberto
 	$CanvasLayer/PainelControles.visible = false
 
@@ -189,6 +220,7 @@ func _on_b_menu_reiniciar_pressed():
 func _on_b_menu_controles_pressed():
 	$CanvasLayer/MenuPausa.visible = false
 	$CanvasLayer/PainelControles.visible = true
+	$SomAparecerPainel.play()
 
 
 func _on_b_controles_voltar_pressed():
@@ -198,12 +230,12 @@ func _on_b_controles_voltar_pressed():
 
 func _on_b_menu_selecionar_fase_pressed():
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://Scenes/selecao_fases.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Shared/selecao_fases.tscn")
 
 
 func _on_b_menu_principal_pressed():
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://Scenes/menu_principal.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Shared/menu_principal.tscn")
 
 
 func iniciar_execucao():
@@ -234,15 +266,13 @@ func _on_b_play_pressed():
 
 
 func esconder_caixas():
+	# Só esconde a paleta — as caixas do trilho ficam visíveis durante a
+	# execução, pra dar pra ver a setinha indicando qual comando tá rodando.
 	$CanvasLayer/Caixas.visible = false
-	for caixa in comandos_no_trilho:
-		caixa.visible = false
 
 
 func mostrar_caixas():
 	$CanvasLayer/Caixas.visible = true
-	for caixa in comandos_no_trilho:
-		caixa.visible = true
 
 
 func soltar_caixa(caixa):
@@ -255,12 +285,15 @@ func soltar_caixa(caixa):
 	if dentro_do_trilho:
 		if not comandos_no_trilho.has(caixa):
 			if comandos_no_trilho.size() >= max_comandos:
+				$SomCancelar.play()
 				caixa.queue_free()
 				return
+			$SomCaixaEncaixada.play()
 			comandos_no_trilho.append(caixa)
 	else:
 		if comandos_no_trilho.has(caixa):
 			comandos_no_trilho.erase(caixa)
+		$SomCaixaRemovida.play()
 		caixa.queue_free()
 
 	reorganizar_trilho()
@@ -271,6 +304,7 @@ func remover_caixa(caixa):
 		return
 	if comandos_no_trilho.has(caixa):
 		comandos_no_trilho.erase(caixa)
+	$SomCaixaRemovida.play()
 	caixa.queue_free()
 	reorganizar_trilho()
 
@@ -310,10 +344,22 @@ func reorganizar_trilho():
 	atualizar_texto()
 
 
+func _on_comando_avancou(indice: int):
+	if indice < 0 or indice >= comandos_no_trilho.size():
+		$CanvasLayer/Trilho/Seta.visible = false
+		return
+	var caixa = comandos_no_trilho[indice]
+	var centro_caixa = (caixa.global_position - trilho.global_position) + (caixa.size * caixa.scale) / 2.0
+	$CanvasLayer/Trilho/Seta.position = centro_caixa + Vector2(0, -20)
+	$CanvasLayer/Trilho/Seta.visible = true
+
+
 func _on_b_limpar_pressed():
 	if estado != Estado.JOGANDO:
 		return
 	$Player.interromper()
+	if not comandos_no_trilho.is_empty():
+		$SomCaixaRemovida.play()
 	for caixa in comandos_no_trilho:
 		caixa.queue_free()
 	comandos_no_trilho.clear()
@@ -322,10 +368,7 @@ func _on_b_limpar_pressed():
 
 
 func atualizar_texto():
-	var texto = " > ".join(lista_montada)
-	if texto == "":
-		texto = "(arraste as caixas até o trilho)"
-	$CanvasLayer/ListaComandos.text = "%s\nComandos: %d/%d" % [texto, comandos_no_trilho.size(), max_comandos]
+	$CanvasLayer/Trilho/ListaComandos.text = "Comandos: %d/%d" % [comandos_no_trilho.size(), max_comandos]
 
 
 func _on_b_reiniciar_pressed():

@@ -58,10 +58,16 @@ layout_mode = 2
 focus_mode = 0
 text = "Selecionar Fase"
 
+[node name="BOpcoes" type="Button" parent="VBoxContainer" unique_id=995474825]
+layout_mode = 2
+focus_mode = 0
+text = "Opções"
+
 [node name="BSair" type="Button" parent="VBoxContainer" unique_id=2120658501]
 layout_mode = 2
 focus_mode = 0
 text = "Sair"
 
 [connection signal="pressed" from="VBoxContainer/BJogar" to="." method="_on_b_selecionar_fase_pressed"]
+[connection signal="pressed" from="VBoxContainer/BOpcoes" to="." method="_on_b_opcoes_pressed"]
 [connection signal="pressed" from="VBoxContainer/BSair" to="." method="_on_b_sair_pressed"]

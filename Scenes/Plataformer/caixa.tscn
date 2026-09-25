@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bnlbmab8kwaed"]
 
 [ext_resource type="Script" uid="uid://bcv7jmu0w355a" path="res://Scripts/Plataformer/caixa.gd" id="1_ck0w0"]
+[ext_resource type="AudioStream" path="res://Assets/Sons/block_click.wav" id="2_click"]
+[ext_resource type="AudioStream" path="res://Assets/Sons/pop.wav" id="3_pop"]
 
 [node name="Caixa" type="Control" unique_id=379628843]
 custom_minimum_size = Vector2(100, 50)
@@ -31,3 +33,9 @@ offset_right = 88.0
 offset_bottom = 59.0
 text = "andar
 "
+
+[node name="SomClique" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_click")
+
+[node name="SomAparecer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pop")

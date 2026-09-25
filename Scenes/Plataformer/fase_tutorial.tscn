@@ -6,7 +6,7 @@
 size = Vector2(1465, 3)
 
 [node name="fase_teste" unique_id=1097491722 instance=ExtResource("1_tut")]
-proxima_fase = "res://Scenes/fase_1.tscn"
+proxima_fase = "res://Scenes/Plataformer/fase_1.tscn"
 texto_tutorial = "Bem-vindo! Aqui você pode testar à vontade, sem risco nenhum — não tem como perder, e dá pra apertar Play quantas vezes quiser.
 
 Arraste as caixas até o trilho lá em cima pra montar sua sequência de comandos. A ORDEM que você monta as caixas da esquerda pra direita é a ORDEM em que o personagem vai executar cada uma — a primeira caixa do trilho roda primeiro, depois a segunda, e assim por diante.

@@ -15,6 +15,13 @@ var interrompido = false
 var andando_de_costas = false  # true enquanto roda o comando "andar_tras"
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var som_passo: Array[AudioStreamPlayer] = [$SomPasso1, $SomPasso2]
+@onready var som_pular: AudioStreamPlayer = $SomPular
+@onready var som_aterrissar: AudioStreamPlayer = $SomAterrissar
+
+const INTERVALO_PASSO = 0.28  # tempo entre um footstep e outro, andando
+var _indice_passo = 0
+var _tempo_desde_passo = 0.0
 
 
 func _ready():
@@ -53,6 +60,20 @@ func _physics_process(delta):
 
 	move_and_slide()
 	atualizar_animacao()
+	atualizar_passos(delta)
+
+
+func atualizar_passos(delta):
+	if is_on_floor() and abs(velocity.x) > 1.0:
+		_tempo_desde_passo += delta
+		if _tempo_desde_passo >= INTERVALO_PASSO:
+			_tempo_desde_passo = 0.0
+			som_passo[_indice_passo].play()
+			_indice_passo = (_indice_passo + 1) % som_passo.size()
+	else:
+		# Assim que voltar a andar, o próximo passo toca na hora, em vez
+		# de esperar o intervalo inteiro de novo.
+		_tempo_desde_passo = INTERVALO_PASSO
 
 
 func atualizar_animacao():
@@ -72,6 +93,8 @@ func atualizar_animacao():
 		sprite.play("idle")
 
 
+signal comando_avancou(indice)
+
 func executar_comandos():
 	# Se já tá executando uma sequência, ignora a chamada em vez de reiniciar
 	# tudo do zero por cima — é o que causava o "andar infinito", quando
@@ -82,10 +105,11 @@ func executar_comandos():
 	executando = true
 	interrompido = false
 
-	for comando in comandos:
+	for i in comandos.size():
 		if interrompido:
 			break
-		match comando:
+		comando_avancou.emit(i)
+		match comandos[i]:
 			"andar":
 				await andar(DISTANCIA_PASSO)
 			"andar_tras":
@@ -99,6 +123,7 @@ func executar_comandos():
 
 	velocity.x = 0
 	executando = false
+	comando_avancou.emit(-1)
 
 
 func interromper():
@@ -143,6 +168,7 @@ func pular() -> void:
 
 	velocity.y = FORCA_PULO
 	velocity.x = velocidade_horizontal_pulo
+	som_pular.play()
 	await get_tree().physics_frame
 
 	# Garante que o personagem realmente saiu do chão antes de considerar
@@ -163,4 +189,5 @@ func pular() -> void:
 		velocity.x = velocidade_horizontal_pulo
 		await get_tree().physics_frame
 
+	som_aterrissar.play()
 	velocity.x = 0
