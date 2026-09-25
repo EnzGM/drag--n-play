@@ -1,15 +1,17 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cttnon2qsg7er"]
 
 [ext_resource type="Script" uid="uid://dqedblfpnmifi" path="res://Scripts/TopDown/personagem_grid.gd" id="1_grid"]
-[ext_resource type="AudioStream" path="res://Assets/Sons/footstep1.wav" id="2_step1"]
-[ext_resource type="AudioStream" path="res://Assets/Sons/footstep2.wav" id="3_step2"]
-[ext_resource type="AudioStream" path="res://Assets/Sons/cancel.wav" id="4_bloqueado"]
-[ext_resource type="AudioStream" path="res://Assets/Sons/jump_impact.wav" id="5_ataque"]
+[ext_resource type="SpriteFrames" uid="uid://dxaf24ivwmhvm" path="res://Assets/hero_frames.tres" id="2_27hk8"]
+[ext_resource type="AudioStream" uid="uid://c773if1ju2n8m" path="res://Assets/Sons/footstep1.wav" id="2_step1"]
+[ext_resource type="AudioStream" uid="uid://dd1444nycbc4w" path="res://Assets/Sons/footstep2.wav" id="3_step2"]
+[ext_resource type="AudioStream" uid="uid://bux42kukbnhab" path="res://Assets/Sons/cancel.wav" id="4_bloqueado"]
+[ext_resource type="AudioStream" uid="uid://bj4j2cfjl0c5m" path="res://Assets/Sons/jump_impact.wav" id="5_ataque"]
 
 [node name="PersonagemGrid" type="Node2D" unique_id=2001000001]
 script = ExtResource("1_grid")
 
 [node name="Corpo" type="ColorRect" parent="." unique_id=2001000002]
+visible = false
 offset_left = -32.0
 offset_top = -32.0
 offset_right = 32.0
@@ -19,19 +21,20 @@ color = Color(0.25, 0.5, 0.95, 1)
 [node name="Seta" type="Node2D" parent="." unique_id=2001000003]
 
 [node name="Ponta" type="Polygon2D" parent="Seta" unique_id=2001000004]
-color = Color(1, 1, 1, 1)
 polygon = PackedVector2Array(18, 0, -6, -12, -6, 12)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2001000005]
+sprite_frames = ExtResource("2_27hk8")
+animation = &"idle"
 
-[node name="SomPasso1" type="AudioStreamPlayer" parent="."]
+[node name="SomPasso1" type="AudioStreamPlayer" parent="." unique_id=427769852]
 stream = ExtResource("2_step1")
 
-[node name="SomPasso2" type="AudioStreamPlayer" parent="."]
+[node name="SomPasso2" type="AudioStreamPlayer" parent="." unique_id=1514599077]
 stream = ExtResource("3_step2")
 
-[node name="SomBloqueado" type="AudioStreamPlayer" parent="."]
+[node name="SomBloqueado" type="AudioStreamPlayer" parent="." unique_id=1754353890]
 stream = ExtResource("4_bloqueado")
 
-[node name="SomAtacar" type="AudioStreamPlayer" parent="."]
+[node name="SomAtacar" type="AudioStreamPlayer" parent="." unique_id=1317351484]
 stream = ExtResource("5_ataque")

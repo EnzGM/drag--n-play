@@ -34,13 +34,14 @@ texture = ExtResource("3_guarda")
 region_enabled = true
 region_rect = Rect2(96, 18, 32, 31)
 
-[node name="SpriteOutline" type="Sprite2D" parent="Chao/Sprite2D" index="0" unique_id=1245721650]
+[node name="SpriteOutline2" type="Sprite2D" parent="Chao/Sprite2D" index="0" unique_id=398991548]
 self_modulate = Color(0, 0, 0, 1)
 show_behind_parent = true
-scale = Vector2(1.08, 1.08)
+position = Vector2(0, -8.940697e-08)
+scale = Vector2(1.043, 1.0451614)
 texture = ExtResource("3_guarda")
 region_enabled = true
-region_rect = Rect2(96, 18, 32, 31)
+region_rect = Rect2(128, 18, 32, 31)
 
 [node name="Sprite2D2" type="Sprite2D" parent="Chao" index="1" unique_id=667410869]
 position = Vector2(-143, 80)
@@ -52,7 +53,8 @@ region_rect = Rect2(128, 18, 32, 31)
 [node name="SpriteOutline2" type="Sprite2D" parent="Chao/Sprite2D2" index="0" unique_id=667410870]
 self_modulate = Color(0, 0, 0, 1)
 show_behind_parent = true
-scale = Vector2(1.08, 1.08)
+position = Vector2(0, -8.940697e-08)
+scale = Vector2(1.043, 1.0451614)
 texture = ExtResource("3_guarda")
 region_enabled = true
 region_rect = Rect2(128, 18, 32, 31)
@@ -64,16 +66,18 @@ texture = ExtResource("3_guarda")
 region_enabled = true
 region_rect = Rect2(160, 18, 32, 31)
 
-[node name="SpriteOutline3" type="Sprite2D" parent="Chao/Sprite2D3" index="0" unique_id=1524790081]
+[node name="SpriteOutline2" type="Sprite2D" parent="Chao/Sprite2D3" index="0" unique_id=1130721519]
 self_modulate = Color(0, 0, 0, 1)
 show_behind_parent = true
-scale = Vector2(1.08, 1.08)
+position = Vector2(0, -8.940697e-08)
+scale = Vector2(1.043, 1.0451614)
 texture = ExtResource("3_guarda")
 region_enabled = true
-region_rect = Rect2(160, 18, 32, 31)
+region_rect = Rect2(128, 18, 32, 31)
 
 [node name="CollisionShape2D" parent="Chao" index="3" unique_id=445313393]
-position = Vector2(-140, 118)
+visible = false
+position = Vector2(-144, 119)
 shape = SubResource("CapsuleShape2D_hya8f")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Chao" index="4" unique_id=568648295]

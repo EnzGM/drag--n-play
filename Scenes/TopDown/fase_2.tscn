@@ -1,15 +1,16 @@
 [gd_scene format=3 uid="uid://d3g02tcqrxok1"]
 
 [ext_resource type="Script" uid="uid://4evk0m4rsall" path="res://Scripts/TopDown/fase_grid.gd" id="1_grid"]
-[ext_resource type="PackedScene" path="res://Scenes/TopDown/PersonagemGrid.tscn" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://cttnon2qsg7er" path="res://Scenes/TopDown/PersonagemGrid.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://Scenes/TopDown/parede.tscn" id="3_parede"]
-[ext_resource type="PackedScene" path="res://Scenes/TopDown/inimigo.tscn" id="4_inimigo"]
+[ext_resource type="PackedScene" uid="uid://uuv4o7ie04ej" path="res://Scenes/TopDown/inimigo.tscn" id="4_inimigo"]
+[ext_resource type="SpriteFrames" uid="uid://d0dxwfmm8qrnt" path="res://Assets/cigarra_frames.tres" id="4_wsk3u"]
 [ext_resource type="PackedScene" uid="uid://bnlbmab8kwaed" path="res://Scenes/Plataformer/caixa.tscn" id="5_caixa"]
 [ext_resource type="SpriteFrames" uid="uid://cfbttc8hw182h" path="res://Assets/flag_frames.tres" id="6_flag"]
-[ext_resource type="AudioStream" path="res://Assets/Sons/appear.wav" id="7_appear"]
-[ext_resource type="AudioStream" path="res://Assets/Sons/cancel.wav" id="8_cancel"]
-[ext_resource type="AudioStream" path="res://Assets/Sons/box.wav" id="9_box"]
-[ext_resource type="AudioStream" path="res://Assets/Sons/pop2.wav" id="10_pop2"]
+[ext_resource type="AudioStream" uid="uid://biyppp3vw1if2" path="res://Assets/Sons/appear.wav" id="7_appear"]
+[ext_resource type="AudioStream" uid="uid://bux42kukbnhab" path="res://Assets/Sons/cancel.wav" id="8_cancel"]
+[ext_resource type="AudioStream" uid="uid://5b5w5gleaxp0" path="res://Assets/Sons/box.wav" id="9_box"]
+[ext_resource type="AudioStream" uid="uid://dvsgco71jerhm" path="res://Assets/Sons/pop2.wav" id="10_pop2"]
 
 [node name="fase_2" type="Node2D" unique_id=2010000000]
 process_mode = 3
@@ -41,11 +42,25 @@ position = Vector2(300, 300)
 [node name="Inimigo" parent="Inimigos" unique_id=2010000006 instance=ExtResource("4_inimigo")]
 position = Vector2(400, 0)
 
-[node name="Inimigo2" parent="Inimigos" unique_id=2010000007 instance=ExtResource("4_inimigo")]
-position = Vector2(200, 200)
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Inimigos/Inimigo" unique_id=1187197257]
+scale = Vector2(1.4668374, 1.5559458)
+sprite_frames = ExtResource("4_wsk3u")
 
-[node name="Inimigo3" parent="Inimigos" unique_id=2010000053 instance=ExtResource("4_inimigo")]
-position = Vector2(300, 400)
+[node name="Inimigo" parent="Inimigos/Inimigo" unique_id=2002000001 instance=ExtResource("4_inimigo")]
+position = Vector2(400, 0)
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Inimigos/Inimigo/Inimigo" unique_id=1434981138]
+position = Vector2(-604.99994, 202.99998)
+scale = Vector2(1.4668374, 1.5559458)
+sprite_frames = ExtResource("4_wsk3u")
+
+[node name="Inimigo" parent="Inimigos/Inimigo/Inimigo" unique_id=1336255515 instance=ExtResource("4_inimigo")]
+position = Vector2(400, 0)
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Inimigos/Inimigo/Inimigo/Inimigo" unique_id=1529421517]
+position = Vector2(-901, 403)
+scale = Vector2(1.4668374, 1.5559458)
+sprite_frames = ExtResource("4_wsk3u")
 
 [node name="Objetivo" type="Node2D" parent="." unique_id=2010000008]
 position = Vector2(0, 400)
@@ -58,28 +73,28 @@ autoplay = "aceno"
 [node name="Player" parent="." unique_id=2010000010 instance=ExtResource("2_player")]
 position = Vector2(0, 200)
 
-[node name="SomAparecerPainel" type="AudioStreamPlayer" parent="."]
+[node name="SomAparecerPainel" type="AudioStreamPlayer" parent="." unique_id=1388541717]
 stream = ExtResource("7_appear")
 
-[node name="SomCancelar" type="AudioStreamPlayer" parent="."]
+[node name="SomCancelar" type="AudioStreamPlayer" parent="." unique_id=658027475]
 stream = ExtResource("8_cancel")
 
-[node name="SomCaixaEncaixada" type="AudioStreamPlayer" parent="."]
+[node name="SomCaixaEncaixada" type="AudioStreamPlayer" parent="." unique_id=1518476461]
 stream = ExtResource("9_box")
 
-[node name="SomCaixaRemovida" type="AudioStreamPlayer" parent="."]
+[node name="SomCaixaRemovida" type="AudioStreamPlayer" parent="." unique_id=326306655]
 stream = ExtResource("10_pop2")
 
-[node name="SomAparecerPainel" type="AudioStreamPlayer" parent="."]
+[node name="SomAparecerPainel2" type="AudioStreamPlayer" parent="." unique_id=1917452478]
 stream = ExtResource("7_appear")
 
-[node name="SomCancelar" type="AudioStreamPlayer" parent="."]
+[node name="SomCancelar2" type="AudioStreamPlayer" parent="." unique_id=116708955]
 stream = ExtResource("8_cancel")
 
-[node name="SomCaixaEncaixada" type="AudioStreamPlayer" parent="."]
+[node name="SomCaixaEncaixada2" type="AudioStreamPlayer" parent="." unique_id=145660910]
 stream = ExtResource("9_box")
 
-[node name="SomCaixaRemovida" type="AudioStreamPlayer" parent="."]
+[node name="SomCaixaRemovida2" type="AudioStreamPlayer" parent="." unique_id=1635573744]
 stream = ExtResource("10_pop2")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2010000011]
@@ -130,9 +145,8 @@ anchor_bottom = 1.0
 offset_left = 260.0
 offset_top = 6.0
 offset_bottom = 30.0
-grow_vertical = 1
-horizontal_alignment = 1
 text = "Comandos: 0/6"
+horizontal_alignment = 1
 
 [node name="Seta" type="Polygon2D" parent="CanvasLayer/Trilho" unique_id=2010000050]
 visible = false

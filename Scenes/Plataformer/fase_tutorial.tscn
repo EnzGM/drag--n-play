@@ -16,6 +16,9 @@ max_comandos = 20
 pode_morrer = false
 permitir_repetir = true
 
+[node name="CanvasLayer" parent="." index="2" unique_id=1543111422]
+visible = true
+
 [node name="AnimatedSprite2D" parent="Objetivo/CollisionShape2D" parent_id_path=PackedInt32Array(126583945) index="0" unique_id=1698438592]
 position = Vector2(21, -14)
 
