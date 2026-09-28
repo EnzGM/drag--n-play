@@ -4,16 +4,22 @@
 [ext_resource type="AudioStream" uid="uid://c28o3wnt3b8bc" path="res://Assets/Sons/block_click.wav" id="2_click"]
 [ext_resource type="AudioStream" uid="uid://dqsm03t4pqqej" path="res://Assets/Sons/pop.wav" id="3_pop"]
 
+
 [node name="Caixa" type="Control" unique_id=379628843]
-custom_minimum_size = Vector2(100, 50)
+custom_minimum_size = Vector2(140, 54)
 layout_mode = 3
 anchors_preset = 0
-offset_left = -55.0
-offset_top = -36.000004
-offset_right = 45.0
-offset_bottom = 13.999996
-scale = Vector2(0.5660377, 0.5416667)
+offset_right = 140.0
+offset_bottom = 54.0
 script = ExtResource("1_ck0w0")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=452454323]
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 54.0
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=452454322]
 layout_mode = 1

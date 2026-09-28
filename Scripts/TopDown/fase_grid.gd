@@ -29,6 +29,14 @@ var inimigos: Dictionary = {}  # Vector2i -> nó do inimigo (pra poder remover a
 var inimigos_originais: Dictionary = {}  # Vector2i -> cópia "molde", pra repor ao reiniciar
 var celula_objetivo: Vector2i
 
+@export var usar_limites_grade: bool = false
+@export var limites_grade: Rect2i = Rect2i(-9999, -9999, 19999, 19999)
+@export var tem_chave: bool = false
+@export var celula_chave: Vector2i = Vector2i.ZERO
+@export var celula_cadeado: Vector2i = Vector2i.ZERO
+@export var celula_saida: Vector2i = Vector2i.ZERO
+var chave_coletada: bool = false
+
 # Caminho da cena da próxima fase. Deixe em branco se a fase não tiver
 # "próxima". Preenche no Inspector do nó raiz, sem precisar mexer em código.
 @export_file("*.tscn") var proxima_fase: String = ""
@@ -69,6 +77,12 @@ func _ready():
 
 	celula_objetivo = celula_da_posicao($Objetivo.position)
 
+	chave_coletada = false
+	atualizar_visual_chave_cadeado()
+	if has_node("CanvasLayer/TextoChave"):
+		$CanvasLayer/TextoChave.text = ""
+		$CanvasLayer/TextoChave.visible = false
+
 	celula_inicial_player = celula_da_posicao($Player.position)
 	$Player.fase = self
 	$Player.celula = celula_inicial_player
@@ -81,7 +95,8 @@ func _ready():
 		$SomAparecerPainel.play()
 		get_tree().paused = true
 	else:
-		$CanvasLayer/PainelTutorial.visible = false
+		if has_node("CanvasLayer/PainelTutorial"):
+			$CanvasLayer/PainelTutorial.visible = false
 
 
 # --- Ponte com o personagem_grid.gd ---
@@ -118,7 +133,39 @@ func posicao_da_celula(celula: Vector2i) -> Vector2:
 
 
 func celula_e_parede(celula: Vector2i) -> bool:
-	return paredes.has(celula)
+	if paredes.has(celula):
+		return true
+	if usar_limites_grade and not limites_grade.has_point(celula):
+		if celula == celula_cadeado or celula == celula_saida:
+			return false
+		return true
+	return false
+
+
+func celula_bloqueada_especial(celula: Vector2i) -> bool:
+	if tem_chave and celula == celula_cadeado and not chave_coletada:
+		if has_node("SomCancelar"):
+			$SomCancelar.play()
+		return true
+	return false
+
+
+func jogador_entrou_na_celula(celula: Vector2i) -> void:
+	if tem_chave and not chave_coletada and celula == celula_chave:
+		chave_coletada = true
+		if has_node("SomChave"):
+			$SomChave.play()
+		atualizar_visual_chave_cadeado()
+		if has_node("CanvasLayer/TextoChave"):
+			$CanvasLayer/TextoChave.text = "CHAVE: PEGOU ✓"
+			$CanvasLayer/TextoChave.visible = true
+
+
+func atualizar_visual_chave_cadeado() -> void:
+	if has_node("Chave"):
+		$Chave.visible = tem_chave and not chave_coletada
+	if has_node("Cadeado"):
+		$Cadeado.visible = not chave_coletada
 
 
 func celula_tem_inimigo_vivo(celula: Vector2i) -> bool:
@@ -218,12 +265,16 @@ func _on_b_menu_reiniciar_pressed():
 
 
 func _on_b_menu_controles_pressed():
+	if not has_node("CanvasLayer/PainelControles"):
+		return
 	$CanvasLayer/MenuPausa.visible = false
 	$CanvasLayer/PainelControles.visible = true
 	$SomAparecerPainel.play()
 
 
 func _on_b_controles_voltar_pressed():
+	if not has_node("CanvasLayer/PainelControles"):
+		return
 	$CanvasLayer/PainelControles.visible = false
 	$CanvasLayer/MenuPausa.visible = true
 
@@ -320,6 +371,12 @@ func _espaco_entre_caixas() -> Vector2:
 
 
 func reorganizar_trilho():
+	# As caixas ficam menores quando entram no trilho, permitindo montar uma
+	# sequência de até 7 comandos sem estourar a largura do painel.
+	var escala_trilho = 0.55
+	for caixa in comandos_no_trilho:
+		caixa.scale = Vector2(escala_trilho, escala_trilho)
+
 	var espaco = _espaco_entre_caixas()
 	comandos_no_trilho.sort_custom(func(a, b):
 		var linha_a = roundi((a.global_position.y - trilho.global_position.y) / espaco.y)
@@ -404,9 +461,15 @@ func reiniciar_fase():
 
 	get_tree().paused = false
 	estado = Estado.JOGANDO
+	chave_coletada = false
+	if has_node("CanvasLayer/TextoChave"):
+		$CanvasLayer/TextoChave.text = ""
+		$CanvasLayer/TextoChave.visible = false
+	atualizar_visual_chave_cadeado()
 	menu_aberto = false
 	$CanvasLayer/MenuPausa.visible = false
-	$CanvasLayer/PainelControles.visible = false
+	if has_node("CanvasLayer/PainelControles"):
+		$CanvasLayer/PainelControles.visible = false
 	$CanvasLayer/TextoVitoria.visible = false
 	$CanvasLayer/TextoDerrota.visible = false
 	$CanvasLayer/BReiniciar.visible = false

@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://uuv4o7ie04ej"]
 
+[ext_resource type="SpriteFrames" uid="uid://d0dxwfmm8qrnt" path="res://Assets/cigarra_frames.tres" id="1_cigarra"]
+
 [node name="Inimigo" type="Node2D" unique_id=2002000001]
 
 [node name="Corpo" type="ColorRect" parent="." unique_id=2002000002]
@@ -11,3 +13,7 @@ offset_bottom = 25.0
 color = Color(0.85, 0.15, 0.15, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=663236792]
+sprite_frames = ExtResource("1_cigarra")
+animation = &"default"
+autoplay = "default"
+scale = Vector2(1.45, 1.45)

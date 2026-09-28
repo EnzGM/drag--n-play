@@ -4,24 +4,264 @@
 [ext_resource type="PackedScene" uid="uid://cttnon2qsg7er" path="res://Scenes/TopDown/PersonagemGrid.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://Scenes/TopDown/parede.tscn" id="3_parede"]
 [ext_resource type="PackedScene" uid="uid://uuv4o7ie04ej" path="res://Scenes/TopDown/inimigo.tscn" id="4_inimigo"]
-[ext_resource type="SpriteFrames" uid="uid://d0dxwfmm8qrnt" path="res://Assets/cigarra_frames.tres" id="4_wsk3u"]
 [ext_resource type="PackedScene" uid="uid://bnlbmab8kwaed" path="res://Scenes/Plataformer/caixa.tscn" id="5_caixa"]
 [ext_resource type="SpriteFrames" uid="uid://cfbttc8hw182h" path="res://Assets/flag_frames.tres" id="6_flag"]
-[ext_resource type="AudioStream" uid="uid://biyppp3vw1if2" path="res://Assets/Sons/appear.wav" id="7_appear"]
-[ext_resource type="AudioStream" uid="uid://bux42kukbnhab" path="res://Assets/Sons/cancel.wav" id="8_cancel"]
-[ext_resource type="AudioStream" uid="uid://5b5w5gleaxp0" path="res://Assets/Sons/box.wav" id="9_box"]
-[ext_resource type="AudioStream" uid="uid://dvsgco71jerhm" path="res://Assets/Sons/pop2.wav" id="10_pop2"]
+[ext_resource type="Texture2D" uid="uid://cb88drvo0t4fr" path="res://Assets/nodetabopen.png" id="7_trilho"]
+[ext_resource type="Texture2D" uid="uid://blbn052hao8my" path="res://Assets/pausebutton.png" id="8_pause"]
+[ext_resource type="Texture2D" uid="uid://buasjbna8eiv8" path="res://Assets/chave.svg" id="9_chave"]
+[ext_resource type="Texture2D" uid="uid://caqkh87kghh73" path="res://Assets/cadeado.svg" id="10_cadeado"]
+[ext_resource type="AudioStream" uid="uid://biyppp3vw1if2" path="res://Assets/Sons/appear.wav" id="11_appear"]
+[ext_resource type="AudioStream" uid="uid://bux42kukbnhab" path="res://Assets/Sons/cancel.wav" id="12_cancel"]
+[ext_resource type="AudioStream" uid="uid://5b5w5gleaxp0" path="res://Assets/Sons/box.wav" id="13_box"]
+[ext_resource type="AudioStream" uid="uid://dvsgco71jerhm" path="res://Assets/Sons/pop2.wav" id="14_pop2"]
+[ext_resource type="AudioStream" uid="uid://dqsm03t4pqqej" path="res://Assets/Sons/pop.wav" id="15_key"]
+[ext_resource type="Texture2D" uid="uid://bi4loxa7rd6hn" path="res://Assets/fase2_tileset.png" id="16_hh5ry"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_xej8a"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x5x04"]
+texture = ExtResource("16_hh5ry")
+1:1/0 = 0
+2:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+22:1/0 = 0
+23:1/0 = 0
+24:1/0 = 0
+25:1/0 = 0
+26:1/0 = 0
+27:1/0 = 0
+28:1/0 = 0
+29:1/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+22:2/0 = 0
+23:2/0 = 0
+24:2/0 = 0
+25:2/0 = 0
+26:2/0 = 0
+27:2/0 = 0
+28:2/0 = 0
+29:2/0 = 0
+22:3/0 = 0
+23:3/0 = 0
+24:3/0 = 0
+25:3/0 = 0
+26:3/0 = 0
+27:3/0 = 0
+28:3/0 = 0
+29:3/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+16:4/0 = 0
+17:4/0 = 0
+22:4/0 = 0
+23:4/0 = 0
+24:4/0 = 0
+25:4/0 = 0
+26:4/0 = 0
+27:4/0 = 0
+28:4/0 = 0
+29:4/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+14:5/0 = 0
+16:5/0 = 0
+22:5/0 = 0
+23:5/0 = 0
+24:5/0 = 0
+25:5/0 = 0
+26:5/0 = 0
+27:5/0 = 0
+28:5/0 = 0
+29:5/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+14:6/0 = 0
+16:6/0 = 0
+28:6/0 = 0
+29:6/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+13:7/0 = 0
+14:7/0 = 0
+15:7/0 = 0
+16:7/0 = 0
+17:7/0 = 0
+21:7/0 = 0
+22:7/0 = 0
+24:7/0 = 0
+25:7/0 = 0
+27:7/0 = 0
+28:7/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+10:8/0 = 0
+11:8/0 = 0
+21:8/0 = 0
+22:8/0 = 0
+24:8/0 = 0
+25:8/0 = 0
+27:8/0 = 0
+28:8/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+21:9/0 = 0
+22:9/0 = 0
+24:9/0 = 0
+25:9/0 = 0
+27:9/0 = 0
+28:9/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+21:11/0 = 0
+22:11/0 = 0
+27:11/0 = 0
+28:11/0 = 0
+21:12/0 = 0
+22:12/0 = 0
+27:12/0 = 0
+28:12/0 = 0
+21:13/0 = 0
+22:13/0 = 0
+27:13/0 = 0
+28:13/0 = 0
+21:14/0 = 0
+22:14/0 = 0
+24:14/0 = 0
+25:14/0 = 0
+27:14/0 = 0
+28:14/0 = 0
+21:15/0 = 0
+22:15/0 = 0
+24:15/0 = 0
+25:15/0 = 0
+27:15/0 = 0
+28:15/0 = 0
+21:16/0 = 0
+22:16/0 = 0
+24:16/0 = 0
+25:16/0 = 0
+27:16/0 = 0
+28:16/0 = 0
+4:4/next_alternative_id = 2
+4:4/0 = 0
+4:4/1 = 1
+4:5/0 = 0
+5:4/0 = 0
+5:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_7f37h"]
+sources/0 = SubResource("TileSetScenesCollectionSource_xej8a")
+sources/1 = SubResource("TileSetAtlasSource_x5x04")
 
 [node name="fase_2" type="Node2D" unique_id=2010000000]
 process_mode = 3
 script = ExtResource("1_grid")
+usar_limites_grade = true
+limites_grade = Rect2i(0, 0, 5, 5)
+tem_chave = true
+celula_chave = Vector2i(4, 4)
+celula_cadeado = Vector2i(2, 5)
+celula_saida = Vector2i(2, 6)
 
 [node name="Fundo" type="ColorRect" parent="." unique_id=2010000001]
 offset_left = -50.0
 offset_top = -50.0
 offset_right = 450.0
 offset_bottom = 450.0
+mouse_filter = 2
 color = Color(0.88, 0.88, 0.82, 1)
+
+[node name="ChaoSaida" type="ColorRect" parent="." unique_id=2010000106]
+offset_left = 150.0
+offset_top = 450.0
+offset_right = 250.0
+offset_bottom = 650.0
+mouse_filter = 2
+color = Color(0.88, 0.88, 0.82, 1)
+
+[node name="BordaCima" type="ColorRect" parent="." unique_id=1451808081]
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 450.0
+offset_bottom = -44.0
+color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="BordaBaixo" type="ColorRect" parent="." unique_id=136234630]
+offset_left = -50.0
+offset_top = 444.0
+offset_right = 150.0
+offset_bottom = 450.0
+color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="BordaBaixo2" type="ColorRect" parent="." unique_id=118560373]
+offset_left = 250.0
+offset_top = 444.0
+offset_right = 450.0
+offset_bottom = 450.0
+color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="BordaEsquerda" type="ColorRect" parent="." unique_id=1405841219]
+offset_left = -50.0
+offset_top = -50.0
+offset_right = -44.0
+offset_bottom = 450.0
+color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="BordaDireita" type="ColorRect" parent="." unique_id=45933210]
+offset_left = 444.0
+offset_top = -50.0
+offset_right = 450.0
+offset_bottom = 450.0
+color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="ParedeCorredorEsq" type="ColorRect" parent="." unique_id=2010000107]
+offset_left = 144.0
+offset_top = 450.0
+offset_right = 150.0
+offset_bottom = 650.0
+color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="ParedeCorredorDir" type="ColorRect" parent="." unique_id=2010000108]
+offset_left = 250.0
+offset_top = 450.0
+offset_right = 256.0
+offset_bottom = 650.0
+color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="BordaSaida" type="ColorRect" parent="." unique_id=2010000109]
+offset_left = 144.0
+offset_top = 644.0
+offset_right = 250.0
+offset_bottom = 650.0
+color = Color(0.12, 0.12, 0.12, 1)
 
 [node name="Paredes" type="Node2D" parent="." unique_id=2010000002]
 
@@ -29,43 +269,63 @@ color = Color(0.88, 0.88, 0.82, 1)
 position = Vector2(100, 100)
 
 [node name="Parede2" parent="Paredes" unique_id=2010000004 instance=ExtResource("3_parede")]
-position = Vector2(100, 300)
+position = Vector2(300, 100)
 
 [node name="Parede3" parent="Paredes" unique_id=2010000051 instance=ExtResource("3_parede")]
-position = Vector2(300, 100)
+position = Vector2(100, 300)
 
 [node name="Parede4" parent="Paredes" unique_id=2010000052 instance=ExtResource("3_parede")]
 position = Vector2(300, 300)
 
 [node name="Inimigos" type="Node2D" parent="." unique_id=2010000005]
 
-[node name="Inimigo" parent="Inimigos" unique_id=2010000006 instance=ExtResource("4_inimigo")]
+[node name="Inimigo1" parent="Inimigos" unique_id=2010000100 instance=ExtResource("4_inimigo")]
 position = Vector2(400, 0)
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Inimigos/Inimigo" unique_id=1187197257]
-scale = Vector2(1.4668374, 1.5559458)
-sprite_frames = ExtResource("4_wsk3u")
+[node name="Inimigo2" parent="Inimigos" unique_id=2010000102 instance=ExtResource("4_inimigo")]
+position = Vector2(200, 200)
 
-[node name="Inimigo" parent="Inimigos/Inimigo" unique_id=2002000001 instance=ExtResource("4_inimigo")]
-position = Vector2(400, 0)
+[node name="Inimigo3" parent="Inimigos" unique_id=2010000104 instance=ExtResource("4_inimigo")]
+position = Vector2(300, 400)
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Inimigos/Inimigo/Inimigo" unique_id=1434981138]
-position = Vector2(-604.99994, 202.99998)
-scale = Vector2(1.4668374, 1.5559458)
-sprite_frames = ExtResource("4_wsk3u")
+[node name="Chave" type="Node2D" parent="." unique_id=2010000060]
+position = Vector2(400, 400)
 
-[node name="Inimigo" parent="Inimigos/Inimigo/Inimigo" unique_id=1336255515 instance=ExtResource("4_inimigo")]
-position = Vector2(400, 0)
+[node name="Sprite2D" type="Sprite2D" parent="Chave" unique_id=2010000061]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("9_chave")
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Inimigos/Inimigo/Inimigo/Inimigo" unique_id=1529421517]
-position = Vector2(-901, 403)
-scale = Vector2(1.4668374, 1.5559458)
-sprite_frames = ExtResource("4_wsk3u")
+[node name="Label" type="Label" parent="Chave" unique_id=2010000062]
+offset_left = -45.0
+offset_top = 35.0
+offset_right = 45.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0.2, 0.15, 0, 1)
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+
+[node name="Cadeado" type="Node2D" parent="." unique_id=2010000063]
+position = Vector2(200, 500)
+
+[node name="Sprite2D" type="Sprite2D" parent="Cadeado" unique_id=2010000064]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_cadeado")
+
+[node name="Label" type="Label" parent="Cadeado" unique_id=2010000065]
+offset_left = -65.0
+offset_top = 35.0
+offset_right = 65.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 13
+text = "PRECISA DA CHAVE"
+horizontal_alignment = 1
 
 [node name="Objetivo" type="Node2D" parent="." unique_id=2010000008]
-position = Vector2(0, 400)
+position = Vector2(200, 600)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Objetivo" unique_id=2010000009]
+scale = Vector2(0.9, 0.9)
 sprite_frames = ExtResource("6_flag")
 animation = &"aceno"
 autoplay = "aceno"
@@ -73,35 +333,59 @@ autoplay = "aceno"
 [node name="Player" parent="." unique_id=2010000010 instance=ExtResource("2_player")]
 position = Vector2(0, 200)
 
-[node name="SomAparecerPainel" type="AudioStreamPlayer" parent="." unique_id=1388541717]
-stream = ExtResource("7_appear")
-
-[node name="SomCancelar" type="AudioStreamPlayer" parent="." unique_id=658027475]
-stream = ExtResource("8_cancel")
-
-[node name="SomCaixaEncaixada" type="AudioStreamPlayer" parent="." unique_id=1518476461]
-stream = ExtResource("9_box")
-
-[node name="SomCaixaRemovida" type="AudioStreamPlayer" parent="." unique_id=326306655]
-stream = ExtResource("10_pop2")
-
-[node name="SomAparecerPainel2" type="AudioStreamPlayer" parent="." unique_id=1917452478]
-stream = ExtResource("7_appear")
-
-[node name="SomCancelar2" type="AudioStreamPlayer" parent="." unique_id=116708955]
-stream = ExtResource("8_cancel")
-
-[node name="SomCaixaEncaixada2" type="AudioStreamPlayer" parent="." unique_id=145660910]
-stream = ExtResource("9_box")
-
-[node name="SomCaixaRemovida2" type="AudioStreamPlayer" parent="." unique_id=1635573744]
-stream = ExtResource("10_pop2")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2010000011]
-position = Vector2(200, 200)
-zoom = Vector2(0.7, 0.7)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2010000012]
+
+[node name="BMenu" type="Button" parent="CanvasLayer" unique_id=2010000029]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 48.0
+grow_horizontal = 0
+focus_mode = 0
+text = " Menu (Esc)"
+icon = ExtResource("8_pause")
+expand_icon = true
+
+[node name="Trilho" type="Control" parent="CanvasLayer" unique_id=2010000015]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 200.0
+offset_top = 10.0
+offset_right = 760.0
+offset_bottom = 80.0
+
+[node name="Fundo" type="TextureRect" parent="CanvasLayer/Trilho" unique_id=2010000016]
+modulate = Color(1, 1, 1, 0.92)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_trilho")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ListaComandos" type="Label" parent="CanvasLayer/Trilho" unique_id=2010000017]
+layout_mode = 0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 260.0
+offset_top = 6.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Comandos: 0/7"
+horizontal_alignment = 1
+
+[node name="Seta" type="Polygon2D" parent="CanvasLayer/Trilho" unique_id=2010000050]
+visible = false
+color = Color(1, 0.85, 0.1, 1)
+polygon = PackedVector2Array(-8, -12, 8, -12, 0, 2)
 
 [node name="BLimpar" type="Button" parent="CanvasLayer" unique_id=2010000013]
 offset_left = 200.0
@@ -119,39 +403,49 @@ offset_bottom = 118.0
 focus_mode = 0
 text = "Play (Enter)"
 
-[node name="Trilho" type="Control" parent="CanvasLayer" unique_id=2010000015]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 200.0
-offset_top = 10.0
-offset_right = 760.0
-offset_bottom = 80.0
+[node name="Caixas" type="Panel" parent="CanvasLayer" unique_id=2010000042]
+offset_right = 155.0
+offset_bottom = 310.0
 
-[node name="Fundo" type="ColorRect" parent="CanvasLayer/Trilho" unique_id=2010000016]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.2, 0.2, 0.2, 0.35)
-
-[node name="ListaComandos" type="Label" parent="CanvasLayer/Trilho" unique_id=2010000017]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Caixas" unique_id=2010000043]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 260.0
-offset_top = 6.0
-offset_bottom = 30.0
-text = "Comandos: 0/6"
-horizontal_alignment = 1
+offset_right = 150.0
+offset_bottom = 310.0
+theme_override_constants/separation = 4
 
-[node name="Seta" type="Polygon2D" parent="CanvasLayer/Trilho" unique_id=2010000050]
-visible = false
-color = Color(1, 0.85, 0.1, 1)
-polygon = PackedVector2Array(-8, -12, 8, -12, 0, 2)
+[node name="CaixaCima" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000044 instance=ExtResource("5_caixa")]
+layout_mode = 2
+tipo_comando = "cima"
+e_modelo = true
+
+[node name="CaixaBaixo" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000045 instance=ExtResource("5_caixa")]
+layout_mode = 2
+tipo_comando = "baixo"
+e_modelo = true
+
+[node name="CaixaEsquerda" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000046 instance=ExtResource("5_caixa")]
+layout_mode = 2
+tipo_comando = "esquerda"
+e_modelo = true
+
+[node name="CaixaDireita" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000047 instance=ExtResource("5_caixa")]
+layout_mode = 2
+tipo_comando = "direita"
+e_modelo = true
+
+[node name="CaixaAtacar" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000048 instance=ExtResource("5_caixa")]
+layout_mode = 2
+tipo_comando = "atacar"
+e_modelo = true
+
+[node name="TextoChave" type="Label" parent="CanvasLayer" unique_id=2010000070]
+offset_left = 10.0
+offset_top = 350.0
+offset_right = 300.0
+offset_bottom = 390.0
+theme_override_font_sizes/font_size = 18
+text = "CHAVE: NÃO PEGOU"
 
 [node name="TextoVitoria" type="Label" parent="CanvasLayer" unique_id=2010000018]
 visible = false
@@ -161,16 +455,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
+offset_left = -80.0
 offset_top = -21.0
-offset_right = 48.0
+offset_right = 80.0
 offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
 theme_override_font_sizes/font_size = 30
-text = "Vitória"
+text = "Vitória!"
 
 [node name="TextoDerrota" type="Label" parent="CanvasLayer" unique_id=2010000019]
 visible = false
@@ -184,10 +476,6 @@ offset_left = -70.0
 offset_top = -21.0
 offset_right = 70.0
 offset_bottom = 21.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
 theme_override_font_sizes/font_size = 30
 text = "Você morreu!"
 
@@ -199,14 +487,12 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -57.5
-offset_top = -31.0
-offset_right = 57.5
+offset_left = -150.0
+offset_top = -45.0
+offset_right = -20.0
+offset_bottom = -12.0
 grow_horizontal = 2
-grow_vertical = 0
-text = "Reiniciar Fase
-"
-metadata/_edit_use_anchors_ = true
+text = "Reiniciar Fase"
 
 [node name="BProximaFase" type="Button" parent="CanvasLayer" unique_id=2010000021]
 process_mode = 3
@@ -216,83 +502,12 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 70.0
-offset_top = -31.0
-offset_right = 220.0
+offset_left = 20.0
+offset_top = -45.0
+offset_right = 150.0
+offset_bottom = -12.0
 grow_horizontal = 2
-grow_vertical = 0
 text = "Próxima Fase"
-metadata/_edit_use_anchors_ = true
-
-[node name="PainelTutorial" type="Panel" parent="CanvasLayer" unique_id=2010000022]
-process_mode = 3
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -260.0
-offset_right = 300.0
-offset_bottom = 260.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Conteudo" type="VBoxContainer" parent="CanvasLayer/PainelTutorial" unique_id=2010000023]
-process_mode = 3
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 12
-
-[node name="Imagem" type="TextureRect" parent="CanvasLayer/PainelTutorial/Conteudo" unique_id=2010000024]
-process_mode = 3
-visible = false
-custom_minimum_size = Vector2(0, 160)
-layout_mode = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Rolagem" type="ScrollContainer" parent="CanvasLayer/PainelTutorial/Conteudo" unique_id=2010000025]
-process_mode = 3
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/PainelTutorial/Conteudo/Rolagem" unique_id=2010000026]
-process_mode = 3
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Tutorial"
-autowrap_mode = 3
-
-[node name="CentroBotao" type="CenterContainer" parent="CanvasLayer/PainelTutorial/Conteudo" unique_id=2010000027]
-process_mode = 3
-layout_mode = 2
-
-[node name="BEntendi" type="Button" parent="CanvasLayer/PainelTutorial/Conteudo/CentroBotao" unique_id=2010000028]
-process_mode = 3
-layout_mode = 2
-text = "Entendi!"
-
-[node name="BMenu" type="Button" parent="CanvasLayer" unique_id=2010000029]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -110.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = 45.0
-grow_horizontal = 0
-focus_mode = 0
-text = "☰ Menu (Esc)"
 
 [node name="MenuPausa" type="Panel" parent="CanvasLayer" unique_id=2010000030]
 visible = false
@@ -354,126 +569,36 @@ layout_mode = 2
 focus_mode = 0
 text = "Menu Principal"
 
-[node name="PainelControles" type="Panel" parent="CanvasLayer" unique_id=2010000038]
-process_mode = 3
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -280.0
-offset_top = -230.0
-offset_right = 280.0
-offset_bottom = 230.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SomAparecerPainel" type="AudioStreamPlayer" parent="." unique_id=1388541717]
+stream = ExtResource("11_appear")
 
-[node name="Titulo" type="Label" parent="CanvasLayer/PainelControles" unique_id=2010000039]
-process_mode = 3
-layout_mode = 0
-anchor_right = 1.0
-offset_left = 16.0
-offset_top = 12.0
-offset_right = -16.0
-offset_bottom = 44.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 24
-text = "Controles"
-horizontal_alignment = 1
+[node name="SomCancelar" type="AudioStreamPlayer" parent="." unique_id=658027475]
+stream = ExtResource("12_cancel")
 
-[node name="Rolagem" type="ScrollContainer" parent="CanvasLayer/PainelControles" unique_id=2010000040]
-process_mode = 3
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 50.0
-offset_right = -16.0
-offset_bottom = -50.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_scroll_mode = 0
+[node name="SomCaixaEncaixada" type="AudioStreamPlayer" parent="." unique_id=1518476461]
+stream = ExtResource("13_box")
 
-[node name="Lista" type="Label" parent="CanvasLayer/PainelControles/Rolagem" unique_id=2010000049]
-process_mode = 3
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/line_spacing = 8
-text = "Mouse: arraste as caixas da paleta até o trilho pra montar a sequência
+[node name="SomCaixaRemovida" type="AudioStreamPlayer" parent="." unique_id=326306655]
+stream = ExtResource("14_pop2")
 
-Clique direito numa caixa do trilho: remove ela na hora
+[node name="SomChave" type="AudioStreamPlayer" parent="." unique_id=2010000071]
+stream = ExtResource("15_key")
 
-Enter (ou a tecla \"Executar\"): dá Play
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2010000011]
+position = Vector2(200, 270)
+zoom = Vector2(0.7, 0.7)
 
-R: reinicia a fase a qualquer momento
+[node name="TileMap" type="TileMap" parent="." unique_id=1814813321]
+tile_set = SubResource("TileSet_7f37h")
+format = 2
 
-Esc: abre/fecha esse menu de pausa
-
-\"Limpar Fila\": remove todas as caixas do trilho de uma vez
-
-Atacar: acerta o inimigo na casa pra onde você tá olhando, sem se mover"
-autowrap_mode = 3
-
-[node name="BVoltarControles" type="Button" parent="CanvasLayer/PainelControles" unique_id=2010000041]
-process_mode = 3
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -40.0
-offset_right = 50.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Voltar"
-
-[node name="Caixas" type="Panel" parent="CanvasLayer" unique_id=2010000042]
-offset_right = 40.0
-offset_bottom = 220.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Caixas" unique_id=2010000043]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 220.0
-
-[node name="CaixaCima" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000044 instance=ExtResource("5_caixa")]
-layout_mode = 2
-tipo_comando = "cima"
-e_modelo = true
-
-[node name="CaixaBaixo" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000045 instance=ExtResource("5_caixa")]
-layout_mode = 2
-tipo_comando = "baixo"
-e_modelo = true
-
-[node name="CaixaEsquerda" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000046 instance=ExtResource("5_caixa")]
-layout_mode = 2
-tipo_comando = "esquerda"
-e_modelo = true
-
-[node name="CaixaDireita" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000047 instance=ExtResource("5_caixa")]
-layout_mode = 2
-tipo_comando = "direita"
-e_modelo = true
-
-[node name="CaixaAtacar" parent="CanvasLayer/Caixas/VBoxContainer" unique_id=2010000048 instance=ExtResource("5_caixa")]
-layout_mode = 2
-tipo_comando = "atacar"
-e_modelo = true
-
+[connection signal="pressed" from="CanvasLayer/BMenu" to="." method="_on_b_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/BLimpar" to="." method="_on_b_limpar_pressed"]
 [connection signal="pressed" from="CanvasLayer/BPlay" to="." method="_on_b_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/BReiniciar" to="." method="_on_b_reiniciar_pressed"]
 [connection signal="pressed" from="CanvasLayer/BProximaFase" to="." method="_on_b_proxima_fase_pressed"]
-[connection signal="pressed" from="CanvasLayer/PainelTutorial/Conteudo/CentroBotao/BEntendi" to="." method="_on_b_entendi_pressed"]
-[connection signal="pressed" from="CanvasLayer/BMenu" to="." method="_on_b_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BContinuar" to="." method="_on_b_continuar_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BReiniciarMenu" to="." method="_on_b_menu_reiniciar_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BControlesMenu" to="." method="_on_b_menu_controles_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BSelecionarFase" to="." method="_on_b_menu_selecionar_fase_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BMenuPrincipal" to="." method="_on_b_menu_principal_pressed"]
-[connection signal="pressed" from="CanvasLayer/PainelControles/BVoltarControles" to="." method="_on_b_controles_voltar_pressed"]

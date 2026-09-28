@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://Assets/fase2_tileset.png" id="1_atlas"]
+
+[node name="Pilar" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_atlas")
+region_enabled = true
+region_rect = Rect2(21, 113, 22, 50)
+scale = Vector2(1.55, 1.55)
+position = Vector2(0, -18)
+
+[node name="Sombra" type="Polygon2D" parent="."]
+z_index = -1
+color = Color(0.08, 0.05, 0.08, 0.22)
+polygon = PackedVector2Array(-26, 23, 24, 23, 31, 29, -19, 29)

@@ -250,6 +250,12 @@ func _espaco_entre_caixas() -> Vector2:
 
 
 func reorganizar_trilho():
+	# Ao entrar no trilho, cada caixa fica menor para caber uma sequência
+	# completa sem ultrapassar o espaço disponível.
+	var escala_trilho = 0.55
+	for caixa in comandos_no_trilho:
+		caixa.scale = Vector2(escala_trilho, escala_trilho)
+
 	var espaco = _espaco_entre_caixas()
 	# Ordena por linha (posição Y, arredondada pra "linha" mais próxima) e
 	# depois por posição X dentro da linha — assim a ordem de leitura

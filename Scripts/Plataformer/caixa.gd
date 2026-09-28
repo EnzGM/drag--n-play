@@ -7,7 +7,20 @@ var offset_mouse = Vector2.ZERO
 
 
 func _ready():
+	var caminhos = {
+		"cima": "res://Assets/nodewalkup.png",
+		"baixo": "res://Assets/nodewalkdown.png",
+		"esquerda": "res://Assets/nodewalkleft.png",
+		"direita": "res://Assets/nodewalkright.png",
+		"atacar": "res://Assets/nodeattack.png",
+		"andar": "res://Assets/nodewalkright.png",
+		"pular": "res://Assets/nodejump.png",
+		"trás": "res://Assets/nodewalkleft.png"
+	}
+	var textura = load(caminhos.get(tipo_comando, "res://Assets/nodewalkright.png"))
+	$TextureRect.texture = textura
 	$ColorRect/Label.text = tipo_comando
+	$ColorRect.visible = false
 
 
 func _gui_input(event):

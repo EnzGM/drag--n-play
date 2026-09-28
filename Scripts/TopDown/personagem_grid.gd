@@ -101,6 +101,10 @@ func mover(dir: int) -> void:
 		$SomBloqueado.play()
 		return
 
+	if fase.has_method("celula_bloqueada_especial") and fase.celula_bloqueada_especial(alvo):
+		# O cadeado impede a passagem até a chave ser coletada.
+		return
+
 	if fase.celula_tem_inimigo_vivo(alvo):
 		# Andou em cima de um inimigo sem atacar antes.
 		fase.jogador_morreu()
@@ -118,6 +122,9 @@ func mover(dir: int) -> void:
 
 	if interrompido:
 		return
+
+	if fase.has_method("jogador_entrou_na_celula"):
+		fase.jogador_entrou_na_celula(celula)
 
 	if fase.celula_e_objetivo(celula):
 		fase.jogador_venceu()
