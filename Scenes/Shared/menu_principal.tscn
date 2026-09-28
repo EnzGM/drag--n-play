@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://dq8qsdpg0eg0r"]
 
 [ext_resource type="Script" uid="uid://ckemt861taoqs" path="res://Scripts/Shared/menu_principal.gd" id="1_menu"]
+[ext_resource type="Theme" path="res://Assets/menu_theme.tres" id="ui_theme"]
+[ext_resource type="AudioStream" path="res://Assets/Musica/menu_music.wav" id="menu_music"]
+[ext_resource type="AudioStream" path="res://Assets/Sons/block_click.wav" id="menu_click"]
+[ext_resource type="AudioStream" path="res://Assets/Sons/pop.wav" id="menu_hover"]
 
 [node name="MenuPrincipal" type="Control" unique_id=305486926]
 layout_mode = 3
@@ -19,6 +23,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="MusicaMenu" type="AudioStreamPlayer" parent="." unique_id=1990908990]
+stream = ExtResource("menu_music")
+autoplay = true
+volume_db = -10.0
+
+[node name="SomCliqueMenu" type="AudioStreamPlayer" parent="." unique_id=1990908991]
+stream = ExtResource("menu_click")
+volume_db = -3.0
+
+[node name="SomHoverMenu" type="AudioStreamPlayer" parent="." unique_id=1990908992]
+stream = ExtResource("menu_hover")
+volume_db = -8.0
 
 [node name="Titulo" type="Label" parent="." unique_id=1044850201]
 layout_mode = 1
@@ -44,9 +61,9 @@ anchor_left = 0.5
 anchor_top = 0.55
 anchor_right = 0.5
 anchor_bottom = 0.55
-offset_left = -70.0
+offset_left = -135.0
 offset_top = -40.0
-offset_right = 70.0
+offset_right = 135.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -56,18 +73,18 @@ alignment = 1
 [node name="BJogar" type="Button" parent="VBoxContainer" unique_id=995474823]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Selecionar Fase"
-
 [node name="BOpcoes" type="Button" parent="VBoxContainer" unique_id=995474825]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Opções"
-
 [node name="BSair" type="Button" parent="VBoxContainer" unique_id=2120658501]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Sair"
-
 [connection signal="pressed" from="VBoxContainer/BJogar" to="." method="_on_b_selecionar_fase_pressed"]
 [connection signal="pressed" from="VBoxContainer/BOpcoes" to="." method="_on_b_opcoes_pressed"]
 [connection signal="pressed" from="VBoxContainer/BSair" to="." method="_on_b_sair_pressed"]

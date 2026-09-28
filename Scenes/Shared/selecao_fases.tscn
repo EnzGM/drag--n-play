@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" uid="uid://cpmrmqbbkbbsd" path="res://Scripts/Shared/selecao_fases.gd" id="1_sel"]
+[ext_resource type="Theme" path="res://Assets/menu_theme.tres" id="ui_theme"]
 
 [node name="SelecaoFases" type="Control" unique_id=305486927]
 layout_mode = 3
@@ -44,9 +45,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -70.0
+offset_left = -135.0
 offset_top = -60.0
-offset_right = 70.0
+offset_right = 135.0
 offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -56,18 +57,18 @@ alignment = 1
 [node name="BTutorial" type="Button" parent="VBoxContainer" unique_id=995474824]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Tutorial"
-
 [node name="BFase1" type="Button" parent="VBoxContainer" unique_id=995474826]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Fase 1"
-
 [node name="BFase2" type="Button" parent="VBoxContainer" unique_id=995474828]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Fase 2"
-
 [node name="BVoltar" type="Button" parent="." unique_id=2120658502]
 anchors_preset = 2
 anchor_top = 1.0
@@ -78,8 +79,8 @@ offset_right = 130.0
 offset_bottom = -20.0
 grow_vertical = 0
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Voltar"
-
 [connection signal="pressed" from="VBoxContainer/BTutorial" to="." method="_on_b_tutorial_pressed"]
 [connection signal="pressed" from="VBoxContainer/BFase1" to="." method="_on_b_fase_1_pressed"]
 [connection signal="pressed" from="VBoxContainer/BFase2" to="." method="_on_b_fase_2_pressed"]

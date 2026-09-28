@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://7m2k45sde6tl"]
 
-[ext_resource type="Texture2D" uid="uid://bllweyqq8gcdp" path="res://icon.svg" id="1_qq0ii"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="1_qq0ii"]
 [ext_resource type="Script" uid="uid://ctkm5pecwe1px" path="res://Scripts/Plataformer/fase_teste.gd" id="1_seb3k"]
 [ext_resource type="PackedScene" uid="uid://bpdegc5slohhk" path="res://Scenes/Plataformer/Player.tscn" id="2_seb3k"]
 [ext_resource type="PackedScene" uid="uid://bnlbmab8kwaed" path="res://Scenes/Plataformer/caixa.tscn" id="4_vbr3q"]
@@ -12,6 +12,16 @@
 
 [ext_resource type="Texture2D" path="res://Assets/nodetabopen.png" id="10_trilho"]
 [ext_resource type="Texture2D" path="res://Assets/pausebutton.png" id="11_pause"]
+[ext_resource type="Theme" path="res://Assets/menu_theme.tres" id="ui_theme"]
+[ext_resource type="Texture2D" path="res://Assets/cleanbutton.png" id="cleanbutton"]
+[ext_resource type="Texture2D" path="res://Assets/cleanbuttonhover.png" id="cleanbuttonhover"]
+[ext_resource type="Texture2D" path="res://Assets/cleanbuttonpressed.png" id="cleanbuttonpressed"]
+[ext_resource type="Texture2D" path="res://Assets/playbutton.png" id="playbutton"]
+[ext_resource type="Texture2D" path="res://Assets/playbuttonhover.png" id="playbuttonhover"]
+[ext_resource type="Texture2D" path="res://Assets/playbuttonpressed.png" id="playbuttonpressed"]
+[ext_resource type="Texture2D" path="res://Assets/pausebuttonhover.png" id="12_pause_hover"]
+[ext_resource type="Texture2D" path="res://Assets/pausebuttonpressed.png" id="13_pause_pressed"]
+[ext_resource type="Texture2D" path="res://Assets/menutabopen.png" id="14_menu_tab"]
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7f37h"]
 size = Vector2(792.5, 14)
 
@@ -41,22 +51,24 @@ position = Vector2(-430, -17)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1543111422]
 visible = false
 
-[node name="BLimpar" type="Button" parent="CanvasLayer" unique_id=956812940]
+[node name="BLimpar" type="TextureButton" parent="CanvasLayer" unique_id=956812940]
 offset_left = 200.0
 offset_top = 85.0
-offset_right = 320.0
-offset_bottom = 118.0
-focus_mode = 0
-text = "Limpar Fila"
-
-[node name="BPlay" type="Button" parent="CanvasLayer" unique_id=956812941]
+offset_right = 328.0
+offset_bottom = 121.0
+texture_normal = ExtResource("cleanbutton")
+texture_hover = ExtResource("cleanbuttonhover")
+texture_pressed = ExtResource("cleanbuttonpressed")
+tooltip_text = "Limpar fila"
+[node name="BPlay" type="TextureButton" parent="CanvasLayer" unique_id=956812941]
 offset_left = 330.0
 offset_top = 85.0
-offset_right = 450.0
-offset_bottom = 118.0
-focus_mode = 0
-text = "Play (Enter)"
-
+offset_right = 458.0
+offset_bottom = 121.0
+texture_normal = ExtResource("playbutton")
+texture_hover = ExtResource("playbuttonhover")
+texture_pressed = ExtResource("playbuttonpressed")
+tooltip_text = "Executar sequência"
 [node name="Trilho" type="Control" parent="CanvasLayer" unique_id=724813205]
 layout_mode = 3
 anchors_preset = 0
@@ -134,6 +146,7 @@ theme_override_font_sizes/font_size = 30
 text = "Você morreu!"
 
 [node name="BReiniciar" type="Button" parent="CanvasLayer" unique_id=885718746]
+theme = ExtResource("ui_theme")
 process_mode = 3
 visible = false
 anchors_preset = 7
@@ -149,8 +162,8 @@ grow_vertical = 0
 text = "Reiniciar Fase
 "
 metadata/_edit_use_anchors_ = true
-
 [node name="BProximaFase" type="Button" parent="CanvasLayer" unique_id=885718747]
+theme = ExtResource("ui_theme")
 process_mode = 3
 visible = false
 anchors_preset = 7
@@ -165,7 +178,6 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Próxima Fase"
 metadata/_edit_use_anchors_ = true
-
 [node name="PainelTutorial" type="Panel" parent="CanvasLayer" unique_id=1698438600]
 process_mode = 3
 visible = false
@@ -223,37 +235,41 @@ layout_mode = 2
 [node name="BEntendi" type="Button" parent="CanvasLayer/PainelTutorial/Conteudo/CentroBotao" unique_id=1698438602]
 process_mode = 3
 layout_mode = 2
+theme = ExtResource("ui_theme")
 text = "Entendi!"
-
-[node name="BMenu" type="Button" parent="CanvasLayer" unique_id=1419415608]
+[node name="BMenu" type="TextureButton" parent="CanvasLayer" unique_id=1419415608]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -110.0
+offset_left = -56.0
 offset_top = 10.0
-offset_right = -10.0
+offset_right = -28.0
 offset_bottom = 45.0
 grow_horizontal = 0
 focus_mode = 0
-text = " Menu (Esc)"
-icon = ExtResource("11_pause")
-icon_max_width = 24
-expand_icon = true
+texture_normal = ExtResource("11_pause")
+texture_pressed = ExtResource("13_pause_pressed")
+texture_hover = ExtResource("12_pause_hover")
+tooltip_text = "Abrir menu (Esc)"
+scale = Vector2(2, 2)
 
-[node name="MenuPausa" type="Panel" parent="CanvasLayer" unique_id=266545154]
+[node name="MenuPausa" type="TextureRect" parent="CanvasLayer" unique_id=266545154]
+texture = ExtResource("14_menu_tab")
+expand_mode = 1
+stretch_mode = 6
+mouse_filter = 2
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -110.0
-offset_top = -140.0
-offset_right = 110.0
-offset_bottom = 140.0
+offset_left = -135.0
+offset_top = -240.0
+offset_right = 135.0
+offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
-
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuPausa" unique_id=1993220160]
 layout_mode = 1
 anchors_preset = 8
@@ -262,9 +278,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -80.0
-offset_top = -120.0
+offset_top = -195.0
 offset_right = 80.0
-offset_bottom = 120.0
+offset_bottom = 195.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
@@ -278,28 +294,28 @@ horizontal_alignment = 1
 [node name="BContinuar" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=980778122]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Continuar"
-
 [node name="BReiniciarMenu" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=117028856]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Reiniciar Fase"
-
 [node name="BControlesMenu" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=148068889]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Controles"
-
 [node name="BSelecionarFase" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=1942102625]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Selecionar Fase"
-
 [node name="BMenuPrincipal" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=601238808]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Menu Principal"
-
 [node name="PainelControles" type="Panel" parent="CanvasLayer" unique_id=1698438610]
 process_mode = 3
 visible = false
@@ -364,6 +380,7 @@ autowrap_mode = 3
 [node name="BVoltarControles" type="Button" parent="CanvasLayer/PainelControles" unique_id=1698438613]
 process_mode = 3
 layout_mode = 1
+theme = ExtResource("ui_theme")
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -376,7 +393,6 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Voltar"
-
 [node name="Caixas" type="Panel" parent="CanvasLayer" unique_id=1492597069]
 offset_right = 40.0
 offset_bottom = 160.0

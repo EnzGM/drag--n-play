@@ -3,12 +3,22 @@
 [ext_resource type="Texture2D" path="res://Assets/fase2_tileset.png" id="1_atlas"]
 
 [node name="Pilar" type="Node2D"]
+z_index = 2
+
+[node name="Destaque" type="Sprite2D" parent="."]
+z_index = -2
+modulate = Color(1, 0.78, 0.2, 0.38)
+texture = ExtResource("1_atlas")
+region_enabled = true
+region_rect = Rect2(21, 113, 22, 50)
+scale = Vector2(1.9, 1.9)
+position = Vector2(0, -18)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_atlas")
 region_enabled = true
 region_rect = Rect2(21, 113, 22, 50)
-scale = Vector2(1.55, 1.55)
+scale = Vector2(1.65, 1.65)
 position = Vector2(0, -18)
 
 [node name="Sombra" type="Polygon2D" parent="."]

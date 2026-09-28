@@ -45,4 +45,4 @@ func _atualizar_label(valor: float) -> void:
 
 
 func _on_b_voltar_pressed():
-	get_tree().change_scene_to_file(MENU_PRINCIPAL)
+	TransicaoCenas.trocar_para(MENU_PRINCIPAL)

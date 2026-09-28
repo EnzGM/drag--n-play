@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://d3g02tcqrxok1"]
 
 [ext_resource type="Script" uid="uid://4evk0m4rsall" path="res://Scripts/TopDown/fase_grid.gd" id="1_grid"]
-[ext_resource type="PackedScene" uid="uid://cttnon2qsg7er" path="res://Scenes/TopDown/PersonagemGrid.tscn" id="2_player"]
-[ext_resource type="PackedScene" path="res://Scenes/TopDown/parede.tscn" id="3_parede"]
-[ext_resource type="PackedScene" uid="uid://uuv4o7ie04ej" path="res://Scenes/TopDown/inimigo.tscn" id="4_inimigo"]
+[ext_resource type="PackedScene" path="res://Scenes/TopDown/PersonagemGrid.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://Scenes/TopDown/pilar.tscn" id="3_pilar"]
+[ext_resource type="PackedScene" path="res://Scenes/TopDown/inimigo.tscn" id="4_inimigo"]
 [ext_resource type="PackedScene" uid="uid://bnlbmab8kwaed" path="res://Scenes/Plataformer/caixa.tscn" id="5_caixa"]
 [ext_resource type="SpriteFrames" uid="uid://cfbttc8hw182h" path="res://Assets/flag_frames.tres" id="6_flag"]
+[ext_resource type="Texture2D" uid="uid://canh3hed13mnc" path="res://Assets/virano.png" id="6_jfot4"]
 [ext_resource type="Texture2D" uid="uid://cb88drvo0t4fr" path="res://Assets/nodetabopen.png" id="7_trilho"]
 [ext_resource type="Texture2D" uid="uid://blbn052hao8my" path="res://Assets/pausebutton.png" id="8_pause"]
 [ext_resource type="Texture2D" uid="uid://buasjbna8eiv8" path="res://Assets/chave.svg" id="9_chave"]
@@ -14,198 +15,378 @@
 [ext_resource type="AudioStream" uid="uid://bux42kukbnhab" path="res://Assets/Sons/cancel.wav" id="12_cancel"]
 [ext_resource type="AudioStream" uid="uid://5b5w5gleaxp0" path="res://Assets/Sons/box.wav" id="13_box"]
 [ext_resource type="AudioStream" uid="uid://dvsgco71jerhm" path="res://Assets/Sons/pop2.wav" id="14_pop2"]
-[ext_resource type="AudioStream" uid="uid://dqsm03t4pqqej" path="res://Assets/Sons/pop.wav" id="15_key"]
-[ext_resource type="Texture2D" uid="uid://bi4loxa7rd6hn" path="res://Assets/fase2_tileset.png" id="16_hh5ry"]
+[ext_resource type="Texture2D" uid="uid://dbygcabdoa3lt" path="res://Assets/fase2_estrada_pedra.png" id="17_road"]
+[ext_resource type="Texture2D" uid="uid://bayceb4wjusqc" path="res://Assets/fase2_grama.png" id="18_grass"]
+[ext_resource type="Texture2D" uid="uid://dnxli8tlgpkc" path="res://Assets/fase2_por_do_sol.png" id="19_sunset"]
+[ext_resource type="Texture2D" uid="uid://60xpracmk3th" path="res://Assets/monumento_grecia.png" id="20_monument"]
+[ext_resource type="AudioStream" uid="uid://chd1tychgrku5" path="res://Assets/Sons/greece_ambience.wav" id="21_ambience"]
+[ext_resource type="Texture2D" uid="uid://b46toxm68fvcr" path="res://Assets/pausebuttonhover.png" id="22_pause_hover"]
+[ext_resource type="Texture2D" uid="uid://braf7r5dai7r6" path="res://Assets/pausebuttonpressed.png" id="23_pause_pressed"]
+[ext_resource type="Texture2D" uid="uid://dpnbbea55nelr" path="res://Assets/menutabopen.png" id="24_menu_tab"]
+[ext_resource type="AudioStream" uid="uid://c28o3wnt3b8bc" path="res://Assets/Sons/block_click.wav" id="26_ui_click"]
+[ext_resource type="AudioStream" uid="uid://dqsm03t4pqqej" path="res://Assets/Sons/pop.wav" id="27_ui_hover"]
+[ext_resource type="Texture2D" uid="uid://cawt7bid2nqs3" path="res://Assets/grama.png" id="33_8xxt7"]
+[ext_resource type="Texture2D" uid="uid://de52ghcfl510b" path="res://Assets/retolado.png" id="34_pem1p"]
+[ext_resource type="Texture2D" uid="uid://cunxs6x3dxaoc" path="res://Assets/reto.png" id="35_h2ihn"]
+[ext_resource type="Texture2D" uid="uid://bo8rxx1qf2vhh" path="res://Assets/cleanbutton.png" id="cleanbutton"]
+[ext_resource type="Texture2D" uid="uid://du1anljxugahu" path="res://Assets/cleanbuttonhover.png" id="cleanbuttonhover"]
+[ext_resource type="Texture2D" uid="uid://qt6l37epcovv" path="res://Assets/cleanbuttonpressed.png" id="cleanbuttonpressed"]
+[ext_resource type="Texture2D" uid="uid://htaddrysa4mw" path="res://Assets/playbutton.png" id="playbutton"]
+[ext_resource type="Texture2D" uid="uid://clg6hjvc3164y" path="res://Assets/playbuttonhover.png" id="playbuttonhover"]
+[ext_resource type="Texture2D" uid="uid://bxx4f2or0hhla" path="res://Assets/playbuttonpressed.png" id="playbuttonpressed"]
+[ext_resource type="Theme" uid="uid://dy5pj0oaqtjn8" path="res://Assets/menu_theme.tres" id="ui_theme"]
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_xej8a"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x5x04"]
-texture = ExtResource("16_hh5ry")
-1:1/0 = 0
-2:1/0 = 0
-4:1/0 = 0
-5:1/0 = 0
-7:1/0 = 0
-8:1/0 = 0
-10:1/0 = 0
-11:1/0 = 0
-22:1/0 = 0
-23:1/0 = 0
-24:1/0 = 0
-25:1/0 = 0
-26:1/0 = 0
-27:1/0 = 0
-28:1/0 = 0
-29:1/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-4:2/0 = 0
-5:2/0 = 0
-7:2/0 = 0
-8:2/0 = 0
-10:2/0 = 0
-11:2/0 = 0
-22:2/0 = 0
-23:2/0 = 0
-24:2/0 = 0
-25:2/0 = 0
-26:2/0 = 0
-27:2/0 = 0
-28:2/0 = 0
-29:2/0 = 0
-22:3/0 = 0
-23:3/0 = 0
-24:3/0 = 0
-25:3/0 = 0
-26:3/0 = 0
-27:3/0 = 0
-28:3/0 = 0
-29:3/0 = 0
-1:4/0 = 0
-2:4/0 = 0
-10:4/0 = 0
-11:4/0 = 0
-14:4/0 = 0
-15:4/0 = 0
-16:4/0 = 0
-17:4/0 = 0
-22:4/0 = 0
-23:4/0 = 0
-24:4/0 = 0
-25:4/0 = 0
-26:4/0 = 0
-27:4/0 = 0
-28:4/0 = 0
-29:4/0 = 0
-1:5/0 = 0
-2:5/0 = 0
-10:5/0 = 0
-11:5/0 = 0
-14:5/0 = 0
-16:5/0 = 0
-22:5/0 = 0
-23:5/0 = 0
-24:5/0 = 0
-25:5/0 = 0
-26:5/0 = 0
-27:5/0 = 0
-28:5/0 = 0
-29:5/0 = 0
-1:6/0 = 0
-2:6/0 = 0
-14:6/0 = 0
-16:6/0 = 0
-28:6/0 = 0
-29:6/0 = 0
-1:7/0 = 0
-2:7/0 = 0
-4:7/0 = 0
-5:7/0 = 0
-7:7/0 = 0
-8:7/0 = 0
-10:7/0 = 0
-11:7/0 = 0
-13:7/0 = 0
-14:7/0 = 0
-15:7/0 = 0
-16:7/0 = 0
-17:7/0 = 0
-21:7/0 = 0
-22:7/0 = 0
-24:7/0 = 0
-25:7/0 = 0
-27:7/0 = 0
-28:7/0 = 0
-1:8/0 = 0
-2:8/0 = 0
-4:8/0 = 0
-5:8/0 = 0
-7:8/0 = 0
-8:8/0 = 0
-10:8/0 = 0
-11:8/0 = 0
-21:8/0 = 0
-22:8/0 = 0
-24:8/0 = 0
-25:8/0 = 0
-27:8/0 = 0
-28:8/0 = 0
-1:9/0 = 0
-2:9/0 = 0
-21:9/0 = 0
-22:9/0 = 0
-24:9/0 = 0
-25:9/0 = 0
-27:9/0 = 0
-28:9/0 = 0
-1:10/0 = 0
-2:10/0 = 0
-21:11/0 = 0
-22:11/0 = 0
-27:11/0 = 0
-28:11/0 = 0
-21:12/0 = 0
-22:12/0 = 0
-27:12/0 = 0
-28:12/0 = 0
-21:13/0 = 0
-22:13/0 = 0
-27:13/0 = 0
-28:13/0 = 0
-21:14/0 = 0
-22:14/0 = 0
-24:14/0 = 0
-25:14/0 = 0
-27:14/0 = 0
-28:14/0 = 0
-21:15/0 = 0
-22:15/0 = 0
-24:15/0 = 0
-25:15/0 = 0
-27:15/0 = 0
-28:15/0 = 0
-21:16/0 = 0
-22:16/0 = 0
-24:16/0 = 0
-25:16/0 = 0
-27:16/0 = 0
-28:16/0 = 0
-4:4/next_alternative_id = 2
-4:4/0 = 0
-4:4/1 = 1
-4:5/0 = 0
-5:4/0 = 0
-5:5/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_7f37h"]
-sources/0 = SubResource("TileSetScenesCollectionSource_xej8a")
-sources/1 = SubResource("TileSetAtlasSource_x5x04")
+[sub_resource type="AtlasTexture" id="AtlasTexture_road_strip"]
+atlas = ExtResource("17_road")
+region = Rect2(0, 0, 500, 100)
 
 [node name="fase_2" type="Node2D" unique_id=2010000000]
 process_mode = 3
 script = ExtResource("1_grid")
 usar_limites_grade = true
 limites_grade = Rect2i(0, 0, 5, 5)
+desenhar_grade_visual = false
 tem_chave = true
 celula_chave = Vector2i(4, 4)
 celula_cadeado = Vector2i(2, 5)
 celula_saida = Vector2i(2, 6)
 
-[node name="Fundo" type="ColorRect" parent="." unique_id=2010000001]
+[node name="PorDoSol" type="TextureRect" parent="." unique_id=2010000200]
+z_index = -30
+offset_left = -700.0
+offset_top = -260.0
+offset_right = 1100.0
+offset_bottom = 460.0
+mouse_filter = 2
+texture = ExtResource("19_sunset")
+expand_mode = 1
+
+[node name="Monumento" type="Sprite2D" parent="." unique_id=2010000201]
+z_index = -12
+position = Vector2(791, 254)
+scale = Vector2(3.2950006, 4.089195)
+texture = ExtResource("20_monument")
+
+[node name="GramaSuperior" type="TextureRect" parent="." unique_id=2010000202]
+z_index = -20
+texture_repeat = 2
+offset_left = -700.0
+offset_top = -50.0
+offset_right = 1100.0
+mouse_filter = 2
+texture = ExtResource("18_grass")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="GramaEsquerda" type="TextureRect" parent="." unique_id=2010000203]
+z_index = -20
+texture_repeat = 2
+offset_left = -700.0
+offset_top = -50.0
+offset_right = -50.0
+offset_bottom = 750.0
+mouse_filter = 2
+texture = ExtResource("18_grass")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="GramaDireita" type="TextureRect" parent="." unique_id=2010000204]
+z_index = -20
+texture_repeat = 2
+offset_left = 450.0
+offset_top = -50.0
+offset_right = 1100.0
+offset_bottom = 750.0
+mouse_filter = 2
+texture = ExtResource("18_grass")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="GramaBaixoEsquerda" type="TextureRect" parent="." unique_id=2010000205]
+z_index = -20
+texture_repeat = 2
+offset_left = -700.0
+offset_top = 450.0
+offset_right = 150.0
+offset_bottom = 750.0
+mouse_filter = 2
+texture = ExtResource("18_grass")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="GramaBaixoDireita" type="TextureRect" parent="." unique_id=2010000206]
+z_index = -20
+texture_repeat = 2
+offset_left = 250.0
+offset_top = 450.0
+offset_right = 1100.0
+offset_bottom = 750.0
+mouse_filter = 2
+texture = ExtResource("18_grass")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="GramaAposSaida" type="TextureRect" parent="." unique_id=2010000207]
+z_index = -20
+texture_repeat = 2
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 250.0
+offset_bottom = 750.0
+mouse_filter = 2
+texture = ExtResource("18_grass")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="EstradaPrincipal" type="TextureRect" parent="." unique_id=2010000208]
+visible = false
+z_index = -10
+texture_repeat = 2
 offset_left = -50.0
 offset_top = -50.0
 offset_right = 450.0
 offset_bottom = 450.0
 mouse_filter = 2
-color = Color(0.88, 0.88, 0.82, 1)
+texture = SubResource("AtlasTexture_road_strip")
+expand_mode = 1
+stretch_mode = 1
 
-[node name="ChaoSaida" type="ColorRect" parent="." unique_id=2010000106]
+[node name="EstradaSaida" type="TextureRect" parent="." unique_id=2010000209]
+visible = false
+z_index = -10
+texture_repeat = 2
 offset_left = 150.0
 offset_top = 450.0
 offset_right = 250.0
 offset_bottom = 650.0
 mouse_filter = 2
-color = Color(0.88, 0.88, 0.82, 1)
+texture = SubResource("AtlasTexture_road_strip")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Fundo" type="ColorRect" parent="." unique_id=2010000001]
+z_index = -9
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 450.0
+offset_bottom = 450.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="chão2" type="TextureRect" parent="Fundo" unique_id=290081932]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 121.0
+offset_bottom = 121.0
+texture = ExtResource("6_jfot4")
+
+[node name="chão3" type="TextureRect" parent="Fundo/chão2" unique_id=1209137326]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 116.0
+offset_top = 264.0
+offset_right = 266.0
+offset_bottom = 377.0
+pivot_offset = Vector2(177, 80)
+texture = ExtResource("33_8xxt7")
+flip_h = true
+flip_v = true
+
+[node name="chão8" type="TextureRect" parent="Fundo/chão2" unique_id=1268152947]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 226.0
+offset_right = 374.0
+offset_bottom = 116.0
+texture = ExtResource("34_pem1p")
+flip_h = true
+
+[node name="chão7" type="TextureRect" parent="Fundo/chão2" unique_id=1207328755]
+show_behind_parent = true
+layout_mode = 0
+offset_top = 110.0
+offset_right = 116.0
+offset_bottom = 260.0
+texture = ExtResource("35_h2ihn")
+flip_v = true
+
+[node name="chão6" type="TextureRect" parent="Fundo/chão2" unique_id=339708527]
+show_behind_parent = true
+layout_mode = 0
+offset_top = 259.0
+offset_right = 116.0
+offset_bottom = 375.0
+texture = ExtResource("35_h2ihn")
+flip_v = true
+
+[node name="chão5" type="TextureRect" parent="Fundo/chão2" unique_id=732518648]
+show_behind_parent = true
+layout_mode = 0
+offset_top = 374.0
+offset_right = 116.0
+offset_bottom = 490.0
+texture = ExtResource("6_jfot4")
+flip_v = true
+
+[node name="chão4" type="TextureRect" parent="Fundo/chão2" unique_id=1396294944]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 373.0
+offset_right = 489.0
+offset_bottom = 116.0
+texture = ExtResource("6_jfot4")
+flip_h = true
+
+[node name="chão2" type="TextureRect" parent="Fundo/chão2" unique_id=2042787953]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 110.0
+offset_right = 226.0
+offset_bottom = 116.0
+texture = ExtResource("34_pem1p")
+
+[node name="chão9" type="TextureRect" parent="Fundo/chão2" unique_id=942557250]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 373.0
+offset_top = 257.0
+offset_right = 489.0
+offset_bottom = 375.0
+texture = ExtResource("35_h2ihn")
+
+[node name="chão10" type="TextureRect" parent="Fundo/chão2" unique_id=1432920613]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 373.0
+offset_top = 111.0
+offset_right = 489.0
+offset_bottom = 257.0
+texture = ExtResource("35_h2ihn")
+
+[node name="chão11" type="TextureRect" parent="Fundo/chão2" unique_id=543725966]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 230.0
+offset_top = 374.0
+offset_right = 378.0
+offset_bottom = 490.0
+texture = ExtResource("34_pem1p")
+flip_h = true
+
+[node name="chão12" type="TextureRect" parent="Fundo/chão2" unique_id=825125514]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 114.0
+offset_top = 374.0
+offset_right = 230.0
+offset_bottom = 490.0
+texture = ExtResource("34_pem1p")
+
+[node name="chão13" type="TextureRect" parent="Fundo/chão2" unique_id=818882518]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 222.0
+offset_top = 151.0
+offset_right = 332.0
+offset_bottom = 264.0
+pivot_offset = Vector2(177, 80)
+texture = ExtResource("33_8xxt7")
+flip_h = true
+flip_v = true
+
+[node name="chão14" type="TextureRect" parent="Fundo/chão2" unique_id=1237112531]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 263.0
+offset_top = 151.0
+offset_right = 373.0
+offset_bottom = 264.0
+pivot_offset = Vector2(177, 80)
+texture = ExtResource("33_8xxt7")
+flip_h = true
+flip_v = true
+
+[node name="chão15" type="TextureRect" parent="Fundo/chão2" unique_id=917713275]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 226.0
+offset_top = 116.0
+offset_right = 336.0
+offset_bottom = 229.0
+pivot_offset = Vector2(177, 80)
+texture = ExtResource("33_8xxt7")
+flip_h = true
+flip_v = true
+
+[node name="chão16" type="TextureRect" parent="Fundo/chão2" unique_id=581442625]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 116.0
+offset_top = 116.0
+offset_right = 226.0
+offset_bottom = 229.0
+pivot_offset = Vector2(177, 80)
+texture = ExtResource("33_8xxt7")
+flip_h = true
+flip_v = true
+
+[node name="chão17" type="TextureRect" parent="Fundo/chão2" unique_id=1063859132]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 263.0
+offset_top = 116.0
+offset_right = 373.0
+offset_bottom = 229.0
+pivot_offset = Vector2(177, 80)
+texture = ExtResource("33_8xxt7")
+flip_h = true
+flip_v = true
+
+[node name="chão18" type="TextureRect" parent="Fundo/chão2" unique_id=1931059307]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 116.0
+offset_top = 151.0
+offset_right = 226.0
+offset_bottom = 264.0
+pivot_offset = Vector2(177, 80)
+texture = ExtResource("33_8xxt7")
+flip_h = true
+flip_v = true
+
+[node name="chão19" type="TextureRect" parent="Fundo/chão2" unique_id=2094975455]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 373.0
+offset_top = 374.0
+offset_right = 489.0
+offset_bottom = 490.0
+texture = ExtResource("6_jfot4")
+flip_h = true
+flip_v = true
+
+[node name="chão20" type="TextureRect" parent="Fundo/chão2" unique_id=2141050905]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 263.0
+offset_top = 263.0
+offset_right = 373.0
+offset_bottom = 376.0
+pivot_offset = Vector2(177, 80)
+texture = ExtResource("33_8xxt7")
+flip_h = true
+flip_v = true
+
+[node name="ChaoSaida" type="ColorRect" parent="." unique_id=2010000106]
+z_index = -9
+offset_left = 150.0
+offset_top = 450.0
+offset_right = 250.0
+offset_bottom = 650.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
 [node name="BordaCima" type="ColorRect" parent="." unique_id=1451808081]
 offset_left = -50.0
@@ -265,16 +446,16 @@ color = Color(0.12, 0.12, 0.12, 1)
 
 [node name="Paredes" type="Node2D" parent="." unique_id=2010000002]
 
-[node name="Parede" parent="Paredes" unique_id=2010000003 instance=ExtResource("3_parede")]
+[node name="Pilar1" parent="Paredes" unique_id=2010000003 instance=ExtResource("3_pilar")]
 position = Vector2(100, 100)
 
-[node name="Parede2" parent="Paredes" unique_id=2010000004 instance=ExtResource("3_parede")]
+[node name="Pilar2" parent="Paredes" unique_id=2010000004 instance=ExtResource("3_pilar")]
 position = Vector2(300, 100)
 
-[node name="Parede3" parent="Paredes" unique_id=2010000051 instance=ExtResource("3_parede")]
+[node name="Pilar3" parent="Paredes" unique_id=2010000051 instance=ExtResource("3_pilar")]
 position = Vector2(100, 300)
 
-[node name="Parede4" parent="Paredes" unique_id=2010000052 instance=ExtResource("3_parede")]
+[node name="Pilar4" parent="Paredes" unique_id=2010000052 instance=ExtResource("3_pilar")]
 position = Vector2(300, 300)
 
 [node name="Inimigos" type="Node2D" parent="." unique_id=2010000005]
@@ -324,6 +505,11 @@ horizontal_alignment = 1
 [node name="Objetivo" type="Node2D" parent="." unique_id=2010000008]
 position = Vector2(200, 600)
 
+[node name="DestaqueBandeira" type="Polygon2D" parent="Objetivo" unique_id=1620942205]
+z_index = -1
+color = Color(1, 0.78, 0.12, 0.3)
+polygon = PackedVector2Array(0, -42, 21, -36, 36, -20, 42, 0, 36, 20, 21, 36, 0, 42, -21, 36, -36, 20, -42, 0, -36, -20, -21, -36)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Objetivo" unique_id=2010000009]
 scale = Vector2(0.9, 0.9)
 sprite_frames = ExtResource("6_flag")
@@ -334,20 +520,7 @@ autoplay = "aceno"
 position = Vector2(0, 200)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2010000012]
-
-[node name="BMenu" type="Button" parent="CanvasLayer" unique_id=2010000029]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -130.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = 48.0
-grow_horizontal = 0
-focus_mode = 0
-text = " Menu (Esc)"
-icon = ExtResource("8_pause")
-expand_icon = true
+visible = false
 
 [node name="Trilho" type="Control" parent="CanvasLayer" unique_id=2010000015]
 layout_mode = 3
@@ -387,21 +560,25 @@ visible = false
 color = Color(1, 0.85, 0.1, 1)
 polygon = PackedVector2Array(-8, -12, 8, -12, 0, 2)
 
-[node name="BLimpar" type="Button" parent="CanvasLayer" unique_id=2010000013]
+[node name="BLimpar" type="TextureButton" parent="CanvasLayer" unique_id=2010000013]
 offset_left = 200.0
 offset_top = 85.0
-offset_right = 320.0
-offset_bottom = 118.0
-focus_mode = 0
-text = "Limpar Fila"
+offset_right = 328.0
+offset_bottom = 121.0
+tooltip_text = "Limpar fila"
+texture_normal = ExtResource("cleanbutton")
+texture_pressed = ExtResource("cleanbuttonpressed")
+texture_hover = ExtResource("cleanbuttonhover")
 
-[node name="BPlay" type="Button" parent="CanvasLayer" unique_id=2010000014]
+[node name="BPlay" type="TextureButton" parent="CanvasLayer" unique_id=2010000014]
 offset_left = 330.0
 offset_top = 85.0
-offset_right = 450.0
-offset_bottom = 118.0
-focus_mode = 0
-text = "Play (Enter)"
+offset_right = 458.0
+offset_bottom = 121.0
+tooltip_text = "Executar sequência"
+texture_normal = ExtResource("playbutton")
+texture_pressed = ExtResource("playbuttonpressed")
+texture_hover = ExtResource("playbuttonhover")
 
 [node name="Caixas" type="Panel" parent="CanvasLayer" unique_id=2010000042]
 offset_right = 155.0
@@ -492,6 +669,7 @@ offset_top = -45.0
 offset_right = -20.0
 offset_bottom = -12.0
 grow_horizontal = 2
+theme = ExtResource("ui_theme")
 text = "Reiniciar Fase"
 
 [node name="BProximaFase" type="Button" parent="CanvasLayer" unique_id=2010000021]
@@ -507,21 +685,27 @@ offset_top = -45.0
 offset_right = 150.0
 offset_bottom = -12.0
 grow_horizontal = 2
+theme = ExtResource("ui_theme")
 text = "Próxima Fase"
 
-[node name="MenuPausa" type="Panel" parent="CanvasLayer" unique_id=2010000030]
+[node name="MenuPausa" type="TextureRect" parent="CanvasLayer" unique_id=2010000030]
+process_mode = 3
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -110.0
-offset_top = -140.0
-offset_right = 110.0
-offset_bottom = 140.0
+offset_left = -135.0
+offset_top = -240.0
+offset_right = 135.0
+offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("24_menu_tab")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuPausa" unique_id=2010000031]
 layout_mode = 1
@@ -531,9 +715,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -80.0
-offset_top = -120.0
+offset_top = -195.0
 offset_right = 80.0
-offset_bottom = 120.0
+offset_bottom = 195.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
@@ -547,27 +731,127 @@ horizontal_alignment = 1
 [node name="BContinuar" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=2010000033]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Continuar"
 
 [node name="BReiniciarMenu" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=2010000034]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Reiniciar Fase"
 
 [node name="BControlesMenu" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=2010000035]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Controles"
 
 [node name="BSelecionarFase" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=2010000036]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Selecionar Fase"
 
 [node name="BMenuPrincipal" type="Button" parent="CanvasLayer/MenuPausa/VBoxContainer" unique_id=2010000037]
 layout_mode = 2
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Menu Principal"
+
+[node name="PainelControles" type="Panel" parent="CanvasLayer/MenuPausa" unique_id=1957956467]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -230.0
+offset_right = 280.0
+offset_bottom = 230.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titulo" type="Label" parent="CanvasLayer/MenuPausa/PainelControles" unique_id=1822499529]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Controles"
+horizontal_alignment = 1
+
+[node name="Rolagem" type="ScrollContainer" parent="CanvasLayer/MenuPausa/PainelControles" unique_id=1297516260]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 50.0
+offset_right = -16.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="Lista" type="Label" parent="CanvasLayer/MenuPausa/PainelControles/Rolagem" unique_id=27352099]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/line_spacing = 8
+text = "Mouse: arraste as caixas da paleta até o trilho pra montar a sequência
+
+Clique direito numa caixa do trilho: remove ela na hora
+
+Enter (ou a tecla \"Executar\"): dá Play
+
+R: reinicia a fase a qualquer momento
+
+Esc: abre/fecha esse menu de pausa
+
+\"Limpar Fila\": remove todas as caixas do trilho de uma vez"
+autowrap_mode = 3
+
+[node name="BVoltarControles" type="Button" parent="CanvasLayer/MenuPausa/PainelControles" unique_id=2066290764]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -40.0
+offset_right = 50.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("ui_theme")
+text = "Voltar"
+
+[node name="BMenu" type="TextureButton" parent="CanvasLayer" unique_id=584397917]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 10.0
+offset_right = -28.0
+offset_bottom = 46.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+tooltip_text = "Abrir menu (Esc)"
+focus_mode = 0
+texture_normal = ExtResource("8_pause")
+texture_pressed = ExtResource("23_pause_pressed")
+texture_hover = ExtResource("22_pause_hover")
 
 [node name="SomAparecerPainel" type="AudioStreamPlayer" parent="." unique_id=1388541717]
 stream = ExtResource("11_appear")
@@ -582,17 +866,32 @@ stream = ExtResource("13_box")
 stream = ExtResource("14_pop2")
 
 [node name="SomChave" type="AudioStreamPlayer" parent="." unique_id=2010000071]
-stream = ExtResource("15_key")
+stream = ExtResource("27_ui_hover")
+
+[node name="SomAmbiente" type="AudioStreamPlayer" parent="." unique_id=2010000072]
+stream = ExtResource("21_ambience")
+volume_db = -12.0
+autoplay = true
+
+[node name="SomCliqueInterface" type="AudioStreamPlayer" parent="." unique_id=2010000073]
+stream = ExtResource("26_ui_click")
+volume_db = -3.0
+
+[node name="SomHoverInterface" type="AudioStreamPlayer" parent="." unique_id=2010000074]
+stream = ExtResource("27_ui_hover")
+volume_db = -8.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2010000011]
-position = Vector2(200, 270)
+position = Vector2(200, 205)
 zoom = Vector2(0.7, 0.7)
 
-[node name="TileMap" type="TileMap" parent="." unique_id=1814813321]
-tile_set = SubResource("TileSet_7f37h")
-format = 2
+[node name="Monumento2" type="Sprite2D" parent="." unique_id=1280344235]
+z_index = -12
+position = Vector2(-342, 209)
+scale = Vector2(2.9985645, 3.6398547)
+texture = ExtResource("20_monument")
+flip_h = true
 
-[connection signal="pressed" from="CanvasLayer/BMenu" to="." method="_on_b_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/BLimpar" to="." method="_on_b_limpar_pressed"]
 [connection signal="pressed" from="CanvasLayer/BPlay" to="." method="_on_b_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/BReiniciar" to="." method="_on_b_reiniciar_pressed"]
@@ -602,3 +901,4 @@ format = 2
 [connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BControlesMenu" to="." method="_on_b_menu_controles_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BSelecionarFase" to="." method="_on_b_menu_selecionar_fase_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuPausa/VBoxContainer/BMenuPrincipal" to="." method="_on_b_menu_principal_pressed"]
+[connection signal="pressed" from="CanvasLayer/BMenu" to="." method="_on_b_menu_pressed"]

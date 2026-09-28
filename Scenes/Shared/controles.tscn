@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c8qtiwpy41qxk"]
 
 [ext_resource type="Script" uid="uid://df2rbh4opjpdh" path="res://Scripts/Shared/controles.gd" id="1_h3jom"]
+[ext_resource type="Theme" path="res://Assets/menu_theme.tres" id="ui_theme"]
 
 [node name="Controles" type="Control" unique_id=305486930]
 layout_mode = 3
@@ -81,6 +82,6 @@ offset_right = 130.0
 offset_bottom = -20.0
 grow_vertical = 0
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Voltar"
-
 [connection signal="pressed" from="BVoltar" to="." method="_on_b_voltar_pressed"]

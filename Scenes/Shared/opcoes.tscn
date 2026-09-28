@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c5o1vupq7t3ke"]
 
-[ext_resource type="Script" uid="uid://xaji0y6dpbhsa" path="res://Scripts/Shared/opcoes.gd" id="1_opcoes"]
+[ext_resource type="Script" path="res://Scripts/Shared/opcoes.gd" id="1_opcoes"]
+[ext_resource type="Theme" path="res://Assets/menu_theme.tres" id="ui_theme"]
 
 [node name="Opcoes" type="Control" unique_id=305486940]
 layout_mode = 3
@@ -82,7 +83,7 @@ offset_right = 130.0
 offset_bottom = -20.0
 grow_vertical = 0
 focus_mode = 0
+theme = ExtResource("ui_theme")
 text = "Voltar"
-
 [connection signal="value_changed" from="VBoxContainer/Slider" to="." method="_on_slider_value_changed"]
 [connection signal="pressed" from="BVoltar" to="." method="_on_b_voltar_pressed"]

@@ -149,12 +149,12 @@ func _on_b_controles_voltar_pressed():
 
 func _on_b_menu_selecionar_fase_pressed():
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://Scenes/Shared/selecao_fases.tscn")
+	TransicaoCenas.trocar_para("res://Scenes/Shared/selecao_fases.tscn")
 
 
 func _on_b_menu_principal_pressed():
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://Scenes/Shared/menu_principal.tscn")
+	TransicaoCenas.trocar_para("res://Scenes/Shared/menu_principal.tscn")
 
 
 func iniciar_execucao():
@@ -331,7 +331,7 @@ func _on_b_proxima_fase_pressed():
 	if proxima_fase.is_empty():
 		return
 	get_tree().paused = false
-	get_tree().change_scene_to_file(proxima_fase)
+	TransicaoCenas.trocar_para(proxima_fase)
 
 
 func _on_zona_de_morte_body_entered(body):

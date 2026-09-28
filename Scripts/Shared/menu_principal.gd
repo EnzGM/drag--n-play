@@ -9,6 +9,17 @@ const BUS_MASTER = "Master"
 
 func _ready():
 	carregar_volume_salvo()
+	for botao in [$VBoxContainer/BJogar, $VBoxContainer/BOpcoes, $VBoxContainer/BSair]:
+		botao.pressed.connect(_tocar_clique_menu)
+		botao.mouse_entered.connect(_tocar_hover_menu)
+
+
+func _tocar_clique_menu() -> void:
+	$SomCliqueMenu.play()
+
+
+func _tocar_hover_menu() -> void:
+	$SomHoverMenu.play()
 
 
 # Recarrega o volume salvo na tela de Opções. Roda aqui porque o Menu
@@ -26,15 +37,15 @@ func carregar_volume_salvo() -> void:
 
 
 func _on_b_selecionar_fase_pressed():
-	get_tree().change_scene_to_file(TELA_SELECAO_FASES)
+	TransicaoCenas.trocar_para(TELA_SELECAO_FASES)
 
 
 func _on_b_controles_pressed():
-	get_tree().change_scene_to_file(TELA_CONTROLES)
+	TransicaoCenas.trocar_para(TELA_CONTROLES)
 
 
 func _on_b_opcoes_pressed():
-	get_tree().change_scene_to_file(TELA_OPCOES)
+	TransicaoCenas.trocar_para(TELA_OPCOES)
 
 
 func _on_b_sair_pressed():

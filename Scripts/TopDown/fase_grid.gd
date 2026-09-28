@@ -31,6 +31,7 @@ var celula_objetivo: Vector2i
 
 @export var usar_limites_grade: bool = false
 @export var limites_grade: Rect2i = Rect2i(-9999, -9999, 19999, 19999)
+@export var desenhar_grade_visual: bool = true
 @export var tem_chave: bool = false
 @export var celula_chave: Vector2i = Vector2i.ZERO
 @export var celula_cadeado: Vector2i = Vector2i.ZERO
@@ -63,6 +64,7 @@ var chave_coletada: bool = false
 func _ready():
 	$CanvasLayer.visible = true
 	$Player.comando_avancou.connect(_on_comando_avancou)
+	configurar_sons_interface()
 	mostrar_caixas()
 	atualizar_texto()
 	queue_redraw()
@@ -99,12 +101,40 @@ func _ready():
 			$CanvasLayer/PainelTutorial.visible = false
 
 
+func configurar_sons_interface() -> void:
+	var botoes = [
+		$CanvasLayer/BMenu,
+		$CanvasLayer/BLimpar,
+		$CanvasLayer/BPlay,
+		$CanvasLayer/BReiniciar,
+		$CanvasLayer/BProximaFase,
+		$CanvasLayer/MenuPausa/VBoxContainer/BContinuar,
+		$CanvasLayer/MenuPausa/VBoxContainer/BReiniciarMenu,
+		$CanvasLayer/MenuPausa/VBoxContainer/BControlesMenu,
+		$CanvasLayer/MenuPausa/VBoxContainer/BSelecionarFase,
+		$CanvasLayer/MenuPausa/VBoxContainer/BMenuPrincipal,
+		$CanvasLayer/MenuPausa/PainelControles/BVoltarControles,
+	]
+	for botao in botoes:
+		if botao != null:
+			botao.pressed.connect(_tocar_clique_interface)
+			botao.mouse_entered.connect(_tocar_hover_interface)
+
+
+func _tocar_clique_interface() -> void:
+	$SomCliqueInterface.play()
+
+
+func _tocar_hover_interface() -> void:
+	$SomHoverInterface.play()
+
+
 # --- Ponte com o personagem_grid.gd ---
 
 func _draw() -> void:
 	# Desenha as linhas da grade sobre a área do Fundo, uma célula por
 	# quadrado — puramente visual, não afeta a lógica de colisão.
-	if not has_node("Fundo"):
+	if not desenhar_grade_visual or not has_node("Fundo"):
 		return
 	var fundo: ColorRect = $Fundo
 	var esquerda = fundo.position.x
@@ -211,7 +241,7 @@ func _on_b_proxima_fase_pressed():
 	if proxima_fase.is_empty():
 		return
 	get_tree().paused = false
-	get_tree().change_scene_to_file(proxima_fase)
+	TransicaoCenas.trocar_para(proxima_fase)
 
 
 # --- Daqui pra baixo é a mesma estrutura de UI da fase_teste.gd ---
@@ -248,8 +278,10 @@ func alternar_menu_pausa():
 	get_tree().paused = menu_aberto
 	if menu_aberto:
 		$SomAparecerPainel.play()
-	$CanvasLayer/MenuPausa.visible = menu_aberto
-	$CanvasLayer/PainelControles.visible = false
+		$CanvasLayer/MenuPausa.visible = menu_aberto
+
+	if has_node("CanvasLayer/PainelControles"):
+		$CanvasLayer/PainelControles.visible = false
 
 
 func _on_b_menu_pressed():
@@ -281,12 +313,12 @@ func _on_b_controles_voltar_pressed():
 
 func _on_b_menu_selecionar_fase_pressed():
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://Scenes/Shared/selecao_fases.tscn")
+	TransicaoCenas.trocar_para("res://Scenes/Shared/selecao_fases.tscn")
 
 
 func _on_b_menu_principal_pressed():
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://Scenes/Shared/menu_principal.tscn")
+	TransicaoCenas.trocar_para("res://Scenes/Shared/menu_principal.tscn")
 
 
 func iniciar_execucao():
