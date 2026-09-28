@@ -63,8 +63,8 @@ expand_mode = 1
 
 [node name="Monumento" type="Sprite2D" parent="." unique_id=2010000201]
 z_index = -12
-position = Vector2(791, 254)
-scale = Vector2(3.2950006, 4.089195)
+position = Vector2(764.00006, 196.00003)
+scale = Vector2(3.1050003, 3.1050003)
 texture = ExtResource("20_monument")
 
 [node name="GramaSuperior" type="TextureRect" parent="." unique_id=2010000202]
@@ -885,10 +885,10 @@ volume_db = -8.0
 position = Vector2(200, 205)
 zoom = Vector2(0.7, 0.7)
 
-[node name="Monumento2" type="Sprite2D" parent="." unique_id=1280344235]
+[node name="Monumento2" type="Sprite2D" parent="." unique_id=1564921423]
 z_index = -12
-position = Vector2(-342, 209)
-scale = Vector2(2.9985645, 3.6398547)
+position = Vector2(-350, 192.00003)
+scale = Vector2(3.0727568, 3.1027567)
 texture = ExtResource("20_monument")
 flip_h = true
 
