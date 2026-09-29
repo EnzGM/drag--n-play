@@ -6,6 +6,8 @@ enum Estado { JOGANDO, MORTO, VITORIA }
 # tamanho real da caixa + essa folga, então dá pra apertar ou afrouxar aqui.
 const FOLGA_ENTRE_CAIXAS = 8.0   # lado a lado (horizontal)
 const FOLGA_ENTRE_LINHAS = 6.0   # entre linhas (vertical)
+const ALTURA_TRILHO_COMPACTO = 70.0
+const ALTURA_TRILHO_EXPANDIDO = 145.0
 
 # Converte o "tipo_comando" da caixa pro comando que o Player entende.
 const MAPA_COMANDOS = {
@@ -255,6 +257,7 @@ func reorganizar_trilho():
 	var escala_trilho = 0.55
 	for caixa in comandos_no_trilho:
 		caixa.scale = Vector2(escala_trilho, escala_trilho)
+	_atualizar_tamanho_trilho()
 
 	var espaco = _espaco_entre_caixas()
 	# Ordena por linha (posição Y, arredondada pra "linha" mais próxima) e
@@ -286,6 +289,17 @@ func reorganizar_trilho():
 	atualizar_texto()
 
 
+func _atualizar_tamanho_trilho() -> void:
+	var altura = ALTURA_TRILHO_EXPANDIDO if comandos_no_trilho.size() > 2 else ALTURA_TRILHO_COMPACTO
+	trilho.offset_bottom = trilho.offset_top + altura
+	if has_node("CanvasLayer/BLimpar"):
+		var topo_botoes = trilho.offset_bottom + 5.0
+		$CanvasLayer/BLimpar.offset_top = topo_botoes
+		$CanvasLayer/BLimpar.offset_bottom = topo_botoes + 36.0
+		$CanvasLayer/BPlay.offset_top = topo_botoes
+		$CanvasLayer/BPlay.offset_bottom = topo_botoes + 36.0
+
+
 func _on_comando_avancou(indice: int):
 	if indice < 0 or indice >= comandos_no_trilho.size():
 		$CanvasLayer/Trilho/Seta.visible = false
@@ -310,6 +324,7 @@ func _on_b_limpar_pressed():
 
 
 func atualizar_texto():
+	_atualizar_tamanho_trilho()
 	$CanvasLayer/Trilho/ListaComandos.text = "Comandos: %d/%d" % [comandos_no_trilho.size(), max_comandos]
 
 

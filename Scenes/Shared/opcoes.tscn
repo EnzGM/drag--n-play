@@ -73,6 +73,22 @@ layout_mode = 2
 text = "Volume: 100%"
 horizontal_alignment = 1
 
+[node name="LabelResolucao" type="Label" parent="VBoxContainer" unique_id=1252748883]
+layout_mode = 2
+text = "Resolução da tela"
+horizontal_alignment = 1
+
+[node name="SeletorResolucao" type="OptionButton" parent="VBoxContainer" unique_id=1252748884]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("ui_theme")
+
+[node name="ValorResolucao" type="Label" parent="VBoxContainer" unique_id=1252748885]
+layout_mode = 2
+text = "Aplicada: 1152 x 648"
+horizontal_alignment = 1
+
 [node name="BVoltar" type="Button" parent="." unique_id=2120658510]
 layout_mode = 0
 anchor_top = 1.0
@@ -86,4 +102,5 @@ focus_mode = 0
 theme = ExtResource("ui_theme")
 text = "Voltar"
 [connection signal="value_changed" from="VBoxContainer/Slider" to="." method="_on_slider_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/SeletorResolucao" to="." method="_on_resolucao_selected"]
 [connection signal="pressed" from="BVoltar" to="." method="_on_b_voltar_pressed"]

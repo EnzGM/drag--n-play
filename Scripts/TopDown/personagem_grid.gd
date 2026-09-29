@@ -134,6 +134,10 @@ func atacar() -> void:
 	if interrompido:
 		return
 	$SomAtacar.play()
-	var alvo = celula + vetor_direcao(direcao_atual)
-	fase.tentar_derrotar_inimigo(alvo)
+	if fase.has_method("tentar_derrotar_inimigo_adjacente"):
+		# Na fase 2, o ataque acerta o inimigo à frente ou ao lado do jogador.
+		fase.tentar_derrotar_inimigo_adjacente(celula, direcao_atual)
+	else:
+		var alvo = celula + vetor_direcao(direcao_atual)
+		fase.tentar_derrotar_inimigo(alvo)
 	await get_tree().create_timer(TEMPO_ATAQUE).timeout

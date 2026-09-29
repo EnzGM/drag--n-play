@@ -7,6 +7,8 @@ const TAMANHO_CELULA = 100.0
 # tamanho real da caixa + essa folga, então dá pra apertar ou afrouxar aqui.
 const FOLGA_ENTRE_CAIXAS = 8.0   # lado a lado (horizontal)
 const FOLGA_ENTRE_LINHAS = 6.0   # entre linhas (vertical)
+const ALTURA_TRILHO_COMPACTO = 70.0
+const ALTURA_TRILHO_EXPANDIDO = 145.0
 
 # Converte o "tipo_comando" da caixa pro comando que o Player entende.
 const MAPA_COMANDOS = {
@@ -214,6 +216,32 @@ func tentar_derrotar_inimigo(celula: Vector2i) -> void:
 		$SomCaixaRemovida.play()  # reaproveitado como "poof" do inimigo sumindo
 
 
+func tentar_derrotar_inimigo_adjacente(celula_jogador: Vector2i, direcao_jogador: int) -> void:
+	# O ataque alcança a célula à frente e também qualquer célula lateral
+	# imediatamente vizinha. A frente tem prioridade quando há mais de um alvo.
+	var direcoes = [
+		Vector2i(0, -1),
+		Vector2i(0, 1),
+		Vector2i(-1, 0),
+		Vector2i(1, 0),
+	]
+	var frente = Vector2i.ZERO
+	match direcao_jogador:
+		0: frente = Vector2i(0, -1) # Direcao.CIMA
+		1: frente = Vector2i(0, 1) # Direcao.BAIXO
+		2: frente = Vector2i(-1, 0) # Direcao.ESQUERDA
+		3: frente = Vector2i(1, 0) # Direcao.DIREITA
+	if frente != Vector2i.ZERO:
+		direcoes.erase(frente)
+		direcoes.push_front(frente)
+
+	for deslocamento in direcoes:
+		var alvo = celula_jogador + deslocamento
+		if inimigos.has(alvo):
+			tentar_derrotar_inimigo(alvo)
+			return
+
+
 func jogador_morreu() -> void:
 	if estado != Estado.JOGANDO or not pode_morrer:
 		return
@@ -408,6 +436,7 @@ func reorganizar_trilho():
 	var escala_trilho = 0.55
 	for caixa in comandos_no_trilho:
 		caixa.scale = Vector2(escala_trilho, escala_trilho)
+	_atualizar_tamanho_trilho()
 
 	var espaco = _espaco_entre_caixas()
 	comandos_no_trilho.sort_custom(func(a, b):
@@ -431,6 +460,17 @@ func reorganizar_trilho():
 		lista_montada.append(MAPA_COMANDOS.get(caixa.tipo_comando, caixa.tipo_comando))
 
 	atualizar_texto()
+
+
+func _atualizar_tamanho_trilho() -> void:
+	var altura = ALTURA_TRILHO_EXPANDIDO if comandos_no_trilho.size() > 2 else ALTURA_TRILHO_COMPACTO
+	trilho.offset_bottom = trilho.offset_top + altura
+	if has_node("CanvasLayer/BLimpar"):
+		var topo_botoes = trilho.offset_bottom + 5.0
+		$CanvasLayer/BLimpar.offset_top = topo_botoes
+		$CanvasLayer/BLimpar.offset_bottom = topo_botoes + 36.0
+		$CanvasLayer/BPlay.offset_top = topo_botoes
+		$CanvasLayer/BPlay.offset_bottom = topo_botoes + 36.0
 
 
 func _on_comando_avancou(indice: int):
@@ -457,6 +497,7 @@ func _on_b_limpar_pressed():
 
 
 func atualizar_texto():
+	_atualizar_tamanho_trilho()
 	$CanvasLayer/Trilho/ListaComandos.text = "Comandos: %d/%d" % [comandos_no_trilho.size(), max_comandos]
 
 
